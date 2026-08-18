@@ -1,0 +1,85 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --brand-navy: #0B1D3A;
+    --brand-blue: #163E70;
+    --brand-light: #F8FAFC;
+    --brand-border: #E2E8F0;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    color: #0F172A;
+    background-color: #FFFFFF;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+
+  body {
+    overflow-x: hidden;
+    min-height: 100vh;
+  }
+
+  /* Custom Clean Scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #F1F5F9;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #94A3B8;
+    border-radius: 4px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #64748B;
+  }
+}
+
+@layer utilities {
+  /* Architectural Blueprint & Technical Grid Utilities */
+  .bg-grid-slate {
+    background-size: 32px 32px;
+    background-image: 
+      linear-gradient(to right, rgba(11, 29, 58, 0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(11, 29, 58, 0.05) 1px, transparent 1px);
+  }
+
+  .bg-grid-navy {
+    background-size: 36px 36px;
+    background-image: 
+      linear-gradient(to right, rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+  }
+
+  .bg-blueprint-lines {
+    background-image: radial-gradient(circle at 1px 1px, rgba(22, 62, 112, 0.12) 1px, transparent 0);
+    background-size: 24px 24px;
+  }
+
+  .glass-card {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(226, 232, 240, 0.8);
+  }
+
+  .glass-navy {
+    background: rgba(11, 29, 58, 0.88);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* Micro-interaction transitions */
+.transition-smooth {
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
