@@ -38,6 +38,7 @@ import { Badge } from '@/components/ui/Badge';
 import { PropertyCard } from '@/components/properties/PropertyCard';
 import { getProperties, saveLead } from '@/lib/storage';
 import { formatNPR, formatAreaSqFt, sqFtToTeraiUnits, cn } from '@/lib/utils';
+import { sendInquiryNotification, generateWhatsAppUrl } from '@/lib/email';
 import { Property } from '@/types';
 
 export default function PropertyDetailPage() {
@@ -125,7 +126,21 @@ export default function PropertyDetailPage() {
         status: formMode === 'visit' ? ('Site Visit Scheduled' as const) : ('New' as const),
       };
 
-      saveLead(inquiryPayload);
+      const savedLead = saveLead(inquiryPayload);
+
+      sendInquiryNotification({
+        leadId: savedLead.id,
+        type: formMode === 'visit' ? 'Site Visit Request' : 'Property Inquiry',
+        fullName,
+        phone,
+        email,
+        serviceInterest: `Property [${property.id}]: ${property.title}`,
+        propertyType: property.type,
+        location: `${property.location.address}, ${property.location.city}`,
+        budgetOrArea: `${property.priceLabel || formatNPR(property.price)} (${property.specifications.landArea})`,
+        message: inquiryPayload.message,
+      });
+
       setSubmitSuccess(true);
     } catch (err) {
       console.error('Inquiry submission error', err);
@@ -648,23 +663,48 @@ export default function PropertyDetailPage() {
                       {formMode === 'visit' ? 'Site Visit Requested!' : 'Inquiry Submitted!'}
                     </h3>
                     <p className="text-xs text-slate-600 leading-relaxed">
-                      Our engineering property consultant in Dhangadhi will contact you within 24 hours to coordinate details.
+                      Our engineering property consultant in Dhangadhi will contact you within 24 hours.
                     </p>
                   </div>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setSubmitSuccess(false);
-                      setFullName('');
-                      setPhone('');
-                      setEmail('');
-                      setMessage('');
-                      setPreferredDate('');
-                    }}
-                    className="text-xs font-bold text-navy-900 underline hover:text-amber-600"
-                  >
-                    Submit another inquiry
-                  </button>
+                  <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-3 max-w-sm mx-auto text-xs text-emerald-800 text-center">
+                    ✉️ Notification sent to <strong>kaltadeengineeringservices@gmail.com</strong> &amp; <strong>ai.antigravity11@gmail.com</strong>
+                  </div>
+                  <div className="pt-2 flex flex-col gap-2">
+                    <a
+                      href={generateWhatsAppUrl({
+                        leadId: property.id,
+                        type: formMode === 'visit' ? 'Site Visit Request' : 'Property Inquiry',
+                        fullName,
+                        phone,
+                        email,
+                        serviceInterest: `Inquiry on Property ${property.id}`,
+                        propertyType: property.type,
+                        location: `${property.location.address}, ${property.location.city}`,
+                        budgetOrArea: `${property.priceLabel || formatNPR(property.price)} (${property.specifications.landArea})`,
+                        message: `${formMode === 'visit' ? `[Visit Date: ${preferredDate || 'Flexible'}] ` : ''}${message || 'Inquiring for details & verified trace copies.'}`,
+                      })}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs shadow-md transition-all"
+                    >
+                      <Phone className="w-3.5 h-3.5" />
+                      <span>Send via WhatsApp</span>
+                    </a>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setSubmitSuccess(false);
+                        setFullName('');
+                        setPhone('');
+                        setEmail('');
+                        setMessage('');
+                        setPreferredDate('');
+                      }}
+                      className="text-xs font-bold text-navy-900 underline hover:text-amber-600 py-1"
+                    >
+                      Submit another inquiry
+                    </button>
+                  </div>
                 </div>
               ) : (
                 <form onSubmit={handleInquirySubmit} className="space-y-4">

@@ -28,6 +28,7 @@ import { Button } from '@/components/ui/Button';
 import { Badge } from '@/components/ui/Badge';
 import { Modal } from '@/components/ui/Modal';
 import { saveLead } from '@/lib/storage';
+import { sendInquiryNotification, generateWhatsAppUrl } from '@/lib/email';
 
 export default function DueDiligencePage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -45,7 +46,7 @@ export default function DueDiligencePage() {
     e.preventDefault();
     if (!formData.fullName || !formData.phone) return;
 
-    saveLead({
+    const newLead = saveLead({
       type: 'Buyer Requirement',
       fullName: formData.fullName,
       phone: formData.phone,
@@ -55,6 +56,18 @@ export default function DueDiligencePage() {
       location: formData.propertyLocation,
       message: formData.message,
       urgency: 'Urgent',
+    });
+
+    sendInquiryNotification({
+      leadId: newLead.id,
+      type: 'Due Diligence Assessment',
+      fullName: newLead.fullName,
+      phone: newLead.phone,
+      email: newLead.email,
+      serviceInterest: newLead.serviceInterest,
+      propertyType: newLead.propertyType,
+      location: newLead.location,
+      message: newLead.message,
     });
 
     setIsSubmitted(true);
@@ -325,14 +338,13 @@ export default function DueDiligencePage() {
             >
               Request Due Diligence Assessment
             </Button>
-            <Button
-              href="tel:+9779858420000"
-              variant="outline"
-              size="lg"
-              leftIcon={<Phone className="w-4 h-4" />}
+            <a
+              href="tel:+9779858425256"
+              className="inline-flex items-center justify-center font-medium rounded-lg transition-all duration-200 border border-slate-300 bg-white text-slate-800 hover:bg-slate-50 hover:border-slate-400 text-base px-6 py-3.5 gap-2.5 shadow-sm"
             >
-              Call Our Engineers
-            </Button>
+              <Phone className="w-4 h-4 text-amber-600" />
+              <span>Call +977-9858425256</span>
+            </a>
           </div>
         </section>
       </div>
@@ -346,16 +358,52 @@ export default function DueDiligencePage() {
         maxWidth="lg"
       >
         {isSubmitted ? (
-          <div className="py-8 text-center space-y-3">
+          <div className="py-8 text-center space-y-4">
             <div className="w-14 h-14 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto">
               <Check className="w-8 h-8" />
             </div>
-            <h4 className="text-xl font-bold text-navy-950">
-              Due Diligence Request Received!
-            </h4>
-            <p className="text-sm text-slate-600 max-w-md mx-auto">
-              Our engineering team has logged your verification request. We will contact you immediately to obtain document copies and arrange the site survey.
-            </p>
+            <div className="space-y-1">
+              <h4 className="text-xl font-bold text-navy-950">
+                Due Diligence Request Received!
+              </h4>
+              <p className="text-sm text-slate-600 max-w-md mx-auto">
+                Our engineering team has logged your verification request.
+              </p>
+            </div>
+            <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-3 max-w-md mx-auto text-xs text-emerald-800 text-center">
+              ✉️ Notification sent to <strong>kaltadeengineeringservices@gmail.com</strong> &amp; <strong>ai.antigravity11@gmail.com</strong>
+            </div>
+            <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3">
+              <a
+                href={generateWhatsAppUrl({
+                  leadId: 'DUE-DILIGENCE-REQ',
+                  type: 'Due Diligence Assessment',
+                  fullName: formData.fullName,
+                  phone: formData.phone,
+                  email: formData.email,
+                  serviceInterest: 'Property Due Diligence Assessment',
+                  propertyType: formData.propertyType,
+                  location: formData.propertyLocation,
+                  message: formData.message,
+                })}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs shadow-md transition-all"
+              >
+                <Phone className="w-3.5 h-3.5" />
+                <span>Send via WhatsApp</span>
+              </a>
+              <button
+                type="button"
+                onClick={() => {
+                  setIsSubmitted(false);
+                  setIsModalOpen(false);
+                }}
+                className="px-4 py-2.5 rounded-xl border border-slate-200 hover:bg-slate-50 text-xs font-semibold text-slate-700"
+              >
+                Close Window
+              </button>
+            </div>
           </div>
         ) : (
           <form onSubmit={handleSubmit} className="space-y-4 text-xs sm:text-sm">

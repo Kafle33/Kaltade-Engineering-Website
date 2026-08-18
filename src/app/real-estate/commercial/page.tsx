@@ -32,6 +32,7 @@ import { PropertyCard } from '@/components/properties/PropertyCard';
 import { propertiesData } from '@/data/propertiesData';
 import { Property } from '@/types';
 import { saveLead } from '@/lib/storage';
+import { sendInquiryNotification, generateWhatsAppUrl } from '@/lib/email';
 
 export default function CommercialRealEstatePage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -172,7 +173,7 @@ export default function CommercialRealEstatePage() {
     e.preventDefault();
     if (!formData.fullName || !formData.phone) return;
 
-    saveLead({
+    const newLead = saveLead({
       type: 'Property Inquiry',
       fullName: formData.fullName,
       phone: formData.phone,
@@ -184,6 +185,19 @@ export default function CommercialRealEstatePage() {
       budget: formData.budget,
       message: `[Transaction: ${formData.transactionType}] ${formData.message}`,
       urgency: 'Standard',
+    });
+
+    sendInquiryNotification({
+      leadId: newLead.id,
+      type: 'Commercial Real Estate Inquiry',
+      fullName: newLead.fullName,
+      phone: newLead.phone,
+      email: newLead.email,
+      serviceInterest: newLead.serviceInterest,
+      propertyType: newLead.propertyType,
+      location: newLead.location,
+      budgetOrArea: newLead.budget,
+      message: newLead.message,
     });
 
     setIsSubmitted(true);
@@ -574,16 +588,54 @@ export default function CommercialRealEstatePage() {
         maxWidth="lg"
       >
         {isSubmitted ? (
-          <div className="py-8 text-center space-y-3">
+          <div className="py-8 text-center space-y-4">
             <div className="w-14 h-14 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto">
               <Check className="w-8 h-8" />
             </div>
-            <h4 className="text-xl font-bold text-navy-950">
-              Commercial Inquiry Received!
-            </h4>
-            <p className="text-xs sm:text-sm text-slate-600 max-w-md mx-auto">
-              Our commercial property and engineering advisory desk has received your brief. We will contact you shortly with matched properties and technical specifications.
-            </p>
+            <div className="space-y-1">
+              <h4 className="text-xl font-bold text-navy-950">
+                Commercial Inquiry Received!
+              </h4>
+              <p className="text-xs sm:text-sm text-slate-600 max-w-md mx-auto">
+                Our commercial property and engineering advisory desk has received your brief.
+              </p>
+            </div>
+            <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-3 max-w-md mx-auto text-xs text-emerald-800 text-center">
+              ✉️ Notification sent to <strong>kaltadeengineeringservices@gmail.com</strong> &amp; <strong>ai.antigravity11@gmail.com</strong>
+            </div>
+            <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3">
+              <a
+                href={generateWhatsAppUrl({
+                  leadId: selectedProperty ? selectedProperty.id : 'COMM-REQ',
+                  type: 'Commercial Real Estate Inquiry',
+                  fullName: formData.fullName,
+                  phone: formData.phone,
+                  email: formData.email,
+                  serviceInterest: `Commercial Real Estate: ${formData.commercialCategory}`,
+                  propertyType: formData.commercialCategory,
+                  location: formData.preferredLocation,
+                  budgetOrArea: formData.budget,
+                  message: `[Transaction: ${formData.transactionType}] ${formData.message}`,
+                })}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs shadow-md transition-all"
+              >
+                <Phone className="w-3.5 h-3.5" />
+                <span>Send via WhatsApp</span>
+              </a>
+              <button
+                type="button"
+                onClick={() => {
+                  setIsSubmitted(false);
+                  setIsModalOpen(false);
+                  setSelectedProperty(null);
+                }}
+                className="px-4 py-2.5 rounded-xl border border-slate-200 hover:bg-slate-50 text-xs font-semibold text-slate-700"
+              >
+                Close Window
+              </button>
+            </div>
           </div>
         ) : (
           <form onSubmit={handleSubmit} className="space-y-4 text-xs sm:text-sm">

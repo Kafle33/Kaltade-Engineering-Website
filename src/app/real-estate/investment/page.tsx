@@ -29,6 +29,7 @@ import { Button } from '@/ui/Button';
 import { Badge } from '@/ui/Badge';
 import { Modal } from '@/ui/Modal';
 import { saveLead } from '@/lib/storage';
+import { sendInquiryNotification, generateWhatsAppUrl } from '@/lib/email';
 
 export default function RealEstateInvestmentPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -175,8 +176,8 @@ export default function RealEstateInvestmentPage() {
     e.preventDefault();
     if (!formData.fullName || !formData.phone) return;
 
-    saveLead({
-      type: 'Property Inquiry',
+    const newLead = saveLead({
+      type: 'Buyer Requirement',
       fullName: formData.fullName,
       phone: formData.phone,
       email: formData.email,
@@ -186,6 +187,19 @@ export default function RealEstateInvestmentPage() {
       budget: formData.budgetRange,
       message: `[Investor Type: ${formData.investorType}] [Horizon: ${formData.timeHorizon}] ${formData.message}`,
       urgency: 'Standard',
+    });
+
+    sendInquiryNotification({
+      leadId: newLead.id,
+      type: 'Investment Advisory',
+      fullName: newLead.fullName,
+      phone: newLead.phone,
+      email: newLead.email,
+      serviceInterest: newLead.serviceInterest,
+      propertyType: newLead.propertyType,
+      location: newLead.location,
+      budgetOrArea: newLead.budget,
+      message: newLead.message,
     });
 
     setIsSubmitted(true);
@@ -609,8 +623,8 @@ export default function RealEstateInvestmentPage() {
               <div className="text-center">
                 <span className="text-[11px] text-slate-400">
                   Prefer direct phone conversation? Call{' '}
-                  <a href="tel:+9779858420000" className="text-amber-400 font-semibold underline">
-                    +977 98584-XXXXX
+                  <a href="tel:+9779858425256" className="text-amber-400 font-semibold underline">
+                    +977-9858425256
                   </a>
                 </span>
               </div>
@@ -728,16 +742,53 @@ export default function RealEstateInvestmentPage() {
         maxWidth="lg"
       >
         {isSubmitted ? (
-          <div className="py-8 text-center space-y-3">
+          <div className="py-8 text-center space-y-4">
             <div className="w-14 h-14 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto">
               <Check className="w-8 h-8" />
             </div>
-            <h4 className="text-xl font-bold text-navy-950">
-              Consultation Request Received!
-            </h4>
-            <p className="text-xs sm:text-sm text-slate-600 max-w-md mx-auto">
-              Thank you for reaching out. Our engineering and property advisory lead will review your specifications and contact you shortly.
-            </p>
+            <div className="space-y-1">
+              <h4 className="text-xl font-bold text-navy-950">
+                Consultation Request Received!
+              </h4>
+              <p className="text-xs sm:text-sm text-slate-600 max-w-md mx-auto">
+                Our engineering and property advisory lead will review your specifications.
+              </p>
+            </div>
+            <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-3 max-w-md mx-auto text-xs text-emerald-800 text-center">
+              ✉️ Notification sent to <strong>kaltadeengineeringservices@gmail.com</strong> &amp; <strong>ai.antigravity11@gmail.com</strong>
+            </div>
+            <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3">
+              <a
+                href={generateWhatsAppUrl({
+                  leadId: 'INVEST-ADVISORY',
+                  type: 'Investment Advisory',
+                  fullName: formData.fullName,
+                  phone: formData.phone,
+                  email: formData.email,
+                  serviceInterest: 'Real Estate Investment Consultancy',
+                  propertyType: formData.propertyInterest,
+                  location: formData.targetLocation,
+                  budgetOrArea: formData.budgetRange,
+                  message: `[Investor: ${formData.investorType}] [Horizon: ${formData.timeHorizon}] ${formData.message}`,
+                })}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs shadow-md transition-all"
+              >
+                <Phone className="w-3.5 h-3.5" />
+                <span>Send via WhatsApp</span>
+              </a>
+              <button
+                type="button"
+                onClick={() => {
+                  setIsSubmitted(false);
+                  setIsModalOpen(false);
+                }}
+                className="px-4 py-2.5 rounded-xl border border-slate-200 hover:bg-slate-50 text-xs font-semibold text-slate-700"
+              >
+                Close Window
+              </button>
+            </div>
           </div>
         ) : (
           <form onSubmit={handleSubmit} className="space-y-4 text-xs sm:text-sm">
