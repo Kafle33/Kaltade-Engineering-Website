@@ -6,10 +6,8 @@ import {
   MapPin,
   TrendingUp,
   Scale,
-  ShieldCheck,
   Building,
   Layers,
-  ArrowRight,
 } from 'lucide-react';
 import { SectionHeader } from '@/ui/SectionHeader';
 import { Button } from '@/ui/Button';
@@ -69,7 +67,7 @@ export function PropertyIntelligence() {
   ];
 
   return (
-    <section className="py-20 sm:py-28 bg-navy-950 text-white relative overflow-hidden">
+    <section className="py-20 sm:py-28 bg-navy-950 dark:bg-dark-bg text-white relative overflow-hidden transition-colors">
       <div className="absolute inset-0 bg-grid-navy opacity-20 pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -92,17 +90,17 @@ export function PropertyIntelligence() {
                 <button
                   key={dim.id}
                   onClick={() => setActiveNode(idx)}
-                  className={`w-full text-left p-4 rounded-2xl border transition-all duration-200 flex items-start gap-4 ${
+                  className={`w-full text-left p-4 rounded-2xl border transition-all duration-200 flex items-start gap-4 cursor-pointer ${
                     isActive
-                      ? 'bg-white text-navy-950 border-white shadow-lg scale-[1.02]'
-                      : 'bg-navy-900/80 text-slate-300 border-white/10 hover:bg-white/10 hover:text-white'
+                      ? 'bg-white dark:bg-dark-card text-navy-950 dark:text-white border-white dark:border-sky-400/50 shadow-lg scale-[1.02]'
+                      : 'bg-navy-900/80 dark:bg-dark-surface/60 text-slate-300 border-white/10 dark:border-dark-border hover:bg-white/10 dark:hover:bg-dark-elevated hover:text-white'
                   }`}
                 >
                   <div
                     className={`p-2.5 rounded-xl shrink-0 ${
                       isActive
-                        ? 'bg-navy-900 text-white'
-                        : 'bg-white/10 text-blue-200'
+                        ? 'bg-navy-900 dark:bg-navy-700 text-white'
+                        : 'bg-white/10 dark:bg-dark-elevated text-blue-200 dark:text-sky-300'
                     }`}
                   >
                     <Icon className="w-5 h-5" />
@@ -113,7 +111,7 @@ export function PropertyIntelligence() {
                     </div>
                     <div
                       className={`text-xs mt-1 leading-snug line-clamp-1 ${
-                        isActive ? 'text-slate-600' : 'text-slate-400'
+                        isActive ? 'text-slate-600 dark:text-slate-300' : 'text-slate-400'
                       }`}
                     >
                       {dim.summary}
@@ -126,7 +124,7 @@ export function PropertyIntelligence() {
 
           {/* Right / Bottom Active Deep-Dive Panel (Col 7) */}
           <div className="lg:col-span-7">
-            <div className="relative p-8 sm:p-10 rounded-3xl bg-navy-900 border border-white/15 shadow-2xl overflow-hidden">
+            <div className="relative p-8 sm:p-10 rounded-3xl bg-navy-900 dark:bg-dark-surface border border-white/15 dark:border-dark-border shadow-2xl dark:shadow-card-dark overflow-hidden">
               {/* Subtle background blueprint watermark */}
               <div className="absolute top-0 right-0 p-8 opacity-5 text-white pointer-events-none">
                 <Scale className="w-64 h-64" />
@@ -145,11 +143,11 @@ export function PropertyIntelligence() {
                   {dimensions[activeNode].details}
                 </p>
 
-                <div className="p-4 rounded-xl bg-white/5 border border-white/10 text-xs text-blue-200 space-y-1">
+                <div className="p-4 rounded-xl bg-white/5 dark:bg-dark-elevated/50 border border-white/10 dark:border-dark-border text-xs text-blue-200 dark:text-sky-300 space-y-1">
                   <div className="font-semibold text-white">
                     How Kaltade Assesses This:
                   </div>
-                  <p className="text-slate-300">
+                  <p className="text-slate-300 dark:text-slate-400">
                     We synthesize CAD drafting, survey measurements, municipal setback bylaws, and market transactional metrics to ensure zero ambiguity before you commit capital.
                   </p>
                 </div>

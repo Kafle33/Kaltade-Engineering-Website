@@ -99,38 +99,43 @@ export default function ServicesPage() {
           href: '/valuation',
           desc: 'Engineering evaluation of built age, material degradation, and residual lifespan calculation.',
         },
+        {
+          title: 'Electronic Cadastral Boundary Survey',
+          href: '/valuation',
+          desc: 'Precise electronic distance measurement and cadastral trace map boundary verification.',
+        },
       ],
-      ctaText: 'Request Property Valuation',
+      ctaText: 'Explore Valuation Services',
       ctaHref: '/valuation',
       accentColor: 'from-amber-600 to-navy-900',
     },
     {
       id: 'real-estate',
-      name: 'Real Estate Consultancy & Advisory',
+      name: 'Real Estate Consultancy & Due Diligence',
       shortName: 'Real Estate',
-      badge: 'Intelligence & Diligence',
+      badge: 'Market Intelligence',
       icon: Building2,
       description:
-        'Professional property advisory eliminating speculation through engineering due diligence, boundary verification, road right-of-way analysis, and strategic matchmaking.',
+        'Professional real estate consultancy providing engineering-backed pre-purchase due diligence, land subdivision planning, and commercial advisory.',
       subPages: [
         {
-          title: 'Property Due Diligence & Verification',
+          title: 'Property Due Diligence Assessment',
           href: '/real-estate/due-diligence',
-          desc: 'Independent 10-point technical check, Cadastral trace discrepancy check, and setback verification.',
+          desc: 'On-site technical due diligence, cadastral alignment, municipal setback checks, and feasibility audits.',
         },
         {
-          title: 'Property Buying & Acquisition Consultancy',
-          href: '/real-estate',
-          desc: 'Technical screening, fair price negotiation, and physical suitability assessment for buyers.',
+          title: 'Property Investment Consultancy',
+          href: '/real-estate/investment',
+          desc: 'Data-driven market assessment, commercial yield modeling, and strategic acquisition guidance.',
         },
         {
-          title: 'Property Selling & Listing Advisory',
-          href: '/real-estate',
-          desc: 'Verified listing presentation, realistic valuation benchmarks, and genuine buyer matchmaking.',
+          title: 'Commercial Real Estate Advisory',
+          href: '/real-estate/commercial',
+          desc: 'Commercial plots, office spaces, showroom locations, and high-yield rental assets.',
         },
         {
           title: 'Land Development & Master Planning',
-          href: '/real-estate',
+          href: '/real-estate/land-development',
           desc: 'Subdivision design, internal road and drainage layout, and plot yield optimization.',
         },
       ],
@@ -178,20 +183,20 @@ export default function ServicesPage() {
     : divisions.filter((d) => d.id === activeDivision);
 
   return (
-    <main className="min-h-screen bg-slate-50 pt-28 sm:pt-32 pb-20">
+    <main className="min-h-screen bg-slate-50 dark:bg-dark-bg text-navy-950 dark:text-dark-text pt-28 sm:pt-32 pb-20 transition-colors">
       {/* Hero Header */}
-      <section className="relative overflow-hidden bg-navy-950 text-white py-16 sm:py-24 mb-16">
+      <section className="relative overflow-hidden bg-navy-950 dark:bg-dark-surface text-white py-16 sm:py-24 mb-16 border-b border-navy-800 dark:border-dark-border">
         <div className="absolute inset-0 bg-grid-pattern opacity-10 pointer-events-none" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="max-w-3xl">
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md text-xs font-bold tracking-wider uppercase bg-white/10 text-blue-200 border border-white/15 mb-4">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md text-xs font-bold tracking-wider uppercase bg-white/10 dark:bg-dark-elevated text-blue-200 dark:text-sky-300 border border-white/15 dark:border-dark-border mb-4">
               <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
               OUR CAPABILITIES
             </span>
             <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight leading-tight">
-              Integrated Engineering, Valuation & Property Solutions
+              Integrated Engineering, Valuation &amp; Property Solutions
             </h1>
-            <p className="mt-4 text-base sm:text-lg text-slate-300 leading-relaxed font-normal">
+            <p className="mt-4 text-base sm:text-lg text-slate-300 dark:text-slate-400 leading-relaxed font-normal">
               Kaltade Engineering Services bridges the gap between technical engineering precision, institutional property valuation, and transparent real estate advisory in Nepal.
             </p>
 
@@ -202,7 +207,7 @@ export default function ServicesPage() {
               <Button href="/services/engineering" variant="white" size="md">
                 Engineering Consultancy
               </Button>
-              <Button href="/contact" variant="outline" size="md" className="bg-white/10 text-white border-white/20 hover:bg-white/20">
+              <Button href="/contact" variant="outline" size="md" className="bg-white/10 dark:bg-dark-card text-white border-white/20 dark:border-dark-border hover:bg-white/20">
                 Get Consultation
               </Button>
             </div>
@@ -214,43 +219,43 @@ export default function ServicesPage() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Division Filter Tabs */}
         <div className="flex items-center justify-center mb-12">
-          <div className="inline-flex p-1.5 rounded-xl bg-white border border-slate-200 shadow-sm">
+          <div className="inline-flex p-1.5 rounded-xl bg-white dark:bg-dark-card border border-slate-200 dark:border-dark-border shadow-xs">
             <button
               onClick={() => setActiveDivision('all')}
-              className={`px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all ${
+              className={`px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all cursor-pointer ${
                 activeDivision === 'all'
-                  ? 'bg-navy-900 text-white shadow-sm'
-                  : 'text-slate-600 hover:text-navy-950 hover:bg-slate-50'
+                  ? 'bg-navy-900 dark:bg-navy-700 text-white shadow-xs'
+                  : 'text-slate-600 dark:text-slate-300 hover:text-navy-950 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-dark-elevated'
               }`}
             >
               All Capabilities
             </button>
             <button
               onClick={() => setActiveDivision('engineering')}
-              className={`px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all ${
+              className={`px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all cursor-pointer ${
                 activeDivision === 'engineering'
-                  ? 'bg-navy-900 text-white shadow-sm'
-                  : 'text-slate-600 hover:text-navy-950 hover:bg-slate-50'
+                  ? 'bg-navy-900 dark:bg-navy-700 text-white shadow-xs'
+                  : 'text-slate-600 dark:text-slate-300 hover:text-navy-950 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-dark-elevated'
               }`}
             >
-              Engineering & Design
+              Engineering &amp; Design
             </button>
             <button
               onClick={() => setActiveDivision('valuation')}
-              className={`px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all ${
+              className={`px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all cursor-pointer ${
                 activeDivision === 'valuation'
-                  ? 'bg-navy-900 text-white shadow-sm'
-                  : 'text-slate-600 hover:text-navy-950 hover:bg-slate-50'
+                  ? 'bg-navy-900 dark:bg-navy-700 text-white shadow-xs'
+                  : 'text-slate-600 dark:text-slate-300 hover:text-navy-950 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-dark-elevated'
               }`}
             >
               Property Valuation
             </button>
             <button
               onClick={() => setActiveDivision('real-estate')}
-              className={`px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all ${
+              className={`px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all cursor-pointer ${
                 activeDivision === 'real-estate'
-                  ? 'bg-navy-900 text-white shadow-sm'
-                  : 'text-slate-600 hover:text-navy-950 hover:bg-slate-50'
+                  ? 'bg-navy-900 dark:bg-navy-700 text-white shadow-xs'
+                  : 'text-slate-600 dark:text-slate-300 hover:text-navy-950 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-dark-elevated'
               }`}
             >
               Real Estate Advisory
@@ -266,14 +271,14 @@ export default function ServicesPage() {
               <div
                 key={division.id}
                 id={division.id}
-                className="bg-white rounded-3xl border border-slate-200/90 shadow-sm hover:shadow-md transition-all overflow-hidden"
+                className="bg-white dark:bg-dark-card rounded-3xl border border-slate-200/90 dark:border-dark-border shadow-xs dark:shadow-card-dark hover:shadow-md transition-all overflow-hidden"
               >
                 {/* Division Header Banner */}
-                <div className="p-6 sm:p-8 md:p-10 border-b border-slate-100 bg-gradient-to-r from-navy-950 to-navy-900 text-white">
+                <div className="p-6 sm:p-8 md:p-10 border-b border-slate-100 dark:border-dark-border bg-gradient-to-r from-navy-950 to-navy-900 dark:from-dark-surface dark:to-dark-card text-white">
                   <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
                     <div className="space-y-2">
                       <div className="flex items-center gap-3">
-                        <div className="p-2.5 rounded-xl bg-white/10 text-amber-400 border border-white/15">
+                        <div className="p-2.5 rounded-xl bg-white/10 dark:bg-dark-elevated text-amber-400 shrink-0 border border-white/15 dark:border-dark-border">
                           <Icon className="w-6 h-6" />
                         </div>
                         <Badge variant="warning" size="md">
@@ -283,7 +288,7 @@ export default function ServicesPage() {
                       <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-white">
                         {division.name}
                       </h2>
-                      <p className="text-sm sm:text-base text-slate-300 max-w-3xl leading-relaxed">
+                      <p className="text-sm sm:text-base text-slate-300 dark:text-slate-400 max-w-3xl leading-relaxed">
                         {division.description}
                       </p>
                     </div>
@@ -303,34 +308,34 @@ export default function ServicesPage() {
 
                 {/* Sub-services Grid */}
                 <div className="p-6 sm:p-8 md:p-10">
-                  <h3 className="text-xs font-bold uppercase tracking-wider text-slate-500 mb-6">
-                    Specialized Offerings & Services
+                  <h3 className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-6">
+                    Specialized Offerings &amp; Services
                   </h3>
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {division.subPages.map((sub, idx) => (
                       <Link
                         key={idx}
                         href={sub.href}
-                        className="group p-5 rounded-2xl bg-slate-50/70 border border-slate-200/80 hover:border-navy-900/30 hover:bg-white hover:shadow-md transition-all flex flex-col justify-between"
+                        className="group p-5 rounded-2xl bg-slate-50/70 dark:bg-dark-surface border border-slate-200/80 dark:border-dark-border hover:border-navy-900/30 dark:hover:border-sky-500/40 hover:bg-white dark:hover:bg-dark-elevated hover:shadow-md transition-all flex flex-col justify-between"
                       >
                         <div>
                           <div className="flex items-center justify-between mb-3">
-                            <span className="text-xs font-bold font-mono text-navy-400 group-hover:text-navy-900 transition-colors">
+                            <span className="text-xs font-bold font-mono text-navy-400 dark:text-sky-400 group-hover:text-navy-900 dark:group-hover:text-white transition-colors">
                               0{idx + 1}
                             </span>
-                            <span className="w-6 h-6 rounded-full bg-white border border-slate-200 flex items-center justify-center text-slate-400 group-hover:text-navy-900 group-hover:border-navy-900 transition-all">
+                            <span className="w-6 h-6 rounded-full bg-white dark:bg-dark-card border border-slate-200 dark:border-dark-border flex items-center justify-center text-slate-400 dark:text-slate-400 group-hover:text-navy-900 dark:group-hover:text-white group-hover:border-navy-900 dark:group-hover:border-sky-400 transition-all">
                               <ChevronRight className="w-3.5 h-3.5" />
                             </span>
                           </div>
-                          <h4 className="text-base font-bold text-navy-950 group-hover:text-navy-800 transition-colors mb-2 leading-snug">
+                          <h4 className="text-base font-bold text-navy-950 dark:text-white group-hover:text-navy-800 dark:group-hover:text-sky-300 transition-colors mb-2 leading-snug">
                             {sub.title}
                           </h4>
-                          <p className="text-xs text-slate-600 leading-relaxed font-normal">
+                          <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed font-normal">
                             {sub.desc}
                           </p>
                         </div>
 
-                        <div className="mt-4 pt-3 border-t border-slate-200/60 flex items-center text-xs font-semibold text-navy-900 group-hover:text-amber-600 transition-colors">
+                        <div className="mt-4 pt-3 border-t border-slate-200/60 dark:border-dark-border flex items-center text-xs font-semibold text-navy-900 dark:text-sky-400 group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors">
                           <span>View service details</span>
                           <ArrowRight className="w-3.5 h-3.5 ml-1 transition-transform group-hover:translate-x-1" />
                         </div>
@@ -344,7 +349,7 @@ export default function ServicesPage() {
         </div>
 
         {/* Why Choose Kaltade Section */}
-        <section className="mt-24 sm:mt-32 pt-16 border-t border-slate-200">
+        <section className="mt-24 sm:mt-32 pt-16 border-t border-slate-200 dark:border-dark-border">
           <SectionHeader
             eyebrow="THE KALTADE ADVANTAGE"
             title="Why Choose Kaltade Engineering Services"
@@ -358,15 +363,15 @@ export default function ServicesPage() {
               return (
                 <div
                   key={idx}
-                  className="p-6 sm:p-8 rounded-2xl bg-white border border-slate-200/90 hover:border-navy-900/40 hover:shadow-lg transition-all group"
+                  className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-dark-card border border-slate-200/90 dark:border-dark-border hover:border-navy-900/40 dark:hover:border-sky-500/40 hover:shadow-lg dark:hover:shadow-card-dark transition-all group"
                 >
-                  <div className="w-12 h-12 rounded-xl bg-navy-50 text-navy-900 border border-navy-100 flex items-center justify-center mb-5 group-hover:bg-navy-900 group-hover:text-white transition-all">
+                  <div className="w-12 h-12 rounded-xl bg-navy-50 dark:bg-dark-elevated text-navy-900 dark:text-sky-300 border border-navy-100 dark:border-dark-border flex items-center justify-center mb-5 group-hover:bg-navy-900 dark:group-hover:bg-navy-700 group-hover:text-white transition-all">
                     <Icon className="w-6 h-6" />
                   </div>
-                  <h3 className="text-lg font-bold text-navy-950 mb-2.5">
+                  <h3 className="text-lg font-bold text-navy-950 dark:text-white mb-2.5">
                     {card.title}
                   </h3>
-                  <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal">
+                  <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed font-normal">
                     {card.desc}
                   </p>
                 </div>
@@ -376,7 +381,7 @@ export default function ServicesPage() {
         </section>
 
         {/* Quick Consultation CTA */}
-        <div className="mt-20 p-8 sm:p-12 rounded-3xl bg-navy-950 text-white relative overflow-hidden border border-navy-800">
+        <div className="mt-20 p-8 sm:p-12 rounded-3xl bg-navy-950 dark:bg-dark-surface text-white relative overflow-hidden border border-navy-800 dark:border-dark-border shadow-xl dark:shadow-card-dark">
           <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-8 text-center md:text-left">
             <div className="space-y-3 max-w-xl">
               <span className="text-xs font-bold uppercase tracking-wider text-amber-400">
@@ -385,7 +390,7 @@ export default function ServicesPage() {
               <h3 className="text-2xl sm:text-3xl font-extrabold tracking-tight leading-snug">
                 Let&apos;s discuss your engineering, valuation, or real estate requirement.
               </h3>
-              <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
+              <p className="text-xs sm:text-sm text-slate-300 dark:text-slate-400 leading-relaxed">
                 Reach out to our engineering consultants in Dhangadhi. We review your requirements and provide clear technical guidance.
               </p>
             </div>
@@ -395,7 +400,7 @@ export default function ServicesPage() {
               </Button>
               <a
                 href="tel:+9779858425256"
-                className="inline-flex items-center justify-center font-medium rounded-lg transition-all duration-200 border border-white/20 bg-white/10 text-white hover:bg-white/20 text-base px-6 py-3.5 gap-2.5 shadow-sm"
+                className="inline-flex items-center justify-center font-medium rounded-lg transition-all duration-200 border border-white/20 bg-white/10 dark:bg-dark-elevated text-white hover:bg-white/20 text-base px-6 py-3.5 gap-2.5 shadow-xs"
               >
                 <Phone className="w-4 h-4 text-amber-400" />
                 <span>Call +977-9858425256</span>

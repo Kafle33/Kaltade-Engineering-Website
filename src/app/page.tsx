@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { Scale, Building2, FileSpreadsheet, ArrowRight, Phone, MessageSquare } from 'lucide-react';
+import { Scale, Building2, ArrowRight, Phone, MessageSquare } from 'lucide-react';
 import { Button } from '@/ui/Button';
 import { SectionHeader } from '@/ui/SectionHeader';
 
@@ -51,7 +51,7 @@ export default function HomePage() {
       <InsightsPreview />
 
       {/* 11. Final Multi-Path CTA */}
-      <section className="py-20 sm:py-28 bg-navy-950 text-white relative overflow-hidden">
+      <section className="py-20 sm:py-28 bg-navy-950 dark:bg-dark-bg text-white relative overflow-hidden transition-colors">
         <div className="absolute inset-0 bg-grid-navy opacity-20 pointer-events-none" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <SectionHeader
@@ -83,7 +83,7 @@ export default function HomePage() {
               href="/properties/list"
               variant="outline"
               size="lg"
-              className="bg-white/10 text-white border-white/20 hover:bg-white/20"
+              className="bg-white/10 dark:bg-dark-card/60 text-white border-white/20 dark:border-dark-border hover:bg-white/20"
             >
               List Your Property
             </Button>
@@ -91,14 +91,14 @@ export default function HomePage() {
               href="/contact"
               variant="outline"
               size="lg"
-              className="bg-white/10 text-white border-white/20 hover:bg-white/20"
+              className="bg-white/10 dark:bg-dark-card/60 text-white border-white/20 dark:border-dark-border hover:bg-white/20"
               rightIcon={<ArrowRight className="w-4 h-4" />}
             >
               Get Consultation
             </Button>
           </div>
 
-          <div className="mt-12 flex items-center justify-center gap-8 text-sm text-slate-300">
+          <div className="mt-12 flex items-center justify-center gap-8 text-sm text-slate-300 dark:text-slate-400">
             <a
               href="tel:+9779858425256"
               className="flex items-center gap-2 hover:text-white transition-colors"

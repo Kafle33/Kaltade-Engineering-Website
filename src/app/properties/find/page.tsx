@@ -118,85 +118,78 @@ Acquisition Purpose: ${purpose}
 Road Access Requirement: ${roadRequirement}
 Facing Preference: ${facingPreference}
 Purchase Timeframe: ${timeframe}
+Additional Notes: ${additionalRequirements || 'None provided.'}`;
 
-Additional Notes & Custom Preferences:
-${additionalRequirements || 'No specific custom preferences noted.'}`;
-
-      const saved = saveLead({
+      const newLead = saveLead({
         type: 'Buyer Requirement',
         fullName: name.trim(),
         phone: phone.trim(),
         email: email.trim() || undefined,
+        propertyType: propertyType,
         location: location.trim(),
-        propertyType: propertyType === 'Any Property Type' ? undefined : propertyType,
         budget: budget,
         message: detailedMessage,
         urgency: timeframe.includes('Immediate') ? 'Urgent' : 'Standard',
-        status: 'New'
+        status: 'New',
       });
 
       sendInquiryNotification({
-        leadId: saved.id,
+        leadId: newLead.id,
         type: 'Buyer Requirement',
-        fullName: saved.fullName,
-        phone: saved.phone,
-        email: saved.email,
-        location: saved.location,
-        propertyType: saved.propertyType,
-        budgetOrArea: saved.budget,
-        message: saved.message,
+        fullName: newLead.fullName,
+        phone: newLead.phone,
+        email: newLead.email,
+        serviceInterest: `Buyer Requirement: ${propertyType} in ${location}`,
+        propertyType: propertyType,
+        location: location,
+        budgetOrArea: `${budget} | Area: ${requiredArea}`,
+        message: detailedMessage,
       });
 
-      setSubmittedLeadId(saved.id);
+      setSubmittedLeadId(newLead.id);
     } catch (err) {
-      console.error('Failed to submit requirement:', err);
+      console.error(err);
     } finally {
       setIsSubmitting(false);
     }
   };
 
   const handleReset = () => {
+    setSubmittedLeadId(null);
     setLocation('');
-    setPropertyType('Commercial Land');
-    setBudget('NPR 1.0 Crore - 2.5 Crore');
     setRequiredArea('');
-    setPurpose('Commercial Complex / Office Setup');
-    setRoadRequirement('Wide Residential Road (20+ ft)');
-    setFacingPreference('Any / No Preference');
-    setTimeframe('1 to 3 Months');
     setAdditionalRequirements('');
     setName('');
     setPhone('');
     setEmail('');
-    setSubmittedLeadId(null);
   };
 
   return (
-    <div className="min-h-screen bg-slate-50/60 pt-28 sm:pt-32 pb-24">
-      {/* Header Container */}
+    <div className="min-h-screen bg-slate-50/60 dark:bg-dark-bg text-navy-950 dark:text-dark-text pt-28 sm:pt-32 pb-24 transition-colors">
+      {/* Top Banner */}
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mb-8">
-        <div className="flex items-center gap-2 mb-4">
-          <Link
-            href="/properties"
-            className="inline-flex items-center gap-1.5 text-xs font-bold text-navy-900 hover:text-amber-600 transition-colors"
-          >
-            <ArrowLeft className="w-4 h-4" />
-            <span>Back to Marketplace</span>
-          </Link>
-        </div>
+        <Link
+          href="/properties"
+          className="inline-flex items-center gap-2 text-xs font-bold text-navy-900 dark:text-sky-300 hover:text-amber-600 dark:hover:text-amber-400 mb-6 transition-colors"
+        >
+          <ArrowLeft className="w-4 h-4" />
+          <span>Back to Properties Marketplace</span>
+        </Link>
 
-        <div className="bg-navy-950 text-white rounded-3xl p-6 sm:p-10 relative overflow-hidden shadow-xl border border-navy-900">
-          <div className="absolute -right-12 -bottom-12 w-80 h-80 rounded-full bg-blue-600/10 blur-3xl pointer-events-none" />
-          <div className="relative z-10 space-y-3">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 text-amber-300 text-xs font-bold uppercase tracking-wider border border-white/15">
-              <Sparkles className="w-4 h-4 text-amber-400" />
-              Tailored Property Acquisition
+        <div className="bg-navy-950 dark:bg-dark-surface text-white rounded-3xl p-6 sm:p-10 relative overflow-hidden shadow-xl dark:shadow-card-dark border border-navy-900 dark:border-dark-border">
+          <div className="absolute right-0 top-0 w-80 h-80 rounded-full bg-blue-600/10 blur-3xl pointer-events-none" />
+          <div className="absolute right-1/3 bottom-0 w-64 h-64 rounded-full bg-amber-500/10 blur-3xl pointer-events-none" />
+
+          <div className="relative z-10 max-w-2xl">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 dark:bg-dark-elevated text-amber-300 text-xs font-bold uppercase tracking-wider mb-3 border border-white/15 dark:border-dark-border">
+              <Sparkles className="w-3.5 h-3.5 text-amber-400" />
+              Tailored Buyer Requirement Desk
             </div>
-            <h1 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight leading-tight">
+            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-white leading-tight">
               Tell us what you&apos;re looking for.
             </h1>
-            <p className="text-sm sm:text-base text-slate-300 max-w-2xl leading-relaxed">
-              Looking for a specific land parcel, commercial footprint, or residential plot in Kailali or Sudurpashchim? Share your exact criteria and our engineering advisory team will source and verify matching properties for you.
+            <p className="mt-3 text-xs sm:text-sm text-slate-300 dark:text-slate-400 leading-relaxed font-normal">
+              Whether you need a commercial plot along the highway, residential acreage, or an industrial site in Kailali, our engineers will survey off-market properties to match your exact spatial and budget criteria.
             </p>
           </div>
         </div>
@@ -206,57 +199,57 @@ ${additionalRequirements || 'No specific custom preferences noted.'}`;
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {submittedLeadId ? (
           /* Success Screen */
-          <div className="bg-white rounded-3xl p-8 sm:p-12 border border-slate-200 shadow-sm text-center space-y-8 animate-fadeIn">
-            <div className="w-20 h-20 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center mx-auto shadow-inner">
+          <div className="bg-white dark:bg-dark-card rounded-3xl p-8 sm:p-12 border border-slate-200 dark:border-dark-border shadow-xs dark:shadow-card-dark text-center space-y-8 animate-fadeIn">
+            <div className="w-20 h-20 rounded-full bg-emerald-50 dark:bg-emerald-950/80 text-emerald-600 dark:text-emerald-400 flex items-center justify-center mx-auto shadow-inner">
               <CheckCircle2 className="w-10 h-10" />
             </div>
 
             <div className="space-y-3 max-w-lg mx-auto">
-              <span className="px-3 py-1 rounded-full bg-navy-50 text-navy-950 text-xs font-mono font-bold tracking-wider">
+              <span className="px-3 py-1 rounded-full bg-navy-50 dark:bg-dark-elevated text-navy-950 dark:text-sky-300 text-xs font-mono font-bold tracking-wider">
                 Requirement Reference: {submittedLeadId}
               </span>
-              <h2 className="text-2xl sm:text-3xl font-extrabold text-navy-950">
+              <h2 className="text-2xl sm:text-3xl font-extrabold text-navy-950 dark:text-white">
                 Requirement Successfully Logged!
               </h2>
-              <p className="text-sm text-slate-600 leading-relaxed">
-                Thank you, <strong className="text-navy-950">{name}</strong>. Our real estate and valuation engineers have received your acquisition requirement for <strong className="text-navy-950">{location}</strong>.
+              <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                Thank you, <strong className="text-navy-950 dark:text-white">{name}</strong>. Our real estate and valuation engineers have received your acquisition requirement for <strong className="text-navy-950 dark:text-white">{location}</strong>.
               </p>
             </div>
 
             {/* Requirement Summary Box */}
-            <div className="p-6 rounded-2xl bg-slate-50 border border-slate-200 text-left max-w-xl mx-auto space-y-3 text-xs sm:text-sm">
-              <div className="grid grid-cols-2 gap-3 pb-3 border-b border-slate-200">
+            <div className="p-6 rounded-2xl bg-slate-50 dark:bg-dark-surface border border-slate-200 dark:border-dark-border text-left max-w-xl mx-auto space-y-3 text-xs sm:text-sm">
+              <div className="grid grid-cols-2 gap-3 pb-3 border-b border-slate-200 dark:border-dark-border">
                 <div>
-                  <span className="text-[11px] uppercase text-slate-400 font-bold block">
+                  <span className="text-[11px] uppercase text-slate-400 dark:text-slate-400 font-bold block">
                     Property Type
                   </span>
-                  <strong className="text-navy-950">{propertyType}</strong>
+                  <strong className="text-navy-950 dark:text-white">{propertyType}</strong>
                 </div>
                 <div>
-                  <span className="text-[11px] uppercase text-slate-400 font-bold block">
+                  <span className="text-[11px] uppercase text-slate-400 dark:text-slate-400 font-bold block">
                     Budget Range
                   </span>
-                  <strong className="text-navy-950">{budget}</strong>
+                  <strong className="text-navy-950 dark:text-white">{budget}</strong>
                 </div>
                 <div>
-                  <span className="text-[11px] uppercase text-slate-400 font-bold block">
+                  <span className="text-[11px] uppercase text-slate-400 dark:text-slate-400 font-bold block">
                     Target Area
                   </span>
-                  <strong className="text-navy-950">{requiredArea}</strong>
+                  <strong className="text-navy-950 dark:text-white">{requiredArea}</strong>
                 </div>
                 <div>
-                  <span className="text-[11px] uppercase text-slate-400 font-bold block">
+                  <span className="text-[11px] uppercase text-slate-400 dark:text-slate-400 font-bold block">
                     Target Road Access
                   </span>
-                  <strong className="text-navy-950">{roadRequirement}</strong>
+                  <strong className="text-navy-950 dark:text-white">{roadRequirement}</strong>
                 </div>
               </div>
-              <p className="text-slate-600 text-xs leading-relaxed pt-1">
-                Our property consultants will cross-reference off-market cadastral parcels and contact you at <strong className="text-navy-950">{phone}</strong>.
+              <p className="text-slate-600 dark:text-slate-300 text-xs leading-relaxed pt-1">
+                Our property consultants will cross-reference off-market cadastral parcels and contact you at <strong className="text-navy-950 dark:text-white">{phone}</strong>.
               </p>
             </div>
 
-            <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-3.5 max-w-xl mx-auto text-xs text-emerald-800 text-center">
+            <div className="bg-emerald-50 dark:bg-emerald-950/50 border border-emerald-200 dark:border-emerald-800/60 rounded-xl p-3.5 max-w-xl mx-auto text-xs text-emerald-800 dark:text-emerald-300 text-center">
               ✉️ Notification dispatched to <strong>kaltadeengineeringservices@gmail.com</strong> &amp; <strong>ai.antigravity11@gmail.com</strong>
             </div>
 
@@ -301,22 +294,22 @@ ${additionalRequirements || 'No specific custom preferences noted.'}`;
           /* Buyer Form */
           <form
             onSubmit={handleSubmit}
-            className="bg-white rounded-3xl p-6 sm:p-10 border border-slate-200 shadow-sm space-y-8"
+            className="bg-white dark:bg-dark-card rounded-3xl p-6 sm:p-10 border border-slate-200 dark:border-dark-border shadow-xs dark:shadow-card-dark space-y-8"
           >
             {/* Section 1: Property Requirements */}
             <div className="space-y-4">
-              <div className="flex items-center gap-2 pb-2 border-b border-slate-100">
-                <span className="w-6 h-6 rounded-full bg-navy-900 text-white text-xs font-bold flex items-center justify-center">
+              <div className="flex items-center gap-2 pb-2 border-b border-slate-100 dark:border-dark-border">
+                <span className="w-6 h-6 rounded-full bg-navy-900 dark:bg-navy-700 text-white text-xs font-bold flex items-center justify-center">
                   1
                 </span>
-                <h3 className="text-base font-extrabold text-navy-950">
+                <h3 className="text-base font-extrabold text-navy-950 dark:text-white">
                   Target Property Criteria
                 </h3>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="space-y-1.5 sm:col-span-2">
-                  <label className="text-xs font-bold text-navy-950 block">
+                  <label className="text-xs font-bold text-navy-950 dark:text-slate-300 block">
                     Preferred Location / Neighborhoods <span className="text-rose-500">*</span>
                   </label>
                   <input
@@ -325,18 +318,18 @@ ${additionalRequirements || 'No specific custom preferences noted.'}`;
                     value={location}
                     onChange={(e) => setLocation(e.target.value)}
                     placeholder="e.g. Dhangadhi Ward 1-5, Campus Road, Hasanpur, Attariya, Highway Corridor"
-                    className="w-full px-4 py-2.5 bg-slate-50 rounded-xl border border-slate-200 text-xs sm:text-sm text-navy-950 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-navy-900"
+                    className="w-full px-4 py-2.5 bg-slate-50 dark:bg-dark-surface rounded-xl border border-slate-200 dark:border-dark-border text-xs sm:text-sm text-navy-950 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-navy-900 dark:focus:ring-sky-400"
                   />
                 </div>
 
                 <div className="space-y-1.5">
-                  <label className="text-xs font-bold text-navy-950 block">
+                  <label className="text-xs font-bold text-navy-950 dark:text-slate-300 block">
                     Property Type
                   </label>
                   <select
                     value={propertyType}
                     onChange={(e) => setPropertyType(e.target.value)}
-                    className="w-full px-4 py-2.5 bg-slate-50 rounded-xl border border-slate-200 text-xs sm:text-sm text-navy-950 focus:outline-none focus:ring-2 focus:ring-navy-900"
+                    className="w-full px-4 py-2.5 bg-slate-50 dark:bg-dark-surface rounded-xl border border-slate-200 dark:border-dark-border text-xs sm:text-sm text-navy-950 dark:text-white focus:outline-none focus:ring-2 focus:ring-navy-900 dark:focus:ring-sky-400 cursor-pointer"
                   >
                     {PROPERTY_TYPES.map((t) => (
                       <option key={t} value={t}>
@@ -347,13 +340,13 @@ ${additionalRequirements || 'No specific custom preferences noted.'}`;
                 </div>
 
                 <div className="space-y-1.5">
-                  <label className="text-xs font-bold text-navy-950 block">
+                  <label className="text-xs font-bold text-navy-950 dark:text-slate-300 block">
                     Budget Range
                   </label>
                   <select
                     value={budget}
                     onChange={(e) => setBudget(e.target.value)}
-                    className="w-full px-4 py-2.5 bg-slate-50 rounded-xl border border-slate-200 text-xs sm:text-sm text-navy-950 focus:outline-none focus:ring-2 focus:ring-navy-900"
+                    className="w-full px-4 py-2.5 bg-slate-50 dark:bg-dark-surface rounded-xl border border-slate-200 dark:border-dark-border text-xs sm:text-sm text-navy-950 dark:text-white focus:outline-none focus:ring-2 focus:ring-navy-900 dark:focus:ring-sky-400 cursor-pointer"
                   >
                     {BUDGET_RANGES.map((b) => (
                       <option key={b} value={b}>
@@ -364,7 +357,7 @@ ${additionalRequirements || 'No specific custom preferences noted.'}`;
                 </div>
 
                 <div className="space-y-1.5">
-                  <label className="text-xs font-bold text-navy-950 block">
+                  <label className="text-xs font-bold text-navy-950 dark:text-slate-300 block">
                     Required Area / Dimensions <span className="text-rose-500">*</span>
                   </label>
                   <input
@@ -373,18 +366,18 @@ ${additionalRequirements || 'No specific custom preferences noted.'}`;
                     value={requiredArea}
                     onChange={(e) => setRequiredArea(e.target.value)}
                     placeholder="e.g. 2 to 4 Katha, 1 Bigha, or min 5,000 sq.ft."
-                    className="w-full px-4 py-2.5 bg-slate-50 rounded-xl border border-slate-200 text-xs sm:text-sm text-navy-950 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-navy-900"
+                    className="w-full px-4 py-2.5 bg-slate-50 dark:bg-dark-surface rounded-xl border border-slate-200 dark:border-dark-border text-xs sm:text-sm text-navy-950 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-navy-900 dark:focus:ring-sky-400"
                   />
                 </div>
 
                 <div className="space-y-1.5">
-                  <label className="text-xs font-bold text-navy-950 block">
+                  <label className="text-xs font-bold text-navy-950 dark:text-slate-300 block">
                     Primary Purpose
                   </label>
                   <select
                     value={purpose}
                     onChange={(e) => setPurpose(e.target.value)}
-                    className="w-full px-4 py-2.5 bg-slate-50 rounded-xl border border-slate-200 text-xs sm:text-sm text-navy-950 focus:outline-none focus:ring-2 focus:ring-navy-900"
+                    className="w-full px-4 py-2.5 bg-slate-50 dark:bg-dark-surface rounded-xl border border-slate-200 dark:border-dark-border text-xs sm:text-sm text-navy-950 dark:text-white focus:outline-none focus:ring-2 focus:ring-navy-900 dark:focus:ring-sky-400 cursor-pointer"
                   >
                     {PURPOSES.map((p) => (
                       <option key={p} value={p}>
@@ -395,13 +388,13 @@ ${additionalRequirements || 'No specific custom preferences noted.'}`;
                 </div>
 
                 <div className="space-y-1.5">
-                  <label className="text-xs font-bold text-navy-950 block">
+                  <label className="text-xs font-bold text-navy-950 dark:text-slate-300 block">
                     Minimum Road Width Requirement
                   </label>
                   <select
                     value={roadRequirement}
                     onChange={(e) => setRoadRequirement(e.target.value)}
-                    className="w-full px-4 py-2.5 bg-slate-50 rounded-xl border border-slate-200 text-xs sm:text-sm text-navy-950 focus:outline-none focus:ring-2 focus:ring-navy-900"
+                    className="w-full px-4 py-2.5 bg-slate-50 dark:bg-dark-surface rounded-xl border border-slate-200 dark:border-dark-border text-xs sm:text-sm text-navy-950 dark:text-white focus:outline-none focus:ring-2 focus:ring-navy-900 dark:focus:ring-sky-400 cursor-pointer"
                   >
                     {ROAD_REQUIREMENTS.map((r) => (
                       <option key={r} value={r}>
@@ -412,13 +405,13 @@ ${additionalRequirements || 'No specific custom preferences noted.'}`;
                 </div>
 
                 <div className="space-y-1.5">
-                  <label className="text-xs font-bold text-navy-950 block">
+                  <label className="text-xs font-bold text-navy-950 dark:text-slate-300 block">
                     Facing Preference
                   </label>
                   <select
                     value={facingPreference}
                     onChange={(e) => setFacingPreference(e.target.value)}
-                    className="w-full px-4 py-2.5 bg-slate-50 rounded-xl border border-slate-200 text-xs sm:text-sm text-navy-950 focus:outline-none focus:ring-2 focus:ring-navy-900"
+                    className="w-full px-4 py-2.5 bg-slate-50 dark:bg-dark-surface rounded-xl border border-slate-200 dark:border-dark-border text-xs sm:text-sm text-navy-950 dark:text-white focus:outline-none focus:ring-2 focus:ring-navy-900 dark:focus:ring-sky-400 cursor-pointer"
                   >
                     {FACING_OPTIONS.map((f) => (
                       <option key={f} value={f}>
@@ -429,13 +422,13 @@ ${additionalRequirements || 'No specific custom preferences noted.'}`;
                 </div>
 
                 <div className="space-y-1.5 sm:col-span-2">
-                  <label className="text-xs font-bold text-navy-950 block">
+                  <label className="text-xs font-bold text-navy-950 dark:text-slate-300 block">
                     Purchase Timeline
                   </label>
                   <select
                     value={timeframe}
                     onChange={(e) => setTimeframe(e.target.value)}
-                    className="w-full px-4 py-2.5 bg-slate-50 rounded-xl border border-slate-200 text-xs sm:text-sm text-navy-950 focus:outline-none focus:ring-2 focus:ring-navy-900"
+                    className="w-full px-4 py-2.5 bg-slate-50 dark:bg-dark-surface rounded-xl border border-slate-200 dark:border-dark-border text-xs sm:text-sm text-navy-950 dark:text-white focus:outline-none focus:ring-2 focus:ring-navy-900 dark:focus:ring-sky-400 cursor-pointer"
                   >
                     {TIMEFRAMES.map((tf) => (
                       <option key={tf} value={tf}>
@@ -449,17 +442,17 @@ ${additionalRequirements || 'No specific custom preferences noted.'}`;
 
             {/* Section 2: Specific Requirements Notes */}
             <div className="space-y-4">
-              <div className="flex items-center gap-2 pb-2 border-b border-slate-100">
-                <span className="w-6 h-6 rounded-full bg-navy-900 text-white text-xs font-bold flex items-center justify-center">
+              <div className="flex items-center gap-2 pb-2 border-b border-slate-100 dark:border-dark-border">
+                <span className="w-6 h-6 rounded-full bg-navy-900 dark:bg-navy-700 text-white text-xs font-bold flex items-center justify-center">
                   2
                 </span>
-                <h3 className="text-base font-extrabold text-navy-950">
-                  Custom Requirements & Specific Preferences
+                <h3 className="text-base font-extrabold text-navy-950 dark:text-white">
+                  Custom Requirements &amp; Specific Preferences
                 </h3>
               </div>
 
               <div className="space-y-1.5">
-                <label className="text-xs font-bold text-navy-950 block">
+                <label className="text-xs font-bold text-navy-950 dark:text-slate-300 block">
                   Additional Notes (Frontage, Drainage, Commercial Zoning, Soil Type, etc.)
                 </label>
                 <textarea
@@ -467,25 +460,25 @@ ${additionalRequirements || 'No specific custom preferences noted.'}`;
                   value={additionalRequirements}
                   onChange={(e) => setAdditionalRequirements(e.target.value)}
                   placeholder="Specify any special needs such as required front width, high-tension line clearance, corner plot preference, or proximity to specific schools/hospitals..."
-                  className="w-full px-4 py-3 bg-slate-50 rounded-xl border border-slate-200 text-xs sm:text-sm text-navy-950 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-navy-900"
+                  className="w-full px-4 py-3 bg-slate-50 dark:bg-dark-surface rounded-xl border border-slate-200 dark:border-dark-border text-xs sm:text-sm text-navy-950 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-navy-900 dark:focus:ring-sky-400"
                 />
               </div>
             </div>
 
             {/* Section 3: Buyer Contact Information */}
             <div className="space-y-4">
-              <div className="flex items-center gap-2 pb-2 border-b border-slate-100">
-                <span className="w-6 h-6 rounded-full bg-navy-900 text-white text-xs font-bold flex items-center justify-center">
+              <div className="flex items-center gap-2 pb-2 border-b border-slate-100 dark:border-dark-border">
+                <span className="w-6 h-6 rounded-full bg-navy-900 dark:bg-navy-700 text-white text-xs font-bold flex items-center justify-center">
                   3
                 </span>
-                <h3 className="text-base font-extrabold text-navy-950">
+                <h3 className="text-base font-extrabold text-navy-950 dark:text-white">
                   Your Contact Information
                 </h3>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 <div className="space-y-1.5">
-                  <label className="text-xs font-bold text-navy-950 block">
+                  <label className="text-xs font-bold text-navy-950 dark:text-slate-300 block">
                     Full Name <span className="text-rose-500">*</span>
                   </label>
                   <input
@@ -494,12 +487,12 @@ ${additionalRequirements || 'No specific custom preferences noted.'}`;
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     placeholder="e.g. Dr. Binita Shrestha"
-                    className="w-full px-4 py-2.5 bg-slate-50 rounded-xl border border-slate-200 text-xs sm:text-sm text-navy-950 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-navy-900"
+                    className="w-full px-4 py-2.5 bg-slate-50 dark:bg-dark-surface rounded-xl border border-slate-200 dark:border-dark-border text-xs sm:text-sm text-navy-950 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-navy-900 dark:focus:ring-sky-400"
                   />
                 </div>
 
                 <div className="space-y-1.5">
-                  <label className="text-xs font-bold text-navy-950 block">
+                  <label className="text-xs font-bold text-navy-950 dark:text-slate-300 block">
                     Phone / Mobile <span className="text-rose-500">*</span>
                   </label>
                   <input
@@ -508,12 +501,12 @@ ${additionalRequirements || 'No specific custom preferences noted.'}`;
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
                     placeholder="+977 98XXXXXXXX"
-                    className="w-full px-4 py-2.5 bg-slate-50 rounded-xl border border-slate-200 text-xs sm:text-sm text-navy-950 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-navy-900"
+                    className="w-full px-4 py-2.5 bg-slate-50 dark:bg-dark-surface rounded-xl border border-slate-200 dark:border-dark-border text-xs sm:text-sm text-navy-950 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-navy-900 dark:focus:ring-sky-400"
                   />
                 </div>
 
                 <div className="space-y-1.5">
-                  <label className="text-xs font-bold text-navy-950 block">
+                  <label className="text-xs font-bold text-navy-950 dark:text-slate-300 block">
                     Email Address (Optional)
                   </label>
                   <input
@@ -521,15 +514,15 @@ ${additionalRequirements || 'No specific custom preferences noted.'}`;
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="name@domain.com"
-                    className="w-full px-4 py-2.5 bg-slate-50 rounded-xl border border-slate-200 text-xs sm:text-sm text-navy-950 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-navy-900"
+                    className="w-full px-4 py-2.5 bg-slate-50 dark:bg-dark-surface rounded-xl border border-slate-200 dark:border-dark-border text-xs sm:text-sm text-navy-950 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-navy-900 dark:focus:ring-sky-400"
                   />
                 </div>
               </div>
             </div>
 
             {/* Submit Action */}
-            <div className="pt-4 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-4">
-              <p className="text-xs text-slate-500 text-center sm:text-left">
+            <div className="pt-4 border-t border-slate-100 dark:border-dark-border flex flex-col sm:flex-row items-center justify-between gap-4">
+              <p className="text-xs text-slate-500 dark:text-slate-400 text-center sm:text-left">
                 Free advisory matching service provided by Kaltade Engineering Services.
               </p>
               <Button
@@ -546,43 +539,43 @@ ${additionalRequirements || 'No specific custom preferences noted.'}`;
         )}
 
         {/* Benefits Grid */}
-        <div className="mt-16 pt-12 border-t border-slate-200 space-y-8">
+        <div className="mt-16 pt-12 border-t border-slate-200 dark:border-dark-border space-y-8">
           <div className="text-center max-w-2xl mx-auto space-y-2">
-            <h3 className="text-2xl font-extrabold text-navy-950">
+            <h3 className="text-2xl font-extrabold text-navy-950 dark:text-white">
               Why Source Properties Through Kaltade?
             </h3>
-            <p className="text-sm text-slate-600">
+            <p className="text-sm text-slate-600 dark:text-slate-300">
               Protect your investment capital with engineering-grade site screening and institutional valuation integrity.
             </p>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-            <div className="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-3">
-              <div className="w-10 h-10 rounded-xl bg-navy-50 text-navy-900 flex items-center justify-center font-bold">
-                <FileCheck2 className="w-5 h-5 text-amber-600" />
+            <div className="p-6 rounded-2xl bg-white dark:bg-dark-card border border-slate-200 dark:border-dark-border shadow-xs dark:shadow-card-dark space-y-3">
+              <div className="w-10 h-10 rounded-xl bg-navy-50 dark:bg-dark-elevated text-navy-900 dark:text-sky-300 flex items-center justify-center font-bold">
+                <FileCheck2 className="w-5 h-5 text-amber-600 dark:text-amber-400" />
               </div>
-              <h4 className="text-base font-bold text-navy-950">Zero Commission Traps</h4>
-              <p className="text-xs text-slate-600 leading-relaxed">
+              <h4 className="text-base font-bold text-navy-950 dark:text-white">Zero Commission Traps</h4>
+              <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
                 Direct seller engagement with transparent pricing. No artificial middlemen markups or inflated unofficial commissions.
               </p>
             </div>
 
-            <div className="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-3">
-              <div className="w-10 h-10 rounded-xl bg-navy-50 text-navy-900 flex items-center justify-center font-bold">
-                <ShieldCheck className="w-5 h-5 text-amber-600" />
+            <div className="p-6 rounded-2xl bg-white dark:bg-dark-card border border-slate-200 dark:border-dark-border shadow-xs dark:shadow-card-dark space-y-3">
+              <div className="w-10 h-10 rounded-xl bg-navy-50 dark:bg-dark-elevated text-navy-900 dark:text-sky-300 flex items-center justify-center font-bold">
+                <ShieldCheck className="w-5 h-5 text-amber-600 dark:text-amber-400" />
               </div>
-              <h4 className="text-base font-bold text-navy-950">Engineering Due Diligence</h4>
-              <p className="text-xs text-slate-600 leading-relaxed">
+              <h4 className="text-base font-bold text-navy-950 dark:text-white">Engineering Due Diligence</h4>
+              <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
                 Every recommended property is screened for road width conformity, soil viability, flood safety, and municipal setback rules.
               </p>
             </div>
 
-            <div className="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-3">
-              <div className="w-10 h-10 rounded-xl bg-navy-50 text-navy-900 flex items-center justify-center font-bold">
-                <Compass className="w-5 h-5 text-amber-600" />
+            <div className="p-6 rounded-2xl bg-white dark:bg-dark-card border border-slate-200 dark:border-dark-border shadow-xs dark:shadow-card-dark space-y-3">
+              <div className="w-10 h-10 rounded-xl bg-navy-50 dark:bg-dark-elevated text-navy-900 dark:text-sky-300 flex items-center justify-center font-bold">
+                <Compass className="w-5 h-5 text-amber-600 dark:text-amber-400" />
               </div>
-              <h4 className="text-base font-bold text-navy-950">Cadastral & Legal Purity</h4>
-              <p className="text-xs text-slate-600 leading-relaxed">
+              <h4 className="text-base font-bold text-navy-950 dark:text-white">Cadastral &amp; Legal Purity</h4>
+              <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
                 Physical boundary verification against Land Revenue (Malpot) trace maps ensuring what you see matches official records.
               </p>
             </div>

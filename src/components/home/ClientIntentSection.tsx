@@ -22,7 +22,7 @@ export function ClientIntentSection() {
       href: '/services/engineering',
       icon: Compass,
       tag: 'Engineering',
-      badgeColor: 'bg-blue-50 text-blue-800 border-blue-200',
+      badgeColor: 'bg-blue-50 dark:bg-sky-950/60 text-blue-800 dark:text-sky-300 border-blue-200 dark:border-sky-800/60',
     },
     {
       action: 'Value',
@@ -31,7 +31,7 @@ export function ClientIntentSection() {
       href: '/valuation',
       icon: Scale,
       tag: 'Valuation',
-      badgeColor: 'bg-amber-50 text-amber-900 border-amber-200',
+      badgeColor: 'bg-amber-50 dark:bg-amber-950/60 text-amber-900 dark:text-amber-300 border-amber-200 dark:border-amber-800/60',
     },
     {
       action: 'Plan',
@@ -40,7 +40,7 @@ export function ClientIntentSection() {
       href: '/services/dpr',
       icon: FileSpreadsheet,
       tag: 'Planning & Feasibility',
-      badgeColor: 'bg-indigo-50 text-indigo-800 border-indigo-200',
+      badgeColor: 'bg-indigo-50 dark:bg-indigo-950/60 text-indigo-800 dark:text-indigo-300 border-indigo-200 dark:border-indigo-800/60',
     },
     {
       action: 'Buy',
@@ -49,7 +49,7 @@ export function ClientIntentSection() {
       href: '/properties/find',
       icon: Search,
       tag: 'Real Estate',
-      badgeColor: 'bg-emerald-50 text-emerald-800 border-emerald-200',
+      badgeColor: 'bg-emerald-50 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 border-emerald-200 dark:border-emerald-800/60',
     },
     {
       action: 'Sell',
@@ -58,7 +58,7 @@ export function ClientIntentSection() {
       href: '/properties/list',
       icon: UploadCloud,
       tag: 'Listing',
-      badgeColor: 'bg-purple-50 text-purple-800 border-purple-200',
+      badgeColor: 'bg-purple-50 dark:bg-purple-950/60 text-purple-800 dark:text-purple-300 border-purple-200 dark:border-purple-800/60',
     },
     {
       action: 'Invest',
@@ -67,12 +67,12 @@ export function ClientIntentSection() {
       href: '/real-estate/investment',
       icon: TrendingUp,
       tag: 'Investment',
-      badgeColor: 'bg-teal-50 text-teal-800 border-teal-200',
+      badgeColor: 'bg-teal-50 dark:bg-teal-950/60 text-teal-800 dark:text-teal-300 border-teal-200 dark:border-teal-800/60',
     },
   ];
 
   return (
-    <section className="py-20 sm:py-24 bg-slate-50 border-b border-slate-200/80 relative">
+    <section className="py-20 sm:py-24 bg-slate-50 dark:bg-dark-bg border-b border-slate-200/80 dark:border-dark-border relative transition-colors">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeader
           eyebrow="CLIENT INTENT NAVIGATOR"
@@ -88,14 +88,14 @@ export function ClientIntentSection() {
               <Link
                 key={card.action}
                 href={card.href}
-                className="group relative bg-white p-7 rounded-2xl border border-slate-200 shadow-sm hover:shadow-xl hover:border-navy-900/40 transition-all duration-300 flex flex-col justify-between overflow-hidden"
+                className="group relative bg-white dark:bg-dark-card p-7 rounded-2xl border border-slate-200 dark:border-dark-border shadow-xs dark:shadow-card-dark hover:shadow-xl dark:hover:shadow-card-dark-hover hover:border-navy-900/40 dark:hover:border-sky-500/40 transition-all duration-300 flex flex-col justify-between overflow-hidden"
               >
                 {/* Subtle top accent bar on hover */}
-                <div className="absolute top-0 left-0 right-0 h-1 bg-navy-900 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <div className="absolute top-0 left-0 right-0 h-1 bg-navy-900 dark:bg-sky-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
                 <div>
                   <div className="flex items-center justify-between mb-5">
-                    <div className="p-3 rounded-xl bg-navy-50 text-navy-900 group-hover:bg-navy-900 group-hover:text-white transition-colors duration-300">
+                    <div className="p-3 rounded-xl bg-navy-50 dark:bg-dark-elevated text-navy-900 dark:text-sky-300 group-hover:bg-navy-900 group-hover:text-white dark:group-hover:bg-navy-800 transition-colors duration-300">
                       <Icon className="w-6 h-6" />
                     </div>
                     <span
@@ -105,16 +105,16 @@ export function ClientIntentSection() {
                     </span>
                   </div>
 
-                  <h3 className="text-xl font-bold text-navy-950 group-hover:text-navy-700 transition-colors leading-snug mb-2.5">
+                  <h3 className="text-xl font-bold text-navy-950 dark:text-white group-hover:text-navy-700 dark:group-hover:text-sky-300 transition-colors leading-snug mb-2.5">
                     {card.title}
                   </h3>
 
-                  <p className="text-sm text-slate-600 leading-relaxed font-normal">
+                  <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed font-normal">
                     {card.desc}
                   </p>
                 </div>
 
-                <div className="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between text-sm font-semibold text-navy-900 group-hover:text-navy-700">
+                <div className="mt-6 pt-4 border-t border-slate-100 dark:border-dark-border flex items-center justify-between text-sm font-semibold text-navy-900 dark:text-sky-400 group-hover:text-navy-700 dark:group-hover:text-sky-300">
                   <span>Get Started</span>
                   <ArrowRight className="w-4 h-4 transform group-hover:translate-x-1.5 transition-transform duration-200" />
                 </div>

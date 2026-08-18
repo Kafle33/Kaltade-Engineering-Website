@@ -24,10 +24,10 @@ import {
   Layers,
   Sparkles,
 } from 'lucide-react';
-import { SectionHeader } from '@/ui/SectionHeader';
-import { Button } from '@/ui/Button';
-import { Badge } from '@/ui/Badge';
-import { Modal } from '@/ui/Modal';
+import { SectionHeader } from '@/components/ui/SectionHeader';
+import { Button } from '@/components/ui/Button';
+import { Badge } from '@/components/ui/Badge';
+import { Modal } from '@/components/ui/Modal';
 import { saveLead } from '@/lib/storage';
 import { sendInquiryNotification, generateWhatsAppUrl } from '@/lib/email';
 
@@ -103,72 +103,72 @@ export default function RealEstateInvestmentPage() {
       title: 'Individual & Diaspora Investors',
       icon: Users,
       badge: 'Private Capital',
-      desc: 'Individuals and Non-Resident Nepalese seeking secure, verified land and residential properties with clear cadastral boundaries, verified road access, and long-term capital appreciation potential.',
+      desc: 'Guidance for individuals and non-resident Nepalis (NRNs) seeking verified land parcels, highway plots, and residential assets free from title disputes or boundary mismatches.',
       highlights: [
-        'Boundary & Cadastral Naksha verification',
-        'Fair market pricing guidance',
-        'Independent inspection without sales bias',
+        'Electronic boundary & Cadastral Naksha verification',
+        'Fair Market Valuation preventing artificial price inflation',
+        'Physical on-ground condition and access road auditing',
       ],
     },
     {
-      title: 'Commercial Businesses',
+      title: 'Commercial Businesses & Enterprises',
       icon: Briefcase,
-      badge: 'Corporate Expansion',
-      desc: 'Companies expanding regional branches, retail showrooms, regional offices, or distribution centers requiring strategic commercial properties with verified road rights-of-way.',
+      badge: 'Corporate Sourcing',
+      desc: 'Advisory for corporate offices, retail chains, bank branches, healthcare clinics, and logistics providers seeking strategic locations with robust infrastructure.',
       highlights: [
-        'Highway frontage & vehicular turning radius check',
-        'Structural integrity audit for built properties',
-        'Municipal zoning & commercial permit clearance',
+        'Catchment footfall & customer demographics analysis',
+        'Utility availability (high-power electrical grid, drainage, parking)',
+        'Municipal zoning & commercial building permit compliance',
       ],
     },
     {
       title: 'Property Owners & Inheritors',
       icon: Building2,
-      badge: 'Asset Monetization',
-      desc: 'Landowners holding ancestral or undeveloped acreage seeking to assess commercial redevelopment potential, land subdivision feasibility, or optimal timing for monetization.',
+      badge: 'Asset Optimization',
+      desc: 'Technical advisory for landowners looking to maximize value from inherited acreage, underutilized land banks, or commercial buildings requiring repurposing.',
       highlights: [
-        'Highest and Best Use (HBU) study',
-        'Land subdivision yield estimation',
-        'Pre-sale engineering due diligence',
+        'Highest & Best Use (HBU) engineering analysis',
+        'Land subdivision & plotting layout design',
+        'Structural extension & commercial conversion feasibility',
       ],
     },
     {
       title: 'Real Estate Developers',
       icon: Layers,
-      badge: 'Project Syndicates',
-      desc: 'Developers planning plotted residential communities, commercial complexes, or industrial warehousing requiring bankable Detailed Project Reports (DPR) and technical feasibility.',
+      badge: 'Institutional Developers',
+      desc: 'End-to-end technical diligence and Detailed Project Reports (DPR) for commercial complexes, residential housing colonies, and commercial plotted schemes.',
       highlights: [
-        'Topographical survey & master planning',
-        'Infrastructure cost budgeting (BOQ)',
-        'Bank-compliant DPR preparation',
+        'Topographic surveying & slope / drainage engineering',
+        'Bankable DPR formulation with multi-year financial modeling',
+        'NBC 105:2020 seismic structural design & municipal approval dossiers',
       ],
     },
   ];
 
   const advisoryPillars = [
     {
-      title: 'Cadastral & Physical Due Diligence',
-      desc: 'We cross-verify physical land boundary lines against the Survey Department Cadastral Trace map, detecting encroachments, mismatching corner points, and irregular shapes before commitments are made.',
+      title: 'Engineering Rigor, Not Sales Hype',
+      desc: 'We are accredited civil engineers and approved property valuators, not transaction-driven commission agents. Our advisory is built on physical measurements and structural reality.',
     },
     {
-      title: 'Municipal Road & Setback Verification',
-      desc: 'We inspect municipal right-of-way plans to ensure mandatory road widening setbacks will not adversely truncate your buildable land area in the future.',
+      title: 'Zero Commission Speculation',
+      desc: 'We do not artificially inflate property prices or participate in speculative markups. Clients receive unbiased valuation and feasibility assessments.',
     },
     {
-      title: 'Engineered Asset Valuation',
-      desc: 'Rather than relying on speculative broker claims, our valuations use certified civil engineering methods, comparable transaction benchmarks, and replacement cost formulas.',
+      title: 'Deep Far-Western Regional Intelligence',
+      desc: 'Decades of on-ground engineering experience across Dhangadhi, Kailali, Kanchanpur, and the Mahakali/Seti corridors gives us unparalleled micro-market insight.',
     },
     {
-      title: 'Highest & Best Use (HBU) Assessment',
-      desc: 'We determine the legally permissible, physically possible, financially feasible, and maximally productive development option for any given land parcel.',
+      title: 'Single-Window Technical Platform',
+      desc: 'From initial site search and survey to DPR preparation, architectural drawings, and bank loan valuation, all technical capabilities are delivered in-house.',
     },
     {
-      title: 'Infrastructure & Site Constraints Audit',
-      desc: 'We inspect overhead high-voltage power lines, river/drainage buffer corridors, soil bearing conditions, flood risk history, and utility availability on site.',
+      title: 'Regulatory & NBC Compliance',
+      desc: 'Every recommendation conforms strictly to local municipal bylaws, road right-of-way setbacks, and Nepal National Building Codes.',
     },
     {
-      title: 'Completely Independent & Objective',
-      desc: 'Kaltade provides independent technical assessment. We are not driven by commission bias, ensuring our advice serves only your long-term capital security.',
+      title: 'Bank-Acceptable Documentation',
+      desc: 'Our valuation reports and Detailed Project Reports are structured to meet the credit underwriting criteria of commercial banks and BFIs across Nepal.',
     },
   ];
 
@@ -185,7 +185,7 @@ export default function RealEstateInvestmentPage() {
       propertyType: formData.propertyInterest,
       location: formData.targetLocation,
       budget: formData.budgetRange,
-      message: `[Investor Type: ${formData.investorType}] [Horizon: ${formData.timeHorizon}] ${formData.message}`,
+      message: `[Investor: ${formData.investorType}] [Horizon: ${formData.timeHorizon}] ${formData.message}`,
       urgency: 'Standard',
     });
 
@@ -221,13 +221,13 @@ export default function RealEstateInvestmentPage() {
   };
 
   return (
-    <div className="pt-28 sm:pt-32 bg-white min-h-screen text-navy-950">
+    <div className="pt-28 sm:pt-32 bg-white dark:bg-dark-bg min-h-screen text-navy-950 dark:text-dark-text transition-colors">
       {/* 1. Breadcrumb & Page Hero */}
-      <section className="bg-gradient-to-b from-navy-950 via-navy-900 to-navy-950 text-white py-16 sm:py-24 relative overflow-hidden border-b border-navy-800">
+      <section className="bg-gradient-to-b from-navy-950 via-navy-900 to-navy-950 dark:from-dark-surface dark:via-dark-card dark:to-dark-surface text-white py-16 sm:py-24 relative overflow-hidden border-b border-navy-800 dark:border-dark-border">
         <div className="absolute inset-0 bg-grid-navy opacity-20 pointer-events-none" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           {/* Breadcrumb */}
-          <nav className="flex items-center gap-2 text-xs text-blue-200/80 mb-6 font-medium">
+          <nav className="flex items-center gap-2 text-xs text-blue-200/80 dark:text-sky-300/80 mb-6 font-medium">
             <Link href="/" className="hover:text-white transition-colors">
               Home
             </Link>
@@ -240,7 +240,7 @@ export default function RealEstateInvestmentPage() {
           </nav>
 
           <div className="max-w-3xl">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-white/10 text-blue-200 border border-white/15 text-xs font-bold uppercase tracking-wider mb-4">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-white/10 dark:bg-dark-elevated text-blue-200 dark:text-sky-300 border border-white/15 dark:border-dark-border text-xs font-bold uppercase tracking-wider mb-4">
               <span className="w-1.5 h-1.5 rounded-full bg-amber-500" />
               Strategic Real Estate Advisory
             </div>
@@ -249,7 +249,7 @@ export default function RealEstateInvestmentPage() {
               Make Better Property Investment Decisions.
             </h1>
 
-            <p className="mt-6 text-base sm:text-lg text-slate-300 leading-relaxed font-normal">
+            <p className="mt-6 text-base sm:text-lg text-slate-300 dark:text-slate-400 leading-relaxed font-normal">
               Back your real estate investments with professional civil engineering scrutiny, cadastral trace verification, rigorous valuation methodologies, and development feasibility analysis in Dhangadhi, Kailali, and across Nepal.
             </p>
 
@@ -266,7 +266,7 @@ export default function RealEstateInvestmentPage() {
                 href="/real-estate/commercial"
                 variant="outline"
                 size="lg"
-                className="bg-white/10 text-white border-white/20 hover:bg-white/20"
+                className="bg-white/10 dark:bg-dark-card text-white border-white/20 dark:border-dark-border hover:bg-white/20"
                 rightIcon={<ArrowRight className="w-4 h-4" />}
               >
                 Commercial Properties
@@ -274,22 +274,22 @@ export default function RealEstateInvestmentPage() {
             </div>
 
             {/* Quick Stat Badges */}
-            <div className="mt-10 pt-8 border-t border-white/10 grid grid-cols-2 sm:grid-cols-4 gap-4 text-xs">
+            <div className="mt-10 pt-8 border-t border-white/10 dark:border-dark-border grid grid-cols-2 sm:grid-cols-4 gap-4 text-xs">
               <div className="flex items-center gap-2">
                 <ShieldCheck className="w-4 h-4 text-emerald-400 shrink-0" />
-                <span className="text-slate-300">Independent Due Diligence</span>
+                <span className="text-slate-300 dark:text-slate-400">Independent Due Diligence</span>
               </div>
               <div className="flex items-center gap-2">
                 <Scale className="w-4 h-4 text-amber-400 shrink-0" />
-                <span className="text-slate-300">Bank-Grade Valuation</span>
+                <span className="text-slate-300 dark:text-slate-400">Bank-Grade Valuation</span>
               </div>
               <div className="flex items-center gap-2">
-                <BarChart3 className="w-4 h-4 text-blue-400 shrink-0" />
-                <span className="text-slate-300">Highest & Best Use Studies</span>
+                <BarChart3 className="w-4 h-4 text-blue-400 dark:text-sky-400 shrink-0" />
+                <span className="text-slate-300 dark:text-slate-400">Highest &amp; Best Use Studies</span>
               </div>
               <div className="flex items-center gap-2">
                 <FileCheck className="w-4 h-4 text-emerald-400 shrink-0" />
-                <span className="text-slate-300">Zero Sales Bias</span>
+                <span className="text-slate-300 dark:text-slate-400">Zero Sales Bias</span>
               </div>
             </div>
           </div>
@@ -297,9 +297,9 @@ export default function RealEstateInvestmentPage() {
       </section>
 
       {/* 2. Mandatory Statutory Legal Disclaimer Banner */}
-      <section className="bg-amber-50/90 border-b border-amber-200 py-4 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto flex items-start sm:items-center gap-3 text-xs sm:text-sm text-amber-950">
-          <AlertTriangle className="w-5 h-5 text-amber-700 shrink-0 mt-0.5 sm:mt-0" />
+      <section className="bg-amber-50/90 dark:bg-amber-950/40 border-b border-amber-200 dark:border-amber-800/60 py-4 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto flex items-start sm:items-center gap-3 text-xs sm:text-sm text-amber-950 dark:text-amber-300">
+          <AlertTriangle className="w-5 h-5 text-amber-700 dark:text-amber-400 shrink-0 mt-0.5 sm:mt-0" />
           <div className="leading-relaxed">
             <strong>Important Regulatory Notice:</strong> Investment consultancy provides technical, physical, and market-oriented assessment only. It does <strong>not</strong> constitute financial advice, securities advice, or legal counsel. Kaltade Engineering Services Pvt. Ltd. does <strong>not</strong> make financial guarantees, promises of capital returns, or assured rental yields. Property acquisitions carry inherent market risks.
           </div>
@@ -307,7 +307,7 @@ export default function RealEstateInvestmentPage() {
       </section>
 
       {/* 3. The 7-Step Investment Advisory Process */}
-      <section className="py-20 sm:py-28 bg-slate-50 border-b border-slate-200/80">
+      <section className="py-20 sm:py-28 bg-slate-50 dark:bg-dark-bg border-b border-slate-200/80 dark:border-dark-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeader
             eyebrow="STRUCTURED ADVISORY METHODOLOGY"
@@ -323,15 +323,15 @@ export default function RealEstateInvestmentPage() {
               return (
                 <div
                   key={proc.step}
-                  className={`p-6 rounded-2xl bg-white border border-slate-200 shadow-sm hover:shadow-xl hover:border-navy-900/30 transition-all flex flex-col justify-between group ${
-                    index === 6 ? 'md:col-span-2 lg:col-span-4 bg-navy-950 text-white border-navy-800' : ''
+                  className={`p-6 rounded-2xl bg-white dark:bg-dark-card border border-slate-200 dark:border-dark-border shadow-xs dark:shadow-card-dark hover:shadow-xl dark:hover:shadow-card-dark-hover hover:border-navy-900/30 dark:hover:border-sky-500/40 transition-all flex flex-col justify-between group ${
+                    index === 6 ? 'md:col-span-2 lg:col-span-4 bg-navy-950 dark:bg-dark-surface text-white border-navy-800 dark:border-dark-border' : ''
                   }`}
                 >
                   <div>
                     <div className="flex items-center justify-between mb-4">
                       <span
                         className={`text-2xl font-black font-mono ${
-                          index === 6 ? 'text-amber-400' : 'text-navy-300 group-hover:text-navy-900'
+                          index === 6 ? 'text-amber-400' : 'text-navy-300 dark:text-navy-700 group-hover:text-navy-900 dark:group-hover:text-sky-300'
                         } transition-colors`}
                       >
                         {proc.step}
@@ -339,8 +339,8 @@ export default function RealEstateInvestmentPage() {
                       <div
                         className={`p-2.5 rounded-xl ${
                           index === 6
-                            ? 'bg-white/10 text-amber-400 border border-white/15'
-                            : 'bg-navy-50 text-navy-900 border border-navy-100 group-hover:bg-navy-900 group-hover:text-white'
+                            ? 'bg-white/10 dark:bg-dark-elevated text-amber-400 border border-white/15 dark:border-dark-border'
+                            : 'bg-navy-50 dark:bg-dark-elevated text-navy-900 dark:text-sky-300 border border-navy-100 dark:border-dark-border group-hover:bg-navy-900 dark:group-hover:bg-navy-700 group-hover:text-white'
                         } transition-colors`}
                       >
                         <Icon className="w-5 h-5" />
@@ -350,14 +350,14 @@ export default function RealEstateInvestmentPage() {
                     <div className="mb-2">
                       <span
                         className={`text-[11px] font-bold uppercase tracking-wider ${
-                          index === 6 ? 'text-blue-300' : 'text-amber-700'
+                          index === 6 ? 'text-blue-300 dark:text-sky-400' : 'text-amber-700 dark:text-amber-400'
                         }`}
                       >
                         {proc.short}
                       </span>
                       <h3
                         className={`text-lg font-bold leading-snug mt-1 ${
-                          index === 6 ? 'text-white' : 'text-navy-950'
+                          index === 6 ? 'text-white' : 'text-navy-950 dark:text-white'
                         }`}
                       >
                         {proc.title}
@@ -366,7 +366,7 @@ export default function RealEstateInvestmentPage() {
 
                     <p
                       className={`text-xs sm:text-sm leading-relaxed mt-2 ${
-                        index === 6 ? 'text-slate-300 max-w-4xl' : 'text-slate-600'
+                        index === 6 ? 'text-slate-300 dark:text-slate-400 max-w-4xl' : 'text-slate-600 dark:text-slate-300'
                       }`}
                     >
                       {proc.desc}
@@ -374,7 +374,7 @@ export default function RealEstateInvestmentPage() {
                   </div>
 
                   {index < 6 && (
-                    <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-semibold text-navy-800">
+                    <div className="mt-4 pt-3 border-t border-slate-100 dark:border-dark-border flex items-center justify-between text-xs font-semibold text-navy-800 dark:text-sky-400">
                       <span>Step {index + 1} of 7</span>
                       <ArrowRight className="w-3.5 h-3.5 text-slate-400 group-hover:translate-x-1 transition-transform" />
                     </div>
@@ -385,26 +385,26 @@ export default function RealEstateInvestmentPage() {
           </div>
 
           {/* Workflow Sequence Strip */}
-          <div className="mt-12 p-4 rounded-2xl bg-white border border-slate-200 shadow-sm hidden lg:flex items-center justify-between text-xs font-bold text-navy-900 overflow-x-auto">
+          <div className="mt-12 p-4 rounded-2xl bg-white dark:bg-dark-card border border-slate-200 dark:border-dark-border shadow-xs hidden lg:flex items-center justify-between text-xs font-bold text-navy-900 dark:text-slate-200 overflow-x-auto">
             <span>Property Identification</span>
-            <ArrowRight className="w-4 h-4 text-amber-600 shrink-0" />
+            <ArrowRight className="w-4 h-4 text-amber-600 dark:text-amber-400 shrink-0" />
             <span>Location Assessment</span>
-            <ArrowRight className="w-4 h-4 text-amber-600 shrink-0" />
+            <ArrowRight className="w-4 h-4 text-amber-600 dark:text-amber-400 shrink-0" />
             <span>Valuation</span>
-            <ArrowRight className="w-4 h-4 text-amber-600 shrink-0" />
+            <ArrowRight className="w-4 h-4 text-amber-600 dark:text-amber-400 shrink-0" />
             <span>Market Assessment</span>
-            <ArrowRight className="w-4 h-4 text-amber-600 shrink-0" />
+            <ArrowRight className="w-4 h-4 text-amber-600 dark:text-amber-400 shrink-0" />
             <span>Development Potential</span>
-            <ArrowRight className="w-4 h-4 text-amber-600 shrink-0" />
+            <ArrowRight className="w-4 h-4 text-amber-600 dark:text-amber-400 shrink-0" />
             <span>Feasibility</span>
-            <ArrowRight className="w-4 h-4 text-amber-600 shrink-0" />
-            <span className="text-amber-600 font-extrabold">Investment Decision</span>
+            <ArrowRight className="w-4 h-4 text-amber-600 dark:text-amber-400 shrink-0" />
+            <span className="text-amber-600 dark:text-amber-400 font-extrabold">Investment Decision</span>
           </div>
         </div>
       </section>
 
       {/* 4. Target Client Segments */}
-      <section className="py-20 sm:py-28 bg-white border-b border-slate-200/80">
+      <section className="py-20 sm:py-28 bg-white dark:bg-dark-card border-b border-slate-200/80 dark:border-dark-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeader
             eyebrow="WHO WE SERVE"
@@ -419,32 +419,32 @@ export default function RealEstateInvestmentPage() {
               return (
                 <div
                   key={aud.title}
-                  className="p-8 rounded-3xl bg-slate-50 border border-slate-200/90 hover:border-navy-900/40 hover:shadow-xl transition-all flex flex-col justify-between"
+                  className="p-8 rounded-3xl bg-slate-50 dark:bg-dark-surface border border-slate-200/90 dark:border-dark-border hover:border-navy-900/40 dark:hover:border-sky-500/40 hover:shadow-xl dark:hover:shadow-card-dark-hover transition-all flex flex-col justify-between"
                 >
                   <div>
                     <div className="flex items-center justify-between mb-4">
-                      <div className="p-3 rounded-2xl bg-white border border-slate-200 text-navy-900 shadow-sm">
-                        <Icon className="w-6 h-6 text-amber-600" />
+                      <div className="p-3 rounded-2xl bg-white dark:bg-dark-card border border-slate-200 dark:border-dark-border text-navy-900 dark:text-white shadow-xs">
+                        <Icon className="w-6 h-6 text-amber-600 dark:text-amber-400" />
                       </div>
                       <Badge variant="navy" size="sm">
                         {aud.badge}
                       </Badge>
                     </div>
 
-                    <h3 className="text-xl font-bold text-navy-950 mb-2">
+                    <h3 className="text-xl font-bold text-navy-950 dark:text-white mb-2">
                       {aud.title}
                     </h3>
-                    <p className="text-xs sm:text-sm text-slate-600 leading-relaxed mb-6">
+                    <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed mb-6">
                       {aud.desc}
                     </p>
 
-                    <div className="space-y-2.5 pt-4 border-t border-slate-200">
-                      <span className="text-xs font-bold uppercase tracking-wider text-navy-900 block mb-1">
+                    <div className="space-y-2.5 pt-4 border-t border-slate-200 dark:border-dark-border">
+                      <span className="text-xs font-bold uppercase tracking-wider text-navy-900 dark:text-sky-300 block mb-1">
                         Key Advisory Focus:
                       </span>
                       {aud.highlights.map((hl) => (
-                        <div key={hl} className="flex items-center gap-2 text-xs text-slate-700 font-medium">
-                          <Check className="w-4 h-4 text-emerald-600 shrink-0" />
+                        <div key={hl} className="flex items-center gap-2 text-xs text-slate-700 dark:text-slate-300 font-medium">
+                          <Check className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0" />
                           <span>{hl}</span>
                         </div>
                       ))}
@@ -475,7 +475,7 @@ export default function RealEstateInvestmentPage() {
       </section>
 
       {/* 5. Core Pillars of Kaltade Advisory */}
-      <section className="py-20 sm:py-28 bg-navy-950 text-white relative overflow-hidden">
+      <section className="py-20 sm:py-28 bg-navy-950 dark:bg-dark-surface text-white relative overflow-hidden border-b border-navy-800 dark:border-dark-border shadow-xl dark:shadow-card-dark">
         <div className="absolute inset-0 bg-grid-navy opacity-20 pointer-events-none" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <SectionHeader
@@ -490,7 +490,7 @@ export default function RealEstateInvestmentPage() {
             {advisoryPillars.map((pil, idx) => (
               <div
                 key={pil.title}
-                className="p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-white/25 hover:bg-white/10 transition-all space-y-3"
+                className="p-6 rounded-2xl bg-white/5 dark:bg-dark-elevated/60 border border-white/10 dark:border-dark-border hover:border-white/25 hover:bg-white/10 transition-all space-y-3"
               >
                 <div className="w-8 h-8 rounded-lg bg-amber-600/20 text-amber-400 flex items-center justify-center font-bold text-sm font-mono">
                   0{idx + 1}
@@ -498,7 +498,7 @@ export default function RealEstateInvestmentPage() {
                 <h4 className="text-base font-bold text-white leading-snug">
                   {pil.title}
                 </h4>
-                <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-normal">
+                <p className="text-xs sm:text-sm text-slate-300 dark:text-slate-400 leading-relaxed font-normal">
                   {pil.desc}
                 </p>
               </div>
@@ -508,20 +508,20 @@ export default function RealEstateInvestmentPage() {
       </section>
 
       {/* 6. Technical Due Diligence Checklist */}
-      <section className="py-20 sm:py-28 bg-white border-b border-slate-200/80">
+      <section className="py-20 sm:py-28 bg-white dark:bg-dark-card border-b border-slate-200/80 dark:border-dark-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             <div className="lg:col-span-6 space-y-6">
-              <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-amber-700 bg-amber-50 px-3 py-1 rounded-md border border-amber-200">
+              <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-amber-700 dark:text-amber-400 bg-amber-50 dark:bg-amber-950/40 px-3 py-1 rounded-md border border-amber-200 dark:border-amber-800/60">
                 <ShieldCheck className="w-4 h-4" />
                 <span>Pre-Acquisition Protection</span>
               </div>
 
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight text-navy-950 leading-tight">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight text-navy-950 dark:text-white leading-tight">
                 What We Audit Before You Commit Your Capital.
               </h2>
 
-              <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
+              <p className="text-sm sm:text-base text-slate-600 dark:text-slate-300 leading-relaxed">
                 In Nepal, property mistakes are often irreversible once registration deeds (Lalpurja transfers) are executed at the Land Revenue Office (Malpot). Our technical audit ensures no hidden liabilities emerge.
               </p>
 
@@ -544,11 +544,11 @@ export default function RealEstateInvestmentPage() {
                     desc: 'Screening buffer distances from electrical lines, irrigation canals, and flood zones.',
                   },
                 ].map((item) => (
-                  <div key={item.title} className="p-4 rounded-xl bg-slate-50 border border-slate-200">
-                    <h5 className="text-xs sm:text-sm font-bold text-navy-950 mb-1">
+                  <div key={item.title} className="p-4 rounded-xl bg-slate-50 dark:bg-dark-surface border border-slate-200 dark:border-dark-border">
+                    <h5 className="text-xs sm:text-sm font-bold text-navy-950 dark:text-white mb-1">
                       {item.title}
                     </h5>
-                    <p className="text-xs text-slate-600 leading-relaxed">
+                    <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
                       {item.desc}
                     </p>
                   </div>
@@ -556,14 +556,14 @@ export default function RealEstateInvestmentPage() {
               </div>
             </div>
 
-            <div className="lg:col-span-6 bg-slate-900 text-white p-8 sm:p-10 rounded-3xl border border-slate-800 space-y-6 shadow-xl">
-              <div className="flex items-center justify-between border-b border-slate-800 pb-4">
+            <div className="lg:col-span-6 bg-slate-900 dark:bg-dark-surface text-white p-8 sm:p-10 rounded-3xl border border-slate-800 dark:border-dark-border space-y-6 shadow-xl dark:shadow-card-dark">
+              <div className="flex items-center justify-between border-b border-slate-800 dark:border-dark-border pb-4">
                 <div>
                   <h4 className="text-lg font-bold text-white">
                     Need an Independent Opinion?
                   </h4>
-                  <p className="text-xs text-slate-400 mt-1">
-                    Book an investment advisory briefing with our civil engineers & valuators.
+                  <p className="text-xs text-slate-400 dark:text-slate-400 mt-1">
+                    Book an investment advisory briefing with our civil engineers &amp; valuators.
                   </p>
                 </div>
                 <div className="p-2 rounded-xl bg-amber-500/20 text-amber-400">
@@ -577,7 +577,7 @@ export default function RealEstateInvestmentPage() {
                     ✓
                   </div>
                   <div>
-                    <strong className="text-white block">Confidential & Direct</strong>
+                    <strong className="text-white block">Confidential &amp; Direct</strong>
                     <span className="text-slate-400">
                       Your property requirements, target budgets, and discussions are kept strictly confidential.
                     </span>
@@ -609,7 +609,7 @@ export default function RealEstateInvestmentPage() {
                 </div>
               </div>
 
-              <div className="pt-4 border-t border-slate-800">
+              <div className="pt-4 border-t border-slate-800 dark:border-dark-border">
                 <Button
                   onClick={() => setIsModalOpen(true)}
                   variant="accent"
@@ -634,7 +634,7 @@ export default function RealEstateInvestmentPage() {
       </section>
 
       {/* 7. Comprehensive FAQ & Legal Notes */}
-      <section className="py-20 sm:py-24 bg-slate-50 border-b border-slate-200/80">
+      <section className="py-20 sm:py-24 bg-slate-50 dark:bg-dark-bg border-b border-slate-200/80 dark:border-dark-border">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeader
             eyebrow="FREQUENTLY ASKED QUESTIONS"
@@ -664,13 +664,13 @@ export default function RealEstateInvestmentPage() {
             ].map((faq) => (
               <div
                 key={faq.q}
-                className="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-2"
+                className="p-6 rounded-2xl bg-white dark:bg-dark-card border border-slate-200 dark:border-dark-border shadow-xs dark:shadow-card-dark space-y-2"
               >
-                <div className="flex items-center gap-2 text-navy-950 font-bold text-sm sm:text-base">
-                  <HelpCircle className="w-4 h-4 text-amber-600 shrink-0" />
+                <div className="flex items-center gap-2 text-navy-950 dark:text-white font-bold text-sm sm:text-base">
+                  <HelpCircle className="w-4 h-4 text-amber-600 dark:text-amber-400 shrink-0" />
                   <span>{faq.q}</span>
                 </div>
-                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed pl-6">
+                <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed pl-6">
                   {faq.a}
                 </p>
               </div>
@@ -680,10 +680,10 @@ export default function RealEstateInvestmentPage() {
       </section>
 
       {/* 8. Final CTA Banner */}
-      <section className="py-20 sm:py-28 bg-navy-950 text-white relative overflow-hidden">
+      <section className="py-20 sm:py-28 bg-navy-950 dark:bg-dark-surface text-white relative overflow-hidden border-t border-navy-800 dark:border-dark-border shadow-xl dark:shadow-card-dark">
         <div className="absolute inset-0 bg-grid-navy opacity-20 pointer-events-none" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center space-y-6">
-          <Badge variant="navy" size="md" className="bg-white/10 text-blue-200 border-white/20">
+          <Badge variant="navy" size="md" className="bg-white/10 dark:bg-dark-elevated text-blue-200 dark:text-sky-300 border-white/20 dark:border-dark-border">
             START YOUR EVALUATION
           </Badge>
 
@@ -691,7 +691,7 @@ export default function RealEstateInvestmentPage() {
             Ready to Evaluate Your Next Property Investment?
           </h2>
 
-          <p className="text-sm sm:text-base text-slate-300 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-sm sm:text-base text-slate-300 dark:text-slate-400 max-w-2xl mx-auto leading-relaxed">
             Get in touch with Kaltade’s engineering and valuation team for an objective, comprehensive assessment of your target land or building asset.
           </p>
 
@@ -716,7 +716,7 @@ export default function RealEstateInvestmentPage() {
               href="/contact"
               variant="outline"
               size="lg"
-              className="bg-white/10 text-white border-white/20 hover:bg-white/20"
+              className="bg-white/10 dark:bg-dark-card text-white border-white/20 dark:border-dark-border hover:bg-white/20"
             >
               Contact Office
             </Button>
@@ -728,7 +728,7 @@ export default function RealEstateInvestmentPage() {
               Office in Dhangadhi, Kailali
             </span>
             <span>•</span>
-            <span>Serving Sudurpashchim Province & All Nepal</span>
+            <span>Serving Sudurpashchim Province &amp; All Nepal</span>
           </div>
         </div>
       </section>
@@ -743,18 +743,18 @@ export default function RealEstateInvestmentPage() {
       >
         {isSubmitted ? (
           <div className="py-8 text-center space-y-4">
-            <div className="w-14 h-14 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto">
+            <div className="w-14 h-14 rounded-full bg-emerald-100 dark:bg-emerald-950/80 text-emerald-600 dark:text-emerald-400 flex items-center justify-center mx-auto">
               <Check className="w-8 h-8" />
             </div>
             <div className="space-y-1">
-              <h4 className="text-xl font-bold text-navy-950">
+              <h4 className="text-xl font-bold text-navy-950 dark:text-white">
                 Consultation Request Received!
               </h4>
-              <p className="text-xs sm:text-sm text-slate-600 max-w-md mx-auto">
+              <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 max-w-md mx-auto">
                 Our engineering and property advisory lead will review your specifications.
               </p>
             </div>
-            <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-3 max-w-md mx-auto text-xs text-emerald-800 text-center">
+            <div className="bg-emerald-50 dark:bg-emerald-950/50 border border-emerald-200 dark:border-emerald-800/60 rounded-xl p-3 max-w-md mx-auto text-xs text-emerald-800 dark:text-emerald-300 text-center">
               ✉️ Notification sent to <strong>kaltadeengineeringservices@gmail.com</strong> &amp; <strong>ai.antigravity11@gmail.com</strong>
             </div>
             <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3">
@@ -784,7 +784,7 @@ export default function RealEstateInvestmentPage() {
                   setIsSubmitted(false);
                   setIsModalOpen(false);
                 }}
-                className="px-4 py-2.5 rounded-xl border border-slate-200 hover:bg-slate-50 text-xs font-semibold text-slate-700"
+                className="px-4 py-2.5 rounded-xl border border-slate-200 dark:border-dark-border hover:bg-slate-50 dark:hover:bg-dark-elevated text-xs font-semibold text-slate-700 dark:text-slate-300"
               >
                 Close Window
               </button>
@@ -794,7 +794,7 @@ export default function RealEstateInvestmentPage() {
           <form onSubmit={handleSubmit} className="space-y-4 text-xs sm:text-sm">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block font-semibold text-slate-700 mb-1">
+                <label className="block font-semibold text-slate-700 dark:text-slate-300 mb-1">
                   Full Name *
                 </label>
                 <input
@@ -805,12 +805,12 @@ export default function RealEstateInvestmentPage() {
                     setFormData({ ...formData, fullName: e.target.value })
                   }
                   placeholder="e.g. Shyam Sundar Chaudhary"
-                  className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-navy-900 focus:outline-none"
+                  className="w-full px-3 py-2 border border-slate-300 dark:border-dark-border rounded-lg focus:ring-2 focus:ring-navy-900 dark:focus:ring-sky-400 focus:outline-none bg-white dark:bg-dark-card text-slate-900 dark:text-white"
                 />
               </div>
 
               <div>
-                <label className="block font-semibold text-slate-700 mb-1">
+                <label className="block font-semibold text-slate-700 dark:text-slate-300 mb-1">
                   Phone Number (Mobile / WhatsApp) *
                 </label>
                 <input
@@ -821,14 +821,14 @@ export default function RealEstateInvestmentPage() {
                     setFormData({ ...formData, phone: e.target.value })
                   }
                   placeholder="e.g. +977 98584XXXXX"
-                  className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-navy-900 focus:outline-none"
+                  className="w-full px-3 py-2 border border-slate-300 dark:border-dark-border rounded-lg focus:ring-2 focus:ring-navy-900 dark:focus:ring-sky-400 focus:outline-none bg-white dark:bg-dark-card text-slate-900 dark:text-white"
                 />
               </div>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block font-semibold text-slate-700 mb-1">
+                <label className="block font-semibold text-slate-700 dark:text-slate-300 mb-1">
                   Email Address
                 </label>
                 <input
@@ -838,12 +838,12 @@ export default function RealEstateInvestmentPage() {
                     setFormData({ ...formData, email: e.target.value })
                   }
                   placeholder="e.g. shyam@example.com"
-                  className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-navy-900 focus:outline-none"
+                  className="w-full px-3 py-2 border border-slate-300 dark:border-dark-border rounded-lg focus:ring-2 focus:ring-navy-900 dark:focus:ring-sky-400 focus:outline-none bg-white dark:bg-dark-card text-slate-900 dark:text-white"
                 />
               </div>
 
               <div>
-                <label className="block font-semibold text-slate-700 mb-1">
+                <label className="block font-semibold text-slate-700 dark:text-slate-300 mb-1">
                   Client Profile
                 </label>
                 <select
@@ -851,7 +851,7 @@ export default function RealEstateInvestmentPage() {
                   onChange={(e) =>
                     setFormData({ ...formData, investorType: e.target.value })
                   }
-                  className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-navy-900 focus:outline-none bg-white"
+                  className="w-full px-3 py-2 border border-slate-300 dark:border-dark-border rounded-lg focus:ring-2 focus:ring-navy-900 dark:focus:ring-sky-400 focus:outline-none bg-white dark:bg-dark-card text-slate-900 dark:text-white"
                 >
                   <option value="Individual & Diaspora Investor">Individual / Diaspora Investor</option>
                   <option value="Commercial Business">Commercial Business / Corporate</option>
@@ -863,7 +863,7 @@ export default function RealEstateInvestmentPage() {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block font-semibold text-slate-700 mb-1">
+                <label className="block font-semibold text-slate-700 dark:text-slate-300 mb-1">
                   Property Asset Interest
                 </label>
                 <select
@@ -871,7 +871,7 @@ export default function RealEstateInvestmentPage() {
                   onChange={(e) =>
                     setFormData({ ...formData, propertyInterest: e.target.value })
                   }
-                  className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-navy-900 focus:outline-none bg-white"
+                  className="w-full px-3 py-2 border border-slate-300 dark:border-dark-border rounded-lg focus:ring-2 focus:ring-navy-900 dark:focus:ring-sky-400 focus:outline-none bg-white dark:bg-dark-card text-slate-900 dark:text-white"
                 >
                   <option value="Commercial Land">Commercial Land / Highway Plot</option>
                   <option value="Residential Land">Residential Land Plot</option>
@@ -882,7 +882,7 @@ export default function RealEstateInvestmentPage() {
               </div>
 
               <div>
-                <label className="block font-semibold text-slate-700 mb-1">
+                <label className="block font-semibold text-slate-700 dark:text-slate-300 mb-1">
                   Planned Budget Range
                 </label>
                 <select
@@ -890,7 +890,7 @@ export default function RealEstateInvestmentPage() {
                   onChange={(e) =>
                     setFormData({ ...formData, budgetRange: e.target.value })
                   }
-                  className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-navy-900 focus:outline-none bg-white"
+                  className="w-full px-3 py-2 border border-slate-300 dark:border-dark-border rounded-lg focus:ring-2 focus:ring-navy-900 dark:focus:ring-sky-400 focus:outline-none bg-white dark:bg-dark-card text-slate-900 dark:text-white"
                 >
                   <option value="Under NPR 50 Lakh">Under NPR 50 Lakh</option>
                   <option value="NPR 50 Lakh - 1.5 Crore">NPR 50 Lakh - 1.5 Crore</option>
@@ -903,7 +903,7 @@ export default function RealEstateInvestmentPage() {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block font-semibold text-slate-700 mb-1">
+                <label className="block font-semibold text-slate-700 dark:text-slate-300 mb-1">
                   Target Location / Area
                 </label>
                 <input
@@ -913,12 +913,12 @@ export default function RealEstateInvestmentPage() {
                     setFormData({ ...formData, targetLocation: e.target.value })
                   }
                   placeholder="e.g. Dhangadhi Main Road / Attariya / Hasanpur"
-                  className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-navy-900 focus:outline-none"
+                  className="w-full px-3 py-2 border border-slate-300 dark:border-dark-border rounded-lg focus:ring-2 focus:ring-navy-900 dark:focus:ring-sky-400 focus:outline-none bg-white dark:bg-dark-card text-slate-900 dark:text-white"
                 />
               </div>
 
               <div>
-                <label className="block font-semibold text-slate-700 mb-1">
+                <label className="block font-semibold text-slate-700 dark:text-slate-300 mb-1">
                   Investment Horizon
                 </label>
                 <select
@@ -926,7 +926,7 @@ export default function RealEstateInvestmentPage() {
                   onChange={(e) =>
                     setFormData({ ...formData, timeHorizon: e.target.value })
                   }
-                  className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-navy-900 focus:outline-none bg-white"
+                  className="w-full px-3 py-2 border border-slate-300 dark:border-dark-border rounded-lg focus:ring-2 focus:ring-navy-900 dark:focus:ring-sky-400 focus:outline-none bg-white dark:bg-dark-card text-slate-900 dark:text-white"
                 >
                   <option value="Immediate Acquisition (Within 1 Month)">Immediate Acquisition (Within 1 Month)</option>
                   <option value="Short Term (1-6 Months)">Short Term (1-6 Months)</option>
@@ -937,7 +937,7 @@ export default function RealEstateInvestmentPage() {
             </div>
 
             <div>
-              <label className="block font-semibold text-slate-700 mb-1">
+              <label className="block font-semibold text-slate-700 dark:text-slate-300 mb-1">
                 Specific Objectives or Questions
               </label>
               <textarea
@@ -947,11 +947,11 @@ export default function RealEstateInvestmentPage() {
                   setFormData({ ...formData, message: e.target.value })
                 }
                 placeholder="Mention specific requirements such as road access width, preferred facing, intended construction plans, or existing plot details..."
-                className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-navy-900 focus:outline-none"
+                className="w-full px-3 py-2 border border-slate-300 dark:border-dark-border rounded-lg focus:ring-2 focus:ring-navy-900 dark:focus:ring-sky-400 focus:outline-none bg-white dark:bg-dark-card text-slate-900 dark:text-white"
               />
             </div>
 
-            <div className="p-3 bg-slate-50 rounded-lg border border-slate-200 text-[11px] text-slate-500">
+            <div className="p-3 bg-slate-50 dark:bg-dark-surface rounded-lg border border-slate-200 dark:border-dark-border text-[11px] text-slate-500 dark:text-slate-400">
               Note: Information submitted is protected and used solely to schedule your technical consultation.
             </div>
 

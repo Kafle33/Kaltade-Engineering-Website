@@ -3,7 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { BookOpen, Clock, ArrowRight, ArrowUpRight } from 'lucide-react';
+import { Clock, ArrowRight } from 'lucide-react';
 import { SectionHeader } from '@/ui/SectionHeader';
 import { Button } from '@/ui/Button';
 import { insightsData } from '@/data/insightsData';
@@ -12,7 +12,7 @@ export function InsightsPreview() {
   const featuredArticles = insightsData.slice(0, 3);
 
   return (
-    <section className="py-20 sm:py-28 bg-slate-50 border-b border-slate-200/80 relative">
+    <section className="py-20 sm:py-28 bg-slate-50 dark:bg-dark-bg border-b border-slate-200/80 dark:border-dark-border relative transition-colors">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
           <SectionHeader
@@ -40,9 +40,9 @@ export function InsightsPreview() {
             <Link
               key={art.id}
               href={`/insights/${art.slug}`}
-              className="group bg-white rounded-2xl border border-slate-200 shadow-sm hover:shadow-xl hover:border-navy-900/30 transition-all duration-300 flex flex-col overflow-hidden"
+              className="group bg-white dark:bg-dark-card rounded-2xl border border-slate-200 dark:border-dark-border shadow-xs dark:shadow-card-dark hover:shadow-xl dark:hover:shadow-card-dark-hover hover:border-navy-900/30 dark:hover:border-sky-500/30 transition-all duration-300 flex flex-col overflow-hidden"
             >
-              <div className="relative aspect-[16/10] overflow-hidden bg-slate-100">
+              <div className="relative aspect-[16/10] overflow-hidden bg-slate-100 dark:bg-dark-elevated">
                 <Image
                   src={art.image}
                   alt={art.title}
@@ -58,7 +58,7 @@ export function InsightsPreview() {
 
               <div className="p-6 flex-1 flex flex-col justify-between space-y-4">
                 <div className="space-y-2">
-                  <div className="flex items-center gap-3 text-xs text-slate-400">
+                  <div className="flex items-center gap-3 text-xs text-slate-400 dark:text-slate-500">
                     <span className="flex items-center gap-1">
                       <Clock className="w-3.5 h-3.5" />
                       {art.readTime}
@@ -67,16 +67,16 @@ export function InsightsPreview() {
                     <span>{art.date}</span>
                   </div>
 
-                  <h3 className="text-base sm:text-lg font-bold text-navy-950 group-hover:text-navy-700 transition-colors line-clamp-2 leading-snug">
+                  <h3 className="text-base sm:text-lg font-bold text-navy-950 dark:text-white group-hover:text-navy-700 dark:group-hover:text-sky-300 transition-colors line-clamp-2 leading-snug">
                     {art.title}
                   </h3>
 
-                  <p className="text-xs sm:text-sm text-slate-600 line-clamp-3 leading-relaxed font-normal">
+                  <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 line-clamp-3 leading-relaxed font-normal">
                     {art.summary}
                   </p>
                 </div>
 
-                <div className="pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-navy-900 group-hover:text-navy-700">
+                <div className="pt-3 border-t border-slate-100 dark:border-dark-border flex items-center justify-between text-xs font-bold text-navy-900 dark:text-sky-400 group-hover:text-navy-700 dark:group-hover:text-sky-300">
                   <span>Read Full Guide</span>
                   <ArrowRight className="w-3.5 h-3.5 transform group-hover:translate-x-1 transition-transform" />
                 </div>

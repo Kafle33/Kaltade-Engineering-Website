@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Plus_Jakarta_Sans } from 'next/font/google';
 import './globals.css';
+import { ThemeProvider } from '@/context/ThemeContext';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
 import { MobileActionBar } from '@/components/layout/MobileActionBar';
@@ -53,18 +54,41 @@ export const metadata: Metadata = {
   },
 };
 
+const themeInitializerScript = `
+  (function() {
+    try {
+      var stored = localStorage.getItem('kaltade_theme');
+      var isDark = stored === 'dark' || (!stored && window.matchMedia('(prefers-color-scheme: dark)').matches);
+      if (isDark) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    } catch (e) {}
+  })();
+`;
+
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${fontSans.variable} ${fontDisplay.variable}`}>
-      <body className="font-sans antialiased bg-white text-brand-text">
-        <Navbar />
-        <main className="min-h-screen">{children}</main>
-        <Footer />
-        <MobileActionBar />
+    <html
+      lang="en"
+      suppressHydrationWarning
+      className={`${fontSans.variable} ${fontDisplay.variable}`}
+    >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeInitializerScript }} />
+      </head>
+      <body className="font-sans antialiased bg-slate-50 text-slate-900 dark:bg-dark-bg dark:text-dark-text min-h-screen">
+        <ThemeProvider>
+          <Navbar />
+          <main className="min-h-screen">{children}</main>
+          <Footer />
+          <MobileActionBar />
+        </ThemeProvider>
       </body>
     </html>
   );

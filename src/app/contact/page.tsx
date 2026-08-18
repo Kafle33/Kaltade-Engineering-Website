@@ -82,7 +82,6 @@ export default function ContactPage() {
         internalRemarks: `Received from website contact form. Inquiring about ${formData.serviceRequired}.`,
       });
 
-      // Dispatch email notification to kaltadeengineeringservices@gmail.com and roshankafle33@gmail.com
       sendInquiryNotification({
         leadId: newLead.id,
         type: 'General Contact',
@@ -118,18 +117,18 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="pt-28 sm:pt-32 pb-24 bg-slate-50 min-h-screen">
+    <div className="pt-28 sm:pt-32 pb-24 bg-slate-50 dark:bg-dark-bg min-h-screen text-navy-950 dark:text-dark-text transition-colors">
       {/* Hero Header */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12 sm:mb-16">
         <div className="max-w-3xl">
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md text-xs font-bold tracking-wider uppercase bg-navy-100 text-navy-900 mb-4 border border-navy-200">
+          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md text-xs font-bold tracking-wider uppercase bg-navy-100 dark:bg-dark-elevated text-navy-900 dark:text-sky-300 mb-4 border border-navy-200 dark:border-dark-border">
             <span className="w-1.5 h-1.5 rounded-full bg-amber-500" />
             Get In Touch
           </span>
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-navy-950 tracking-tight leading-tight">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-navy-950 dark:text-white tracking-tight leading-tight">
             Let&apos;s discuss your next property or engineering requirement.
           </h1>
-          <p className="mt-4 text-base sm:text-lg text-slate-600 leading-relaxed font-normal">
+          <p className="mt-4 text-base sm:text-lg text-slate-600 dark:text-slate-300 leading-relaxed font-normal">
             Whether you need bank collateral property valuation, structural engineering designs, a bankable DPR, or strategic real estate guidance in Dhangadhi and Far-Western Nepal, our technical team is here to assist.
           </p>
         </div>
@@ -140,22 +139,22 @@ export default function ContactPage() {
           {/* Left Column: Contact Cards & Info (5 cols) */}
           <div className="lg:col-span-5 space-y-6">
             {/* Quick Contact Box */}
-            <div className="bg-navy-950 text-white rounded-2xl p-6 sm:p-8 shadow-xl border border-navy-800 relative overflow-hidden">
+            <div className="bg-navy-950 dark:bg-dark-surface text-white rounded-2xl p-6 sm:p-8 shadow-xl dark:shadow-card-dark border border-navy-800 dark:border-dark-border relative overflow-hidden">
               <div className="absolute top-0 right-0 w-48 h-48 bg-amber-500/10 rounded-full blur-3xl -mr-16 -mt-16 pointer-events-none" />
 
               <h2 className="text-xl font-bold text-white mb-6 flex items-center gap-2">
                 <span>Head Office &amp; Contact</span>
               </h2>
 
-              <div className="space-y-6 text-sm text-slate-300">
+              <div className="space-y-6 text-sm text-slate-300 dark:text-slate-400">
                 {/* Location */}
                 <div className="flex items-start gap-4">
-                  <div className="p-2.5 rounded-xl bg-white/10 text-amber-400 shrink-0 border border-white/10">
+                  <div className="p-2.5 rounded-xl bg-white/10 dark:bg-dark-elevated text-amber-400 shrink-0 border border-white/10 dark:border-dark-border">
                     <MapPin className="w-5 h-5" />
                   </div>
                   <div>
                     <div className="font-semibold text-white">Office Location</div>
-                    <p className="mt-0.5 text-slate-300 leading-relaxed">
+                    <p className="mt-0.5 text-slate-300 dark:text-slate-400 leading-relaxed">
                       LN. Chowk, Dhangadhi<br />
                       Kailali District, Sudurpashchim Province, Nepal
                     </p>
@@ -164,12 +163,12 @@ export default function ContactPage() {
 
                 {/* MD Contact */}
                 <div className="flex items-start gap-4">
-                  <div className="p-2.5 rounded-xl bg-white/10 text-purple-400 shrink-0 border border-white/10">
+                  <div className="p-2.5 rounded-xl bg-white/10 dark:bg-dark-elevated text-purple-400 shrink-0 border border-white/10 dark:border-dark-border">
                     <Sparkles className="w-5 h-5" />
                   </div>
                   <div>
                     <div className="font-semibold text-white">Managing Director</div>
-                    <p className="mt-0.5 text-slate-300">
+                    <p className="mt-0.5 text-slate-300 dark:text-slate-400">
                       <span className="text-white font-semibold">Er. Laxit Pathak</span><br />
                       <span className="text-xs text-slate-400">Managing Director, Kaltade Engineering Services Pvt. Ltd.</span>
                     </p>
@@ -178,12 +177,12 @@ export default function ContactPage() {
 
                 {/* Phone */}
                 <div className="flex items-start gap-4">
-                  <div className="p-2.5 rounded-xl bg-white/10 text-blue-400 shrink-0 border border-white/10">
+                  <div className="p-2.5 rounded-xl bg-white/10 dark:bg-dark-elevated text-blue-400 dark:text-sky-400 shrink-0 border border-white/10 dark:border-dark-border">
                     <Phone className="w-5 h-5" />
                   </div>
                   <div>
                     <div className="font-semibold text-white">Telephone &amp; WhatsApp</div>
-                    <p className="mt-0.5 text-slate-300">
+                    <p className="mt-0.5 text-slate-300 dark:text-slate-400">
                       Mobile / WhatsApp:{' '}
                       <a href="tel:+9779858425256" className="text-white font-semibold hover:text-amber-300 transition-colors">
                         +977-9858425256
@@ -199,12 +198,12 @@ export default function ContactPage() {
 
                 {/* Email */}
                 <div className="flex items-start gap-4">
-                  <div className="p-2.5 rounded-xl bg-white/10 text-emerald-400 shrink-0 border border-white/10">
+                  <div className="p-2.5 rounded-xl bg-white/10 dark:bg-dark-elevated text-emerald-400 shrink-0 border border-white/10 dark:border-dark-border">
                     <Mail className="w-5 h-5" />
                   </div>
                   <div>
                     <div className="font-semibold text-white">Official Email</div>
-                    <p className="mt-0.5 text-slate-300">
+                    <p className="mt-0.5 text-slate-300 dark:text-slate-400">
                       <a
                         href="mailto:kaltadeengineeringservices@gmail.com"
                         className="text-white font-semibold hover:text-amber-300 transition-colors break-all"
@@ -216,13 +215,13 @@ export default function ContactPage() {
                 </div>
 
                 {/* Working Hours */}
-                <div className="flex items-start gap-4 pt-2 border-t border-white/10">
-                  <div className="p-2.5 rounded-xl bg-white/10 text-amber-300 shrink-0 border border-white/10">
+                <div className="flex items-start gap-4 pt-2 border-t border-white/10 dark:border-dark-border">
+                  <div className="p-2.5 rounded-xl bg-white/10 dark:bg-dark-elevated text-amber-300 shrink-0 border border-white/10 dark:border-dark-border">
                     <Clock className="w-5 h-5" />
                   </div>
                   <div>
                     <div className="font-semibold text-white">Working Hours</div>
-                    <p className="mt-0.5 text-slate-300">
+                    <p className="mt-0.5 text-slate-300 dark:text-slate-400">
                       <span className="font-medium text-white">Sunday – Friday:</span> 9:30 AM – 5:30 PM (NPT)
                       <br />
                       <span className="text-xs text-slate-400">Saturday &amp; Public Holidays: Closed (Emergency field inspection by appointment)</span>
@@ -233,47 +232,47 @@ export default function ContactPage() {
             </div>
 
             {/* Quick Action Badges / Specialties */}
-            <div className="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm space-y-4">
-              <h3 className="font-bold text-navy-950 text-sm uppercase tracking-wider text-slate-700">
+            <div className="bg-white dark:bg-dark-card rounded-2xl p-6 border border-slate-200 dark:border-dark-border shadow-xs dark:shadow-card-dark space-y-4">
+              <h3 className="font-bold text-navy-950 dark:text-white text-sm uppercase tracking-wider">
                 Direct Consultation Channels
               </h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <Link
                   href="/valuation"
-                  className="flex items-center gap-3 p-3 rounded-xl bg-slate-50 hover:bg-navy-50 border border-slate-100 hover:border-navy-200 transition-all text-xs font-semibold text-navy-900 group"
+                  className="flex items-center gap-3 p-3 rounded-xl bg-slate-50 dark:bg-dark-surface hover:bg-navy-50 dark:hover:bg-dark-elevated border border-slate-100 dark:border-dark-border text-xs font-semibold text-navy-900 dark:text-sky-300 group transition-all"
                 >
-                  <Scale className="w-4 h-4 text-amber-600 group-hover:scale-110 transition-transform" />
+                  <Scale className="w-4 h-4 text-amber-600 dark:text-amber-400 group-hover:scale-110 transition-transform" />
                   <span>Property Valuation Form</span>
                 </Link>
 
                 <Link
                   href="/services/dpr"
-                  className="flex items-center gap-3 p-3 rounded-xl bg-slate-50 hover:bg-navy-50 border border-slate-100 hover:border-navy-200 transition-all text-xs font-semibold text-navy-900 group"
+                  className="flex items-center gap-3 p-3 rounded-xl bg-slate-50 dark:bg-dark-surface hover:bg-navy-50 dark:hover:bg-dark-elevated border border-slate-100 dark:border-dark-border text-xs font-semibold text-navy-900 dark:text-sky-300 group transition-all"
                 >
-                  <FileText className="w-4 h-4 text-blue-600 group-hover:scale-110 transition-transform" />
+                  <FileText className="w-4 h-4 text-blue-600 dark:text-blue-400 group-hover:scale-110 transition-transform" />
                   <span>DPR Inquiry Desk</span>
                 </Link>
 
                 <Link
                   href="/services/engineering"
-                  className="flex items-center gap-3 p-3 rounded-xl bg-slate-50 hover:bg-navy-50 border border-slate-100 hover:border-navy-200 transition-all text-xs font-semibold text-navy-900 group"
+                  className="flex items-center gap-3 p-3 rounded-xl bg-slate-50 dark:bg-dark-surface hover:bg-navy-50 dark:hover:bg-dark-elevated border border-slate-100 dark:border-dark-border text-xs font-semibold text-navy-900 dark:text-sky-300 group transition-all"
                 >
-                  <Compass className="w-4 h-4 text-emerald-600 group-hover:scale-110 transition-transform" />
-                  <span>Building & Structural</span>
+                  <Compass className="w-4 h-4 text-emerald-600 dark:text-emerald-400 group-hover:scale-110 transition-transform" />
+                  <span>Building &amp; Structural</span>
                 </Link>
 
                 <Link
                   href="/properties/find"
-                  className="flex items-center gap-3 p-3 rounded-xl bg-slate-50 hover:bg-navy-50 border border-slate-100 hover:border-navy-200 transition-all text-xs font-semibold text-navy-900 group"
+                  className="flex items-center gap-3 p-3 rounded-xl bg-slate-50 dark:bg-dark-surface hover:bg-navy-50 dark:hover:bg-dark-elevated border border-slate-100 dark:border-dark-border text-xs font-semibold text-navy-900 dark:text-sky-300 group transition-all"
                 >
-                  <Building2 className="w-4 h-4 text-purple-600 group-hover:scale-110 transition-transform" />
+                  <Building2 className="w-4 h-4 text-purple-600 dark:text-purple-400 group-hover:scale-110 transition-transform" />
                   <span>Property Sourcing</span>
                 </Link>
               </div>
 
               <div className="pt-2">
-                <div className="flex items-center gap-2 text-xs text-slate-500">
-                  <ShieldCheck className="w-4 h-4 text-emerald-600 shrink-0" />
+                <div className="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400">
+                  <ShieldCheck className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0" />
                   <span>All client communications and property documents are handled with strict institutional confidentiality.</span>
                 </div>
               </div>
@@ -282,47 +281,47 @@ export default function ContactPage() {
 
           {/* Right Column: Contact Form / Success State (7 cols) */}
           <div className="lg:col-span-7">
-            <div className="bg-white rounded-2xl p-6 sm:p-10 border border-slate-200 shadow-md">
+            <div className="bg-white dark:bg-dark-card rounded-2xl p-6 sm:p-10 border border-slate-200 dark:border-dark-border shadow-md dark:shadow-card-dark">
               {submittedLead ? (
                 /* Success Confirmation State */
                 <div className="text-center py-8 space-y-6">
-                  <div className="w-16 h-16 bg-emerald-50 text-emerald-600 rounded-full flex items-center justify-center mx-auto border border-emerald-200 shadow-inner">
+                  <div className="w-16 h-16 bg-emerald-50 dark:bg-emerald-950/80 text-emerald-600 dark:text-emerald-400 rounded-full flex items-center justify-center mx-auto border border-emerald-200 dark:border-emerald-800/60 shadow-inner">
                     <CheckCircle2 className="w-10 h-10" />
                   </div>
 
                   <div className="space-y-2">
-                    <span className="inline-block px-3 py-1 bg-emerald-100 text-emerald-800 rounded-full text-xs font-bold tracking-wide">
+                    <span className="inline-block px-3 py-1 bg-emerald-100 dark:bg-emerald-950/80 text-emerald-800 dark:text-emerald-300 rounded-full text-xs font-bold tracking-wide">
                       Inquiry Received • Ref: {submittedLead.id}
                     </span>
-                    <h3 className="text-2xl sm:text-3xl font-extrabold text-navy-950">
+                    <h3 className="text-2xl sm:text-3xl font-extrabold text-navy-950 dark:text-white">
                       Thank You, {submittedLead.fullName}!
                     </h3>
-                    <p className="text-sm sm:text-base text-slate-600 max-w-md mx-auto leading-relaxed">
+                    <p className="text-sm sm:text-base text-slate-600 dark:text-slate-300 max-w-md mx-auto leading-relaxed">
                       Your inquiry regarding{' '}
-                      <strong className="text-navy-900 font-semibold">{submittedLead.serviceInterest}</strong> has been assigned to our engineering & valuation advisory team.
+                      <strong className="text-navy-900 dark:text-white font-semibold">{submittedLead.serviceInterest}</strong> has been assigned to our engineering &amp; valuation advisory team.
                     </p>
                   </div>
 
-                  <div className="bg-slate-50 border border-slate-200 rounded-xl p-5 max-w-lg mx-auto text-left text-xs space-y-2.5 text-slate-700">
-                    <div className="flex justify-between pb-2 border-b border-slate-200">
-                      <span className="text-slate-500">Inquiry Reference ID:</span>
-                      <span className="font-bold text-navy-950">{submittedLead.id}</span>
+                  <div className="bg-slate-50 dark:bg-dark-surface border border-slate-200 dark:border-dark-border rounded-xl p-5 max-w-lg mx-auto text-left text-xs space-y-2.5 text-slate-700 dark:text-slate-300">
+                    <div className="flex justify-between pb-2 border-b border-slate-200 dark:border-dark-border">
+                      <span className="text-slate-500 dark:text-slate-400">Inquiry Reference ID:</span>
+                      <span className="font-bold text-navy-950 dark:text-white">{submittedLead.id}</span>
                     </div>
-                    <div className="flex justify-between pb-2 border-b border-slate-200">
-                      <span className="text-slate-500">Primary Contact Phone:</span>
-                      <span className="font-semibold text-navy-950">{submittedLead.phone}</span>
+                    <div className="flex justify-between pb-2 border-b border-slate-200 dark:border-dark-border">
+                      <span className="text-slate-500 dark:text-slate-400">Primary Contact Phone:</span>
+                      <span className="font-semibold text-navy-950 dark:text-white">{submittedLead.phone}</span>
                     </div>
-                    <div className="flex justify-between pb-2 border-b border-slate-200">
-                      <span className="text-slate-500">Expected Response Time:</span>
-                      <span className="font-semibold text-emerald-700">Within 24 Business Hours</span>
+                    <div className="flex justify-between pb-2 border-b border-slate-200 dark:border-dark-border">
+                      <span className="text-slate-500 dark:text-slate-400">Expected Response Time:</span>
+                      <span className="font-semibold text-emerald-700 dark:text-emerald-400">Within 24 Business Hours</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-slate-500">Service Division:</span>
-                      <span className="font-semibold text-navy-950">{submittedLead.serviceInterest}</span>
+                      <span className="text-slate-500 dark:text-slate-400">Service Division:</span>
+                      <span className="font-semibold text-navy-950 dark:text-white">{submittedLead.serviceInterest}</span>
                     </div>
                   </div>
 
-                  <div className="bg-emerald-50/80 border border-emerald-200 rounded-xl p-3.5 max-w-lg mx-auto text-xs text-emerald-800 text-center">
+                  <div className="bg-emerald-50/80 dark:bg-emerald-950/50 border border-emerald-200 dark:border-emerald-800/60 rounded-xl p-3.5 max-w-lg mx-auto text-xs text-emerald-800 dark:text-emerald-300 text-center">
                     ✉️ Notification dispatched to <strong>kaltadeengineeringservices@gmail.com</strong> &amp; <strong>ai.antigravity11@gmail.com</strong>
                   </div>
 
@@ -361,16 +360,16 @@ export default function ContactPage() {
                 /* Contact Form */
                 <div>
                   <div className="mb-6">
-                    <h2 className="text-xl sm:text-2xl font-extrabold text-navy-950">
+                    <h2 className="text-xl sm:text-2xl font-extrabold text-navy-950 dark:text-white">
                       Send a Message or Consultation Request
                     </h2>
-                    <p className="text-xs sm:text-sm text-slate-500 mt-1">
+                    <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">
                       Fill out the form below. Our consultants will review your requirement and reach out with technical feedback.
                     </p>
                   </div>
 
                   {errorMessage && (
-                    <div className="mb-6 p-4 rounded-xl bg-rose-50 border border-rose-200 text-xs sm:text-sm text-rose-700 font-medium">
+                    <div className="mb-6 p-4 rounded-xl bg-rose-50 dark:bg-rose-950/60 border border-rose-200 dark:border-rose-800/60 text-xs sm:text-sm text-rose-700 dark:text-rose-300 font-medium">
                       {errorMessage}
                     </div>
                   )}
@@ -379,7 +378,7 @@ export default function ContactPage() {
                     {/* Full Name & Phone */}
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                       <div>
-                        <label className="block text-xs font-bold text-navy-950 uppercase tracking-wider mb-1.5">
+                        <label className="block text-xs font-bold text-navy-950 dark:text-slate-300 uppercase tracking-wider mb-1.5">
                           Your Full Name <span className="text-rose-600">*</span>
                         </label>
                         <input
@@ -388,12 +387,12 @@ export default function ContactPage() {
                           placeholder="e.g. Er. Rajesh Joshi"
                           value={formData.fullName}
                           onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
-                          className="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 text-sm text-navy-950 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-navy-900 focus:border-navy-900 transition-all bg-white"
+                          className="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 dark:border-dark-border text-sm text-navy-950 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-navy-900 dark:focus:ring-sky-400 transition-all bg-white dark:bg-dark-surface"
                         />
                       </div>
 
                       <div>
-                        <label className="block text-xs font-bold text-navy-950 uppercase tracking-wider mb-1.5">
+                        <label className="block text-xs font-bold text-navy-950 dark:text-slate-300 uppercase tracking-wider mb-1.5">
                           Phone Number <span className="text-rose-600">*</span>
                         </label>
                         <input
@@ -402,7 +401,7 @@ export default function ContactPage() {
                           placeholder="e.g. +977 98XXXXXXXX"
                           value={formData.phone}
                           onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                          className="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 text-sm text-navy-950 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-navy-900 focus:border-navy-900 transition-all bg-white"
+                          className="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 dark:border-dark-border text-sm text-navy-950 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-navy-900 dark:focus:ring-sky-400 transition-all bg-white dark:bg-dark-surface"
                         />
                       </div>
                     </div>
@@ -410,26 +409,26 @@ export default function ContactPage() {
                     {/* Email & Service Required */}
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                       <div>
-                        <label className="block text-xs font-bold text-navy-950 uppercase tracking-wider mb-1.5">
-                          Email Address <span className="text-slate-400 text-[11px] font-normal">(Optional)</span>
+                        <label className="block text-xs font-bold text-navy-950 dark:text-slate-300 uppercase tracking-wider mb-1.5">
+                          Email Address <span className="text-slate-400 dark:text-slate-500 text-[11px] font-normal">(Optional)</span>
                         </label>
                         <input
                           type="email"
                           placeholder="e.g. rajesh@example.com"
                           value={formData.email}
                           onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                          className="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 text-sm text-navy-950 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-navy-900 focus:border-navy-900 transition-all bg-white"
+                          className="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 dark:border-dark-border text-sm text-navy-950 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-navy-900 dark:focus:ring-sky-400 transition-all bg-white dark:bg-dark-surface"
                         />
                       </div>
 
                       <div>
-                        <label className="block text-xs font-bold text-navy-950 uppercase tracking-wider mb-1.5">
+                        <label className="block text-xs font-bold text-navy-950 dark:text-slate-300 uppercase tracking-wider mb-1.5">
                           Service Required <span className="text-rose-600">*</span>
                         </label>
                         <select
                           value={formData.serviceRequired}
                           onChange={(e) => setFormData({ ...formData, serviceRequired: e.target.value })}
-                          className="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 text-sm text-navy-950 bg-white focus:outline-none focus:ring-2 focus:ring-navy-900 focus:border-navy-900 transition-all cursor-pointer"
+                          className="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 dark:border-dark-border text-sm text-navy-950 dark:text-white bg-white dark:bg-dark-surface focus:outline-none focus:ring-2 focus:ring-navy-900 dark:focus:ring-sky-400 transition-all cursor-pointer"
                         >
                           {serviceOptions.map((opt) => (
                             <option key={opt} value={opt}>
@@ -442,7 +441,7 @@ export default function ContactPage() {
 
                     {/* Message Box */}
                     <div>
-                      <label className="block text-xs font-bold text-navy-950 uppercase tracking-wider mb-1.5">
+                      <label className="block text-xs font-bold text-navy-950 dark:text-slate-300 uppercase tracking-wider mb-1.5">
                         Requirement Details / Message <span className="text-rose-600">*</span>
                       </label>
                       <textarea
@@ -451,13 +450,13 @@ export default function ContactPage() {
                         placeholder="Please describe your property location, land area, engineering requirement, or bank valuation timeline..."
                         value={formData.message}
                         onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                        className="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 text-sm text-navy-950 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-navy-900 focus:border-navy-900 transition-all bg-white resize-y"
+                        className="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 dark:border-dark-border text-sm text-navy-950 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-navy-900 dark:focus:ring-sky-400 transition-all bg-white dark:bg-dark-surface resize-y"
                       />
                     </div>
 
                     {/* Preferred Contact Timing */}
                     <div>
-                      <label className="block text-xs font-semibold text-slate-700 mb-1.5">
+                      <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5">
                         Preferred Call Back Time
                       </label>
                       <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
@@ -470,10 +469,10 @@ export default function ContactPage() {
                             type="button"
                             key={time}
                             onClick={() => setFormData({ ...formData, preferredTime: time })}
-                            className={`px-3 py-2 text-xs rounded-lg border transition-all text-left ${
+                            className={`px-3 py-2 text-xs rounded-lg border transition-all text-left cursor-pointer ${
                               formData.preferredTime === time
-                                ? 'border-navy-900 bg-navy-50 text-navy-950 font-bold'
-                                : 'border-slate-200 text-slate-600 hover:border-slate-300'
+                                ? 'border-navy-900 dark:border-sky-400 bg-navy-50 dark:bg-dark-elevated text-navy-950 dark:text-white font-bold'
+                                : 'border-slate-200 dark:border-dark-border text-slate-600 dark:text-slate-300 hover:border-slate-300 dark:hover:border-slate-600'
                             }`}
                           >
                             {time}
@@ -494,7 +493,7 @@ export default function ContactPage() {
                       >
                         Submit Consultation Request
                       </Button>
-                      <p className="text-center text-[11px] text-slate-400 mt-3">
+                      <p className="text-center text-[11px] text-slate-400 dark:text-slate-500 mt-3">
                         By submitting, you agree to receive professional contact regarding your engineering or property inquiry. No spam.
                       </p>
                     </div>
@@ -507,16 +506,16 @@ export default function ContactPage() {
 
         {/* Office Location & Map Section */}
         <div className="mt-16 sm:mt-24">
-          <div className="bg-white rounded-3xl border border-slate-200 shadow-sm overflow-hidden">
-            <div className="p-6 sm:p-8 border-b border-slate-200 flex flex-col md:flex-row md:items-center justify-between gap-4 bg-slate-50/50">
+          <div className="bg-white dark:bg-dark-card rounded-3xl border border-slate-200 dark:border-dark-border shadow-sm overflow-hidden">
+            <div className="p-6 sm:p-8 border-b border-slate-200 dark:border-dark-border flex flex-col md:flex-row md:items-center justify-between gap-4 bg-slate-50/50 dark:bg-dark-elevated/40">
               <div>
-                <span className="text-xs font-bold uppercase tracking-wider text-amber-600">
+                <span className="text-xs font-bold uppercase tracking-wider text-amber-600 dark:text-amber-400">
                   Find Our Office
                 </span>
-                <h3 className="text-xl sm:text-2xl font-extrabold text-navy-950 mt-1">
+                <h3 className="text-xl sm:text-2xl font-extrabold text-navy-950 dark:text-white mt-1">
                   Kaltade Engineering Services Office Location
                 </h3>
-                <p className="text-xs sm:text-sm text-slate-600 mt-1">
+                <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 mt-1">
                   Conveniently situated along the central commercial corridor of Dhangadhi, Kailali.
                 </p>
               </div>
@@ -526,7 +525,7 @@ export default function ContactPage() {
                   href="https://maps.google.com/?q=Dhangadhi+Kailali+Nepal"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-navy-900 text-white text-xs font-bold hover:bg-navy-800 transition-colors shadow-sm"
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-navy-900 dark:bg-navy-700 text-white text-xs font-bold hover:bg-navy-800 dark:hover:bg-navy-600 transition-colors shadow-xs"
                 >
                   <MapPin className="w-3.5 h-3.5 text-amber-400" />
                   <span>Open in Google Maps</span>
@@ -536,12 +535,12 @@ export default function ContactPage() {
             </div>
 
             {/* Map Visual Container */}
-            <div className="relative w-full h-80 sm:h-96 bg-slate-100 overflow-hidden">
+            <div className="relative w-full h-80 sm:h-96 bg-slate-100 dark:bg-dark-surface overflow-hidden">
               {/* Map background styling representation */}
-              <div className="absolute inset-0 bg-[#e5e3df] flex items-center justify-center overflow-hidden">
+              <div className="absolute inset-0 bg-[#e5e3df] dark:bg-[#131d2e] flex items-center justify-center overflow-hidden">
                 {/* SVG Map Grid Aesthetic */}
                 <svg
-                  className="absolute inset-0 w-full h-full opacity-30"
+                  className="absolute inset-0 w-full h-full opacity-30 dark:opacity-20"
                   xmlns="http://www.w3.org/2000/svg"
                   width="100%"
                   height="100%"
@@ -582,43 +581,43 @@ export default function ContactPage() {
                 </svg>
 
                 {/* Landmarks in map graphic */}
-                <div className="absolute top-12 left-1/4 bg-white/90 backdrop-blur-sm px-3 py-1.5 rounded-lg border border-slate-300 text-[11px] font-bold text-slate-700 shadow-sm hidden sm:block">
+                <div className="absolute top-12 left-1/4 bg-white/90 dark:bg-dark-card/90 backdrop-blur-xs px-3 py-1.5 rounded-lg border border-slate-300 dark:border-dark-border text-[11px] font-bold text-slate-700 dark:text-slate-200 shadow-xs hidden sm:block">
                   🏛️ Sub-Metropolitan City Office Corridor
                 </div>
-                <div className="absolute bottom-12 right-1/4 bg-white/90 backdrop-blur-sm px-3 py-1.5 rounded-lg border border-slate-300 text-[11px] font-bold text-slate-700 shadow-sm hidden sm:block">
+                <div className="absolute bottom-12 right-1/4 bg-white/90 dark:bg-dark-card/90 backdrop-blur-xs px-3 py-1.5 rounded-lg border border-slate-300 dark:border-dark-border text-[11px] font-bold text-slate-700 dark:text-slate-200 shadow-xs hidden sm:block">
                   🏦 Dhangadhi Commercial Banking Hub
                 </div>
 
                 {/* Central Office Marker Pin */}
                 <div className="relative z-10 flex flex-col items-center">
-                  <div className="bg-navy-950 text-white px-4 py-2 rounded-xl shadow-2xl border border-amber-500/40 text-center animate-bounce">
+                  <div className="bg-navy-950 dark:bg-dark-surface text-white px-4 py-2 rounded-xl shadow-2xl border border-amber-500/40 text-center animate-bounce">
                     <div className="text-xs font-black tracking-tight text-white flex items-center gap-1.5 justify-center">
                       <span className="w-2 h-2 rounded-full bg-amber-400 animate-ping" />
                       KALTADE ENGINEERING SERVICES
                     </div>
-                    <div className="text-[10px] text-blue-200 mt-0.5">
+                    <div className="text-[10px] text-blue-200 dark:text-sky-300 mt-0.5">
                       LN. Chowk, Dhangadhi, Kailali
                     </div>
                   </div>
-                  <div className="w-5 h-5 bg-navy-950 rotate-45 -mt-2.5 border-r border-b border-amber-500/40" />
+                  <div className="w-5 h-5 bg-navy-950 dark:bg-dark-surface rotate-45 -mt-2.5 border-r border-b border-amber-500/40" />
                   <div className="w-4 h-4 bg-amber-500 rounded-full border-2 border-white shadow-lg mt-1" />
                 </div>
               </div>
 
               {/* Map Footer Overlay Box */}
-              <div className="absolute bottom-4 left-4 right-4 sm:left-6 sm:right-auto sm:max-w-md bg-white/95 backdrop-blur-md p-4 rounded-xl border border-slate-200 shadow-lg text-xs space-y-1.5 z-20">
-                <div className="font-bold text-navy-950 flex items-center gap-1.5">
-                  <MapPin className="w-4 h-4 text-amber-600" />
+              <div className="absolute bottom-4 left-4 right-4 sm:left-6 sm:right-auto sm:max-w-md bg-white/95 dark:bg-dark-surface/95 backdrop-blur-md p-4 rounded-xl border border-slate-200 dark:border-dark-border shadow-lg text-xs space-y-1.5 z-20">
+                <div className="font-bold text-navy-950 dark:text-white flex items-center gap-1.5">
+                  <MapPin className="w-4 h-4 text-amber-600 dark:text-amber-400" />
                   <span>LN. Chowk, Dhangadhi, Kailali, Nepal</span>
                 </div>
-                <p className="text-slate-600 leading-relaxed">
+                <p className="text-slate-600 dark:text-slate-300 leading-relaxed">
                   Our office is located at LN. Chowk, Dhangadhi. Contact us at <strong>+977-9858425256</strong> for directions or to confirm your visit.
                 </p>
                 <a
                   href="https://maps.google.com/?q=LN+Chowk+Dhangadhi+Kailali+Nepal"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1 text-navy-700 font-bold hover:underline"
+                  className="inline-flex items-center gap-1 text-navy-700 dark:text-sky-400 font-bold hover:underline"
                 >
                   <ExternalLink className="w-3 h-3" />
                   Open in Google Maps

@@ -74,32 +74,32 @@ export default function ProjectsPage() {
   }, [selectedCategory, searchQuery]);
 
   return (
-    <div className="min-h-screen bg-slate-50/60 pt-28 sm:pt-32 pb-24">
+    <div className="min-h-screen bg-slate-50/60 dark:bg-dark-bg text-navy-950 dark:text-dark-text pt-28 sm:pt-32 pb-24 transition-colors">
       {/* Hero Section */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12">
-        <div className="bg-navy-950 text-white rounded-3xl p-6 sm:p-10 lg:p-12 relative overflow-hidden shadow-xl border border-navy-900">
+        <div className="bg-navy-950 dark:bg-dark-surface text-white rounded-3xl p-6 sm:p-10 lg:p-12 relative overflow-hidden shadow-xl dark:shadow-card-dark border border-navy-900 dark:border-dark-border">
           <div className="absolute -right-16 -top-16 w-96 h-96 rounded-full bg-amber-500/10 blur-3xl pointer-events-none" />
           <div className="absolute right-1/3 -bottom-20 w-80 h-80 rounded-full bg-blue-600/10 blur-3xl pointer-events-none" />
 
           <div className="relative z-10 max-w-3xl space-y-4">
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 text-amber-300 text-xs font-bold uppercase tracking-wider border border-white/15">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 dark:bg-dark-elevated text-amber-300 text-xs font-bold uppercase tracking-wider border border-white/15 dark:border-dark-border">
               <Briefcase className="w-4 h-4 text-amber-400" />
-              Proven Track Record & Case Studies
+              Proven Track Record &amp; Case Studies
             </div>
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white leading-tight">
-              Engineering Projects & Landmark Valuations.
+              Engineering Projects &amp; Landmark Valuations.
             </h1>
-            <p className="text-sm sm:text-base text-slate-300 leading-relaxed font-normal">
+            <p className="text-sm sm:text-base text-slate-300 dark:text-slate-400 leading-relaxed font-normal">
               Explore our portfolio of institutional property valuations for commercial banks, bankable Detailed Project Reports (DPR), structural building designs, and commercial real estate master plans executed across Sudurpashchim and Nepal.
             </p>
 
             {/* Quick Metrics Bar */}
-            <div className="pt-4 grid grid-cols-2 sm:grid-cols-4 gap-4 border-t border-white/10 text-left">
+            <div className="pt-4 grid grid-cols-2 sm:grid-cols-4 gap-4 border-t border-white/10 dark:border-dark-border text-left">
               <div>
                 <div className="text-xl sm:text-2xl font-extrabold text-amber-300 font-mono">
                   100+
                 </div>
-                <div className="text-[11px] text-slate-300">
+                <div className="text-[11px] text-slate-300 dark:text-slate-400">
                   Institutional Valuations
                 </div>
               </div>
@@ -107,7 +107,7 @@ export default function ProjectsPage() {
                 <div className="text-xl sm:text-2xl font-extrabold text-amber-300 font-mono">
                   NBC 105
                 </div>
-                <div className="text-[11px] text-slate-300">
+                <div className="text-[11px] text-slate-300 dark:text-slate-400">
                   Seismic Code Design
                 </div>
               </div>
@@ -115,7 +115,7 @@ export default function ProjectsPage() {
                 <div className="text-xl sm:text-2xl font-extrabold text-amber-300 font-mono">
                   Bankable
                 </div>
-                <div className="text-[11px] text-slate-300">
+                <div className="text-[11px] text-slate-300 dark:text-slate-400">
                   CapEx DPR Formulation
                 </div>
               </div>
@@ -123,7 +123,7 @@ export default function ProjectsPage() {
                 <div className="text-xl sm:text-2xl font-extrabold text-amber-300 font-mono">
                   100%
                 </div>
-                <div className="text-[11px] text-slate-300">
+                <div className="text-[11px] text-slate-300 dark:text-slate-400">
                   Cadastral Accuracy
                 </div>
               </div>
@@ -135,7 +135,7 @@ export default function ProjectsPage() {
       {/* Main Content Area */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
         {/* Filter & Search Bar */}
-        <div className="bg-white rounded-2xl p-4 sm:p-5 border border-slate-200 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div className="bg-white dark:bg-dark-card rounded-2xl p-4 sm:p-5 border border-slate-200 dark:border-dark-border shadow-xs dark:shadow-card-dark flex flex-col md:flex-row md:items-center justify-between gap-4">
           {/* Category Tabs */}
           <div className="flex items-center gap-2 overflow-x-auto no-scrollbar pb-1 md:pb-0">
             {CATEGORIES.map((cat) => (
@@ -143,10 +143,10 @@ export default function ProjectsPage() {
                 key={cat}
                 onClick={() => setSelectedCategory(cat)}
                 className={cn(
-                  'px-4 py-2 rounded-xl text-xs font-bold whitespace-nowrap transition-all',
+                  'px-4 py-2 rounded-xl text-xs font-bold whitespace-nowrap transition-all cursor-pointer',
                   selectedCategory === cat
-                    ? 'bg-navy-900 text-white shadow-sm'
-                    : 'bg-slate-100 text-slate-600 hover:bg-slate-200 hover:text-navy-950'
+                    ? 'bg-navy-900 dark:bg-navy-700 text-white shadow-xs'
+                    : 'bg-slate-100 dark:bg-dark-surface text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-dark-elevated hover:text-navy-950 dark:hover:text-white'
                 )}
               >
                 {cat}
@@ -162,7 +162,7 @@ export default function ProjectsPage() {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search case studies..."
-              className="w-full pl-10 pr-4 py-2 bg-slate-50 rounded-xl border border-slate-200 text-xs text-navy-950 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-navy-900"
+              className="w-full pl-10 pr-4 py-2 bg-slate-50 dark:bg-dark-surface rounded-xl border border-slate-200 dark:border-dark-border text-xs text-navy-950 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-navy-900 dark:focus:ring-sky-400"
             />
           </div>
         </div>
@@ -173,13 +173,13 @@ export default function ProjectsPage() {
             {filteredProjects.map((project) => (
               <div
                 key={project.id}
-                className="group bg-white rounded-3xl border border-slate-200 shadow-sm hover:shadow-xl hover:border-navy-900/30 transition-all duration-300 overflow-hidden flex flex-col justify-between"
+                className="group bg-white dark:bg-dark-card rounded-3xl border border-slate-200 dark:border-dark-border shadow-xs dark:shadow-card-dark hover:shadow-xl dark:hover:shadow-card-dark-hover hover:border-navy-900/30 dark:hover:border-sky-500/40 transition-all duration-300 overflow-hidden flex flex-col justify-between"
               >
                 <div>
                   {/* Project Image */}
                   <Link
                     href={`/projects/${project.slug || project.id}`}
-                    className="relative block aspect-[16/9] w-full overflow-hidden bg-slate-100"
+                    className="relative block aspect-[16/9] w-full overflow-hidden bg-slate-100 dark:bg-dark-surface"
                   >
                     <Image
                       src={
@@ -197,7 +197,7 @@ export default function ProjectsPage() {
                         <span className="px-3 py-1 rounded-md bg-navy-950/85 backdrop-blur-md text-white text-xs font-bold tracking-wide uppercase">
                           {project.category}
                         </span>
-                        <span className="px-2.5 py-1 rounded-md bg-white/90 backdrop-blur-md text-navy-950 text-xs font-extrabold">
+                        <span className="px-2.5 py-1 rounded-md bg-white/90 dark:bg-dark-card/90 backdrop-blur-md text-navy-950 dark:text-white text-xs font-extrabold">
                           {project.year}
                         </span>
                       </div>
@@ -217,8 +217,8 @@ export default function ProjectsPage() {
                   {/* Card Body */}
                   <div className="p-6 sm:p-7 space-y-4">
                     {/* Location */}
-                    <div className="flex items-center gap-1.5 text-xs text-slate-500 font-medium">
-                      <MapPin className="w-3.5 h-3.5 text-amber-600 shrink-0" />
+                    <div className="flex items-center gap-1.5 text-xs text-slate-500 dark:text-slate-400 font-medium">
+                      <MapPin className="w-3.5 h-3.5 text-amber-600 dark:text-amber-400 shrink-0" />
                       <span>{project.location}</span>
                     </div>
 
@@ -227,13 +227,13 @@ export default function ProjectsPage() {
                       href={`/projects/${project.slug || project.id}`}
                       className="block"
                     >
-                      <h3 className="text-lg sm:text-xl font-extrabold text-navy-950 group-hover:text-amber-600 transition-colors leading-snug">
+                      <h3 className="text-lg sm:text-xl font-extrabold text-navy-950 dark:text-white group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors leading-snug">
                         {project.title}
                       </h3>
                     </Link>
 
                     {/* Short Description */}
-                    <p className="text-xs sm:text-sm text-slate-600 leading-relaxed line-clamp-3">
+                    <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed line-clamp-3">
                       {project.shortDescription}
                     </p>
 
@@ -242,14 +242,14 @@ export default function ProjectsPage() {
                       {project.servicesDelivered.slice(0, 3).map((svc, sIdx) => (
                         <span
                           key={sIdx}
-                          className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-slate-100 text-slate-700 text-[11px] font-medium"
+                          className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-slate-100 dark:bg-dark-surface text-slate-700 dark:text-slate-300 text-[11px] font-medium"
                         >
-                          <CheckCircle2 className="w-3 h-3 text-emerald-600 shrink-0" />
+                          <CheckCircle2 className="w-3 h-3 text-emerald-600 dark:text-emerald-400 shrink-0" />
                           <span>{svc}</span>
                         </span>
                       ))}
                       {project.servicesDelivered.length > 3 && (
-                        <span className="px-2 py-1 rounded-md bg-slate-50 text-slate-500 text-[11px] font-medium">
+                        <span className="px-2 py-1 rounded-md bg-slate-50 dark:bg-dark-elevated text-slate-500 dark:text-slate-400 text-[11px] font-medium">
                           +{project.servicesDelivered.length - 3} more
                         </span>
                       )}
@@ -258,13 +258,13 @@ export default function ProjectsPage() {
                 </div>
 
                 {/* Footer Action */}
-                <div className="px-6 sm:px-7 pb-6 pt-3 border-t border-slate-100 flex items-center justify-between">
-                  <span className="text-xs text-slate-400 font-medium">
+                <div className="px-6 sm:px-7 pb-6 pt-3 border-t border-slate-100 dark:border-dark-border flex items-center justify-between">
+                  <span className="text-xs text-slate-400 dark:text-slate-500 font-medium">
                     Detailed Case Study
                   </span>
                   <Link
                     href={`/projects/${project.slug || project.id}`}
-                    className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-navy-900 group-hover:text-amber-600 transition-colors"
+                    className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-navy-900 dark:text-sky-300 group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors"
                   >
                     <span>View Full Case Study</span>
                     <ArrowRight className="w-4 h-4 transform group-hover:translate-x-1 transition-transform" />
@@ -275,11 +275,11 @@ export default function ProjectsPage() {
           </div>
         ) : (
           /* Empty State */
-          <div className="bg-white rounded-3xl p-12 text-center space-y-4 border border-slate-200">
-            <h3 className="text-lg font-bold text-navy-950">
+          <div className="bg-white dark:bg-dark-card rounded-3xl p-12 text-center space-y-4 border border-slate-200 dark:border-dark-border shadow-xs">
+            <h3 className="text-lg font-bold text-navy-950 dark:text-white">
               No projects found matching &apos;{selectedCategory}&apos;
             </h3>
-            <p className="text-xs sm:text-sm text-slate-500 max-w-md mx-auto">
+            <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 max-w-md mx-auto">
               Try adjusting your category selection or clearing your search keywords to view our complete project dossier.
             </p>
             <Button
@@ -296,16 +296,16 @@ export default function ProjectsPage() {
         )}
 
         {/* Consultation Callout Banner */}
-        <div className="mt-16 bg-navy-950 rounded-3xl p-8 sm:p-12 text-white border border-navy-900 relative overflow-hidden shadow-xl flex flex-col md:flex-row items-center justify-between gap-8">
+        <div className="mt-16 bg-navy-950 dark:bg-dark-surface rounded-3xl p-8 sm:p-12 text-white border border-navy-900 dark:border-dark-border relative overflow-hidden shadow-xl dark:shadow-card-dark flex flex-col md:flex-row items-center justify-between gap-8">
           <div className="space-y-3 text-center md:text-left max-w-xl">
             <div className="inline-flex items-center gap-2 text-amber-400 text-xs font-bold uppercase tracking-wider">
               <Sparkles className="w-4 h-4" />
-              Engineering & DPR Consultancy
+              Engineering &amp; DPR Consultancy
             </div>
             <h3 className="text-2xl sm:text-3xl font-extrabold text-white">
               Planning a commercial development or need a certified property valuation?
             </h3>
-            <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
+            <p className="text-xs sm:text-sm text-slate-300 dark:text-slate-400 leading-relaxed">
               Our registered civil engineers, structural consultants, and licensed valuators are ready to discuss your project scope in Dhangadhi or anywhere in Nepal.
             </p>
           </div>
@@ -319,12 +319,12 @@ export default function ProjectsPage() {
               Discuss Your Project
             </Button>
             <Button
-              href="tel:+9779858421098"
+              href="tel:+9779858425256"
               variant="white"
               size="lg"
               leftIcon={<PhoneCall className="w-4 h-4" />}
             >
-              +977 9858421098
+              +977-9858425256
             </Button>
           </div>
         </div>

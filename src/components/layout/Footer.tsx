@@ -18,7 +18,7 @@ export function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-navy-950 text-white pt-16 pb-28 sm:pb-16 border-t border-navy-800">
+    <footer className="bg-navy-950 dark:bg-dark-surface text-white pt-16 pb-28 sm:pb-16 border-t border-navy-800 dark:border-dark-border transition-colors">
       {/* JSON-LD Local Business & Organization Schema */}
       <script
         type="application/ld+json"
@@ -55,7 +55,7 @@ export function Footer() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Top Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-12 border-b border-navy-800">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-12 border-b border-navy-800 dark:border-dark-border">
           {/* Brand Col */}
           <div className="lg:col-span-2 space-y-4">
             <Link href="/" className="flex items-center gap-3">
@@ -71,13 +71,13 @@ export function Footer() {
                 <span className="font-extrabold text-xl tracking-tight block text-white leading-tight">
                   KALTADE
                 </span>
-                <span className="text-[11px] font-semibold tracking-wider uppercase text-blue-300 block leading-tight">
+                <span className="text-[11px] font-semibold tracking-wider uppercase text-blue-300 dark:text-sky-400 block leading-tight">
                   Engineering Services Pvt. Ltd.
                 </span>
               </div>
             </Link>
 
-            <p className="text-sm text-slate-300 leading-relaxed max-w-sm">
+            <p className="text-sm text-slate-300 dark:text-slate-400 leading-relaxed max-w-sm">
               Engineering Expertise. Property Intelligence. Real Estate Solutions.
               Combining technical rigor with deep property insight to guide banks,
               developers, businesses, and property owners.
@@ -100,94 +100,25 @@ export function Footer() {
                 <Mail className="w-4 h-4 text-sky-400 shrink-0" />
                 <span>kaltadeengineeringservices@gmail.com</span>
               </a>
-              <div className="flex items-center gap-2">
-                <Clock className="w-4 h-4 text-blue-400 shrink-0" />
-                <span>Sunday – Friday: 9:30 AM – 5:30 PM (NPT)</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <ShieldCheck className="w-4 h-4 text-emerald-400 shrink-0" />
-                <span>Registered Engineering &amp; Property Consultancy Company</span>
+              <div className="flex items-center gap-2 text-slate-400">
+                <Clock className="w-4 h-4 text-emerald-400 shrink-0" />
+                <span>Sun – Fri: 9:30 AM – 5:30 PM (NPT)</span>
               </div>
             </div>
           </div>
 
-          {/* Quick Links */}
+          {/* Engineering & Valuation Division */}
           <div>
-            <h4 className="text-xs font-bold uppercase tracking-wider text-blue-300 mb-4">
-              Navigation
+            <h4 className="text-xs font-bold uppercase tracking-wider text-blue-300 dark:text-sky-400 mb-4">
+              Engineering &amp; Valuation
             </h4>
-            <ul className="space-y-2.5 text-sm text-slate-300">
-              <li>
-                <Link href="/about" className="hover:text-white transition-colors">
-                  About Kaltade
-                </Link>
-              </li>
-              <li>
-                <Link href="/services" className="hover:text-white transition-colors">
-                  All Capabilities
-                </Link>
-              </li>
-              <li>
-                <Link href="/valuation" className="hover:text-white transition-colors">
-                  Property Valuation
-                </Link>
-              </li>
-              <li>
-                <Link href="/real-estate" className="hover:text-white transition-colors">
-                  Real Estate Advisory
-                </Link>
-              </li>
-              <li>
-                <Link href="/properties" className="hover:text-white transition-colors">
-                  Properties Marketplace
-                </Link>
-              </li>
-              <li>
-                <Link href="/projects" className="hover:text-white transition-colors">
-                  Projects & Case Studies
-                </Link>
-              </li>
-              <li>
-                <Link href="/insights" className="hover:text-white transition-colors">
-                  Property Insights & Guides
-                </Link>
-              </li>
-              <li>
-                <Link href="/contact" className="hover:text-white transition-colors">
-                  Contact & Location
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* Core Services */}
-          <div>
-            <h4 className="text-xs font-bold uppercase tracking-wider text-blue-300 mb-4">
-              Core Services
-            </h4>
-            <ul className="space-y-2.5 text-sm text-slate-300">
+            <ul className="space-y-2.5 text-sm text-slate-300 dark:text-slate-400">
               <li>
                 <Link
                   href="/services/engineering"
                   className="hover:text-white transition-colors"
                 >
-                  Building Design & Drawings
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/services/engineering"
-                  className="hover:text-white transition-colors"
-                >
-                  Structural Analysis (NBC)
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/services/dpr"
-                  className="hover:text-white transition-colors"
-                >
-                  Detailed Project Reports (DPR)
+                  Engineering Consultancy
                 </Link>
               </li>
               <li>
@@ -195,7 +126,64 @@ export function Footer() {
                   href="/valuation"
                   className="hover:text-white transition-colors"
                 >
-                  Bank Collateral Valuation
+                  Property Valuation (Banks)
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/services/dpr"
+                  className="hover:text-white transition-colors"
+                >
+                  DPR Preparation
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/services/engineering"
+                  className="hover:text-white transition-colors"
+                >
+                  Building Design &amp; Drawings
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/services/engineering"
+                  className="hover:text-white transition-colors"
+                >
+                  NBC Seismic Compliance
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/projects"
+                  className="hover:text-white transition-colors"
+                >
+                  Projects &amp; Case Studies
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* Real Estate Advisory */}
+          <div>
+            <h4 className="text-xs font-bold uppercase tracking-wider text-blue-300 dark:text-sky-400 mb-4">
+              Real Estate Advisory
+            </h4>
+            <ul className="space-y-2.5 text-sm text-slate-300 dark:text-slate-400">
+              <li>
+                <Link
+                  href="/properties"
+                  className="hover:text-white transition-colors"
+                >
+                  Verified Property Marketplace
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/real-estate/investment"
+                  className="hover:text-white transition-colors"
+                >
+                  Investment Consultancy
                 </Link>
               </li>
               <li>
@@ -227,10 +215,10 @@ export function Footer() {
 
           {/* Action & Portals */}
           <div>
-            <h4 className="text-xs font-bold uppercase tracking-wider text-blue-300 mb-4">
+            <h4 className="text-xs font-bold uppercase tracking-wider text-blue-300 dark:text-sky-400 mb-4">
               Client Actions
             </h4>
-            <ul className="space-y-2.5 text-sm text-slate-300">
+            <ul className="space-y-2.5 text-sm text-slate-300 dark:text-slate-400">
               <li>
                 <Link
                   href="/valuation"
@@ -264,7 +252,7 @@ export function Footer() {
                   Request DPR Consultation
                 </Link>
               </li>
-              <li className="pt-3 border-t border-navy-800">
+              <li className="pt-3 border-t border-navy-800 dark:border-dark-border">
                 <Link
                   href="/admin"
                   className="text-xs text-slate-400 hover:text-white flex items-center gap-1"
@@ -277,9 +265,9 @@ export function Footer() {
         </div>
 
         {/* Legal Disclaimer & Compliance */}
-        <div className="py-6 border-b border-navy-800 text-xs text-slate-400 leading-relaxed">
+        <div className="py-6 border-b border-navy-800 dark:border-dark-border text-xs text-slate-400 dark:text-slate-500 leading-relaxed">
           <p className="max-w-5xl">
-            <strong className="text-slate-200">Legal & Advisory Disclaimer:</strong>{' '}
+            <strong className="text-slate-200 dark:text-slate-300">Legal &amp; Advisory Disclaimer:</strong>{' '}
             Kaltade Engineering Services Pvt. Ltd. provides professional technical
             consultancy, structural engineering design, institutional property
             valuation, DPR preparation, and property assessment services. Technical
@@ -291,7 +279,7 @@ export function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="pt-6 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-400 gap-4">
+        <div className="pt-6 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-400 dark:text-slate-500 gap-4">
           <p>
             © {currentYear} Kaltade Engineering Services Pvt. Ltd. All rights reserved.
           </p>

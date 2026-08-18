@@ -20,7 +20,7 @@ export function SectionHeader({
   className,
   children,
 }: SectionHeaderProps) {
-  const isDark = theme === 'dark';
+  const isForcedDark = theme === 'dark';
 
   const alignments = {
     left: 'text-left items-start',
@@ -39,10 +39,10 @@ export function SectionHeader({
       {eyebrow && (
         <span
           className={cn(
-            'inline-flex items-center gap-1.5 px-3 py-1 rounded-md text-xs font-bold tracking-wider uppercase mb-3',
-            isDark
+            'inline-flex items-center gap-1.5 px-3 py-1 rounded-md text-xs font-bold tracking-wider uppercase mb-3 transition-colors',
+            isForcedDark
               ? 'bg-white/10 text-blue-200 border border-white/15'
-              : 'bg-navy-50 text-navy-800 border border-navy-100'
+              : 'bg-navy-50 dark:bg-dark-elevated text-navy-800 dark:text-sky-300 border border-navy-100 dark:border-dark-border'
           )}
         >
           <span className="w-1.5 h-1.5 rounded-full bg-amber-500" />
@@ -51,8 +51,8 @@ export function SectionHeader({
       )}
       <h2
         className={cn(
-          'text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight leading-tight',
-          isDark ? 'text-white' : 'text-navy-950'
+          'text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight leading-tight transition-colors',
+          isForcedDark ? 'text-white' : 'text-navy-950 dark:text-white'
         )}
       >
         {title}
@@ -60,8 +60,8 @@ export function SectionHeader({
       {subtitle && (
         <p
           className={cn(
-            'mt-4 text-base sm:text-lg leading-relaxed font-normal',
-            isDark ? 'text-slate-300' : 'text-slate-600'
+            'mt-4 text-base sm:text-lg leading-relaxed font-normal transition-colors',
+            isForcedDark ? 'text-slate-300' : 'text-slate-600 dark:text-slate-300'
           )}
         >
           {subtitle}

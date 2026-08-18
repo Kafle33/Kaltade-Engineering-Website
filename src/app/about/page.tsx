@@ -32,6 +32,7 @@ import { Button } from '@/ui/Button';
 import { Badge } from '@/ui/Badge';
 import { Modal } from '@/ui/Modal';
 import { saveLead } from '@/lib/storage';
+import { sendInquiryNotification, generateWhatsAppUrl } from '@/lib/email';
 
 export default function AboutPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -225,14 +226,24 @@ export default function AboutPage() {
     e.preventDefault();
     if (!formData.fullName || !formData.phone) return;
 
-    saveLead({
+    const newLead = saveLead({
       type: 'General Contact',
-      fullName: formData.fullName,
-      phone: formData.phone,
-      email: formData.email,
+      fullName: formData.fullName.trim(),
+      phone: formData.phone.trim(),
+      email: formData.email.trim() || undefined,
       serviceInterest: `About Us Inquiry: ${formData.serviceInterest}`,
-      message: formData.message,
+      message: formData.message.trim(),
       urgency: 'Standard',
+    });
+
+    sendInquiryNotification({
+      leadId: newLead.id,
+      type: 'General Contact',
+      fullName: newLead.fullName,
+      phone: newLead.phone,
+      email: newLead.email,
+      serviceInterest: newLead.serviceInterest,
+      message: newLead.message,
     });
 
     setIsSubmitted(true);
@@ -250,9 +261,9 @@ export default function AboutPage() {
   };
 
   return (
-    <div className="pt-28 sm:pt-32 bg-white min-h-screen text-navy-950">
+    <div className="pt-28 sm:pt-32 bg-white dark:bg-dark-bg min-h-screen text-navy-950 dark:text-dark-text transition-colors">
       {/* 1. Hero Header */}
-      <section className="bg-gradient-to-b from-navy-950 via-navy-900 to-navy-950 text-white py-16 sm:py-24 relative overflow-hidden border-b border-navy-800">
+      <section className="bg-gradient-to-b from-navy-950 via-navy-900 to-navy-950 dark:from-dark-bg dark:via-dark-surface dark:to-dark-bg text-white py-16 sm:py-24 relative overflow-hidden border-b border-navy-800 dark:border-dark-border">
         <div className="absolute inset-0 bg-grid-navy opacity-20 pointer-events-none" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <nav className="flex items-center gap-2 text-xs text-blue-200/80 mb-6 font-medium">
@@ -301,7 +312,7 @@ export default function AboutPage() {
       </section>
 
       {/* 2. Section: Who We Are */}
-      <section className="py-20 sm:py-28 bg-white border-b border-slate-200/80">
+      <section className="py-20 sm:py-28 bg-white dark:bg-dark-bg border-b border-slate-200/80 dark:border-dark-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             <div className="lg:col-span-6 space-y-6">
@@ -312,36 +323,36 @@ export default function AboutPage() {
                 className="mb-0"
               />
 
-              <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
+              <p className="text-sm sm:text-base text-slate-600 dark:text-slate-300 leading-relaxed">
                 Headquartered at <strong>LN. Chowk, Dhangadhi, Kailali</strong>, <strong>Kaltade Engineering Services Pvt. Ltd.</strong> is a premier consultancy established to bridge the gap between pure civil engineering consultancy and on-the-ground real estate practice in Nepal.
               </p>
 
-              <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
+              <p className="text-sm sm:text-base text-slate-600 dark:text-slate-300 leading-relaxed">
                 Led by Managing Director <strong>Er. Laxit Pathak</strong>, we combine deep technical engineering principles with practical knowledge of land parcels, building construction, cadastral survey mapping, and regional market economics. Our company provides clients with reliable, objective, and professionally prepared solutions across engineering design, bank-grade property valuation, DPR preparation, and real-estate advisory.
               </p>
 
               <div className="pt-4 grid grid-cols-2 gap-4">
-                <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200">
-                  <span className="text-xl sm:text-2xl font-black text-navy-950 font-mono">LN. Chowk</span>
-                  <span className="block text-xs font-semibold text-slate-500 uppercase mt-0.5">
+                <div className="p-4 rounded-2xl bg-slate-50 dark:bg-dark-card border border-slate-200 dark:border-dark-border">
+                  <span className="text-xl sm:text-2xl font-black text-navy-950 dark:text-white font-mono">LN. Chowk</span>
+                  <span className="block text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase mt-0.5">
                     Dhangadhi, Kailali HQ
                   </span>
                 </div>
-                <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200">
-                  <span className="text-2xl font-black text-amber-600 font-mono">6 Core</span>
-                  <span className="block text-xs font-semibold text-slate-500 uppercase mt-0.5">
+                <div className="p-4 rounded-2xl bg-slate-50 dark:bg-dark-card border border-slate-200 dark:border-dark-border">
+                  <span className="text-2xl font-black text-amber-600 dark:text-amber-400 font-mono">6 Core</span>
+                  <span className="block text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase mt-0.5">
                     Practice Disciplines
                   </span>
                 </div>
               </div>
             </div>
 
-            <div className="lg:col-span-6 bg-slate-50 p-8 sm:p-10 rounded-3xl border border-slate-200 space-y-6 shadow-sm">
-              <h3 className="text-xl font-bold text-navy-950 border-b border-slate-200 pb-3">
+            <div className="lg:col-span-6 bg-slate-50 dark:bg-dark-card p-8 sm:p-10 rounded-3xl border border-slate-200 dark:border-dark-border space-y-6 shadow-xs dark:shadow-card-dark">
+              <h3 className="text-xl font-bold text-navy-950 dark:text-white border-b border-slate-200 dark:border-dark-border pb-3">
                 Key Professional Competencies
               </h3>
 
-              <div className="space-y-3 text-xs sm:text-sm text-slate-700">
+              <div className="space-y-3 text-xs sm:text-sm text-slate-700 dark:text-slate-300">
                 {[
                   'Engineering consultancy & building design drawings (NBC compliant)',
                   'Institutional property valuation for Banks, BFIs & private clients',
@@ -352,7 +363,7 @@ export default function AboutPage() {
                   'Physical on-site surveying and cadastral trace (Naksha) auditing',
                 ].map((item) => (
                   <div key={item} className="flex items-start gap-3">
-                    <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                    <Check className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5" />
                     <span>{item}</span>
                   </div>
                 ))}
@@ -369,7 +380,7 @@ export default function AboutPage() {
       </section>
 
       {/* 3. Section: What We Do (3 Divisions) */}
-      <section className="py-20 sm:py-28 bg-slate-50 border-b border-slate-200/80">
+      <section className="py-20 sm:py-28 bg-slate-50 dark:bg-dark-bg border-b border-slate-200/80 dark:border-dark-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeader
             eyebrow="THREE PILLARS OF EXCELLENCE"
@@ -384,32 +395,32 @@ export default function AboutPage() {
               return (
                 <div
                   key={div.title}
-                  className="p-8 rounded-3xl bg-white border border-slate-200 shadow-sm hover:shadow-xl hover:border-navy-900/30 transition-all flex flex-col justify-between"
+                  className="p-8 rounded-3xl bg-white dark:bg-dark-card border border-slate-200 dark:border-dark-border shadow-xs dark:shadow-card-dark hover:shadow-xl dark:hover:shadow-card-dark-hover hover:border-navy-900/30 dark:hover:border-sky-500/30 transition-all flex flex-col justify-between"
                 >
                   <div>
-                    <div className="p-3.5 w-fit rounded-2xl bg-navy-50 text-navy-900 mb-6 border border-navy-100">
-                      <Icon className="w-6 h-6 text-amber-600" />
+                    <div className="p-3.5 w-fit rounded-2xl bg-navy-50 dark:bg-dark-elevated text-navy-900 dark:text-sky-300 mb-6 border border-navy-100 dark:border-dark-border">
+                      <Icon className="w-6 h-6 text-amber-600 dark:text-amber-400" />
                     </div>
 
-                    <span className="text-xs font-bold uppercase tracking-wider text-amber-700 block mb-1">
+                    <span className="text-xs font-bold uppercase tracking-wider text-amber-700 dark:text-amber-400 block mb-1">
                       {div.tagline}
                     </span>
 
-                    <h3 className="text-xl font-bold text-navy-950 mb-3">
+                    <h3 className="text-xl font-bold text-navy-950 dark:text-white mb-3">
                       {div.title}
                     </h3>
 
-                    <p className="text-xs sm:text-sm text-slate-600 leading-relaxed mb-6">
+                    <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed mb-6">
                       {div.desc}
                     </p>
 
-                    <div className="space-y-2.5 pt-4 border-t border-slate-100">
-                      <span className="text-[11px] font-bold uppercase tracking-wider text-slate-500 block mb-1">
+                    <div className="space-y-2.5 pt-4 border-t border-slate-100 dark:border-dark-border">
+                      <span className="text-[11px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 block mb-1">
                         Core Capabilities:
                       </span>
                       {div.capabilities.map((cap) => (
-                        <div key={cap} className="flex items-center gap-2 text-xs text-slate-700 font-medium">
-                          <Check className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+                        <div key={cap} className="flex items-center gap-2 text-xs text-slate-700 dark:text-slate-300 font-medium">
+                          <Check className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400 shrink-0" />
                           <span>{cap}</span>
                         </div>
                       ))}
@@ -429,7 +440,7 @@ export default function AboutPage() {
       </section>
 
       {/* 4. Section: Our Approach */}
-      <section className="py-20 sm:py-28 bg-white border-b border-slate-200/80">
+      <section className="py-20 sm:py-28 bg-white dark:bg-dark-bg border-b border-slate-200/80 dark:border-dark-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeader
             eyebrow="OUR METHODOLOGY"
@@ -444,23 +455,23 @@ export default function AboutPage() {
               return (
                 <div
                   key={app.title}
-                  className="p-6 rounded-2xl bg-slate-50 border border-slate-200 hover:border-navy-900/40 hover:shadow-lg transition-all flex flex-col justify-between"
+                  className="p-6 rounded-2xl bg-slate-50 dark:bg-dark-card border border-slate-200 dark:border-dark-border hover:border-navy-900/40 dark:hover:border-sky-500/40 hover:shadow-lg dark:hover:shadow-card-dark transition-all flex flex-col justify-between"
                 >
                   <div>
                     <div className="flex items-center justify-between mb-4">
-                      <span className="text-2xl font-black font-mono text-navy-300">
+                      <span className="text-2xl font-black font-mono text-navy-300 dark:text-navy-700">
                         0{index + 1}
                       </span>
-                      <div className="p-2.5 rounded-xl bg-white border border-slate-200 text-navy-900">
-                        <Icon className="w-5 h-5 text-amber-600" />
+                      <div className="p-2.5 rounded-xl bg-white dark:bg-dark-elevated border border-slate-200 dark:border-dark-border text-navy-900 dark:text-sky-300">
+                        <Icon className="w-5 h-5 text-amber-600 dark:text-amber-400" />
                       </div>
                     </div>
 
-                    <h3 className="text-base font-bold text-navy-950 mb-2 leading-snug">
+                    <h3 className="text-base font-bold text-navy-950 dark:text-white mb-2 leading-snug">
                       {app.title}
                     </h3>
 
-                    <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                    <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
                       {app.desc}
                     </p>
                   </div>
@@ -472,7 +483,7 @@ export default function AboutPage() {
       </section>
 
       {/* 5. Section: Vision & Mission */}
-      <section className="py-20 sm:py-28 bg-navy-950 text-white relative overflow-hidden">
+      <section className="py-20 sm:py-28 bg-navy-950 dark:bg-dark-bg text-white relative overflow-hidden transition-colors">
         <div className="absolute inset-0 bg-grid-navy opacity-20 pointer-events-none" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <SectionHeader
@@ -485,7 +496,7 @@ export default function AboutPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12">
             {/* Vision Card */}
-            <div className="p-8 sm:p-10 rounded-3xl bg-white/5 border border-white/10 backdrop-blur-sm space-y-4 hover:border-white/20 transition-all">
+            <div className="p-8 sm:p-10 rounded-3xl bg-white/5 dark:bg-dark-surface border border-white/10 dark:border-dark-border backdrop-blur-sm space-y-4 hover:border-white/20 transition-all">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-amber-500/20 text-amber-400 border border-amber-500/30 text-xs font-bold uppercase tracking-wider">
                 <Eye className="w-3.5 h-3.5" />
                 <span>Our Vision</span>
@@ -495,13 +506,13 @@ export default function AboutPage() {
                 To become a trusted and professionally recognized engineering, property valuation and real-estate consultancy platform in Nepal.
               </h3>
 
-              <p className="text-xs sm:text-sm text-slate-300 leading-relaxed pt-2">
+              <p className="text-xs sm:text-sm text-slate-300 dark:text-slate-400 leading-relaxed pt-2">
                 We aspire to set the benchmark for technical integrity, modern engineering methodologies, and transparent property advisory throughout Sudurpashchim Province and nationwide.
               </p>
             </div>
 
             {/* Mission Card */}
-            <div className="p-8 sm:p-10 rounded-3xl bg-white/5 border border-white/10 backdrop-blur-sm space-y-4 hover:border-white/20 transition-all">
+            <div className="p-8 sm:p-10 rounded-3xl bg-white/5 dark:bg-dark-surface border border-white/10 dark:border-dark-border backdrop-blur-sm space-y-4 hover:border-white/20 transition-all">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 text-xs font-bold uppercase tracking-wider">
                 <Target className="w-3.5 h-3.5" />
                 <span>Our Mission</span>
@@ -511,7 +522,7 @@ export default function AboutPage() {
                 To provide accurate, transparent and practical engineering and property-related solutions by combining professional technical expertise with a strong understanding of land and real estate.
               </h3>
 
-              <p className="text-xs sm:text-sm text-slate-300 leading-relaxed pt-2">
+              <p className="text-xs sm:text-sm text-slate-300 dark:text-slate-400 leading-relaxed pt-2">
                 We dedicate ourselves to protecting our clients&apos; assets, empowering investors with uncompromised data, and delivering bankable engineering reports on time, every time.
               </p>
             </div>
@@ -520,7 +531,7 @@ export default function AboutPage() {
       </section>
 
       {/* 6. Section: Core Values (7 Elegant Cards) */}
-      <section className="py-20 sm:py-28 bg-white border-b border-slate-200/80">
+      <section className="py-20 sm:py-28 bg-white dark:bg-dark-bg border-b border-slate-200/80 dark:border-dark-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeader
             eyebrow="OUR PRINCIPLES"
@@ -535,25 +546,25 @@ export default function AboutPage() {
               return (
                 <div
                   key={val.title}
-                  className={`p-6 rounded-2xl bg-slate-50 border border-slate-200 hover:border-navy-900/30 hover:shadow-lg transition-all flex flex-col justify-between ${
+                  className={`p-6 rounded-2xl bg-slate-50 dark:bg-dark-card border border-slate-200 dark:border-dark-border hover:border-navy-900/30 dark:hover:border-sky-500/30 hover:shadow-lg dark:hover:shadow-card-dark transition-all flex flex-col justify-between ${
                     idx === 6 ? 'md:col-span-2 lg:col-span-3 xl:col-span-1' : ''
                   }`}
                 >
                   <div>
                     <div className="flex items-center justify-between mb-4">
-                      <div className="p-2.5 rounded-xl bg-white border border-slate-200 text-navy-900 shadow-sm">
-                        <Icon className="w-5 h-5 text-amber-600" />
+                      <div className="p-2.5 rounded-xl bg-white dark:bg-dark-elevated border border-slate-200 dark:border-dark-border text-navy-900 dark:text-sky-300 shadow-xs">
+                        <Icon className="w-5 h-5 text-amber-600 dark:text-amber-400" />
                       </div>
-                      <span className="text-xs font-mono font-bold text-slate-400">
+                      <span className="text-xs font-mono font-bold text-slate-400 dark:text-slate-500">
                         0{idx + 1}
                       </span>
                     </div>
 
-                    <h3 className="text-base font-bold text-navy-950 mb-2">
+                    <h3 className="text-base font-bold text-navy-950 dark:text-white mb-2">
                       {val.title}
                     </h3>
 
-                    <p className="text-xs text-slate-600 leading-relaxed">
+                    <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
                       {val.desc}
                     </p>
                   </div>
@@ -565,7 +576,7 @@ export default function AboutPage() {
       </section>
 
       {/* 7. Section: Team Structure */}
-      <section className="py-20 sm:py-28 bg-slate-50 border-b border-slate-200/80">
+      <section className="py-20 sm:py-28 bg-slate-50 dark:bg-dark-bg border-b border-slate-200/80 dark:border-dark-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeader
             eyebrow="LEADERSHIP & TALENT"
@@ -575,45 +586,45 @@ export default function AboutPage() {
           />
 
           {/* Managing Director Leadership Spotlight Card */}
-          <div className="max-w-4xl mx-auto mb-12 bg-white rounded-3xl p-8 sm:p-10 border border-slate-200 shadow-lg relative overflow-hidden">
+          <div className="max-w-4xl mx-auto mb-12 bg-white dark:bg-dark-card rounded-3xl p-8 sm:p-10 border border-slate-200 dark:border-dark-border shadow-lg dark:shadow-card-dark relative overflow-hidden">
             <div className="absolute top-0 right-0 w-64 h-64 bg-amber-500/10 rounded-full blur-3xl -mr-20 -mt-20 pointer-events-none" />
             <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
               <div className="space-y-2">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-navy-950 text-amber-400 text-xs font-bold uppercase tracking-wider">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-navy-950 dark:bg-dark-elevated text-amber-400 text-xs font-bold uppercase tracking-wider">
                   <Sparkles className="w-3.5 h-3.5" />
                   <span>Executive Leadership</span>
                 </div>
-                <h3 className="text-2xl sm:text-3xl font-extrabold text-navy-950">
+                <h3 className="text-2xl sm:text-3xl font-extrabold text-navy-950 dark:text-white">
                   Er. Laxit Pathak
                 </h3>
-                <p className="text-sm font-bold text-amber-700 tracking-wide uppercase">
+                <p className="text-sm font-bold text-amber-700 dark:text-amber-400 tracking-wide uppercase">
                   Managing Director
                 </p>
-                <p className="text-xs sm:text-sm text-slate-600 max-w-xl leading-relaxed pt-1">
+                <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 max-w-xl leading-relaxed pt-1">
                   Leading Kaltade Engineering Services Pvt. Ltd. with a dedication to engineering precision, certified property valuation standards, and transparent client advisory across Sudurpashchim Province and beyond.
                 </p>
               </div>
 
-              <div className="shrink-0 p-5 rounded-2xl bg-slate-50 border border-slate-200 space-y-2 text-xs text-slate-700 min-w-[240px]">
-                <div className="flex items-center gap-2 text-navy-950 font-bold">
-                  <MapPin className="w-4 h-4 text-amber-600 shrink-0" />
+              <div className="shrink-0 p-5 rounded-2xl bg-slate-50 dark:bg-dark-surface border border-slate-200 dark:border-dark-border space-y-2 text-xs text-slate-700 dark:text-slate-300 min-w-[240px]">
+                <div className="flex items-center gap-2 text-navy-950 dark:text-white font-bold">
+                  <MapPin className="w-4 h-4 text-amber-600 dark:text-amber-400 shrink-0" />
                   <span>LN. Chowk, Dhangadhi</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <Phone className="w-4 h-4 text-blue-600 shrink-0" />
-                  <a href="tel:+9779858425256" className="hover:text-navy-950 font-semibold">
+                  <Phone className="w-4 h-4 text-blue-600 dark:text-sky-400 shrink-0" />
+                  <a href="tel:+9779858425256" className="hover:text-navy-950 dark:hover:text-white font-semibold">
                     +977-9858425256
                   </a>
                 </div>
                 <div className="flex items-center gap-2">
                   <Phone className="w-4 h-4 text-slate-500 shrink-0" />
-                  <a href="tel:091521256" className="hover:text-navy-950">
+                  <a href="tel:091521256" className="hover:text-navy-950 dark:hover:text-white">
                     091-521256
                   </a>
                 </div>
-                <div className="flex items-center gap-2 pt-1 border-t border-slate-200">
-                  <Mail className="w-4 h-4 text-emerald-600 shrink-0" />
-                  <a href="mailto:kaltadeengineeringservices@gmail.com" className="hover:text-navy-950 break-all text-[11px]">
+                <div className="flex items-center gap-2 pt-1 border-t border-slate-200 dark:border-dark-border">
+                  <Mail className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0" />
+                  <a href="mailto:kaltadeengineeringservices@gmail.com" className="hover:text-navy-950 dark:hover:text-white break-all text-[11px]">
                     kaltadeengineeringservices@gmail.com
                   </a>
                 </div>
@@ -625,45 +636,45 @@ export default function AboutPage() {
             {teamStructure.map((member) => (
               <div
                 key={member.role}
-                className="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm hover:shadow-md hover:border-navy-900/30 transition-all flex flex-col justify-between space-y-4"
+                className="p-6 rounded-2xl bg-white dark:bg-dark-card border border-slate-200 dark:border-dark-border shadow-xs dark:shadow-card-dark hover:shadow-md hover:border-navy-900/30 dark:hover:border-sky-500/30 transition-all flex flex-col justify-between space-y-4"
               >
                 <div>
                   <div className="flex items-center justify-between mb-3">
-                    <span className="text-[10px] font-bold uppercase tracking-wider text-amber-700 bg-amber-50 px-2 py-0.5 rounded border border-amber-200">
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-amber-700 dark:text-amber-400 bg-amber-50 dark:bg-amber-950/60 px-2 py-0.5 rounded border border-amber-200 dark:border-amber-800/60">
                       {member.department}
                     </span>
                     <div className="w-2 h-2 rounded-full bg-emerald-500" />
                   </div>
 
-                  <h3 className="text-base font-bold text-navy-950 leading-snug">
+                  <h3 className="text-base font-bold text-navy-950 dark:text-white leading-snug">
                     {member.role}
                   </h3>
 
-                  <div className="text-[11px] font-semibold text-navy-700 mt-1 mb-3">
+                  <div className="text-[11px] font-semibold text-navy-700 dark:text-sky-400 mt-1 mb-3">
                     {member.qualifications}
                   </div>
 
-                  <p className="text-xs text-slate-600 leading-relaxed">
+                  <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
                     {member.desc}
                   </p>
                 </div>
 
-                <div className="pt-3 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-500 font-medium">
+                <div className="pt-3 border-t border-slate-100 dark:border-dark-border flex items-center justify-between text-[11px] text-slate-500 dark:text-slate-400 font-medium">
                   <span>Accredited Practice</span>
-                  <span className="text-navy-900 font-semibold">Kaltade Team</span>
+                  <span className="text-navy-900 dark:text-white font-semibold">Kaltade Team</span>
                 </div>
               </div>
             ))}
           </div>
 
-          <div className="mt-8 p-4 rounded-xl bg-navy-50 border border-navy-100 text-center text-xs text-navy-800 max-w-2xl mx-auto">
+          <div className="mt-8 p-4 rounded-xl bg-navy-50 dark:bg-dark-card border border-navy-100 dark:border-dark-border text-center text-xs text-navy-800 dark:text-slate-300 max-w-2xl mx-auto">
             Our multi-disciplinary team operates in strict compliance with the Nepal Engineering Council (NEC), municipal building bylaws, and institutional banking valuation guidelines.
           </div>
         </div>
       </section>
 
       {/* 8. Section: Institutional Experience */}
-      <section className="py-20 sm:py-28 bg-white border-b border-slate-200/80">
+      <section className="py-20 sm:py-28 bg-white dark:bg-dark-bg border-b border-slate-200/80 dark:border-dark-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeader
             eyebrow="TRUSTED COLLABORATION"
@@ -678,16 +689,16 @@ export default function AboutPage() {
               return (
                 <div
                   key={sector.title}
-                  className="p-6 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col justify-between"
+                  className="p-6 rounded-2xl bg-slate-50 dark:bg-dark-card border border-slate-200 dark:border-dark-border flex flex-col justify-between hover:shadow-md dark:hover:shadow-card-dark transition-all"
                 >
                   <div>
-                    <div className="p-3 w-fit rounded-xl bg-white border border-slate-200 text-navy-900 shadow-sm mb-4">
-                      <Icon className="w-5 h-5 text-amber-600" />
+                    <div className="p-3 w-fit rounded-xl bg-white dark:bg-dark-elevated border border-slate-200 dark:border-dark-border text-navy-900 dark:text-sky-300 shadow-xs mb-4">
+                      <Icon className="w-5 h-5 text-amber-600 dark:text-amber-400" />
                     </div>
-                    <h4 className="text-base font-bold text-navy-950 mb-2 leading-snug">
+                    <h4 className="text-base font-bold text-navy-950 dark:text-white mb-2 leading-snug">
                       {sector.title}
                     </h4>
-                    <p className="text-xs text-slate-600 leading-relaxed">
+                    <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
                       {sector.desc}
                     </p>
                   </div>
@@ -696,17 +707,17 @@ export default function AboutPage() {
             })}
           </div>
 
-          <div className="mt-12 p-6 rounded-2xl bg-slate-100 border border-slate-200 text-center text-xs text-slate-600 max-w-3xl mx-auto">
-            <span className="font-semibold text-navy-950">Confidentiality Note:</span> In accordance with banking regulations and client privacy covenants, Kaltade does not publish individual borrower identities, confidential loan amounts, or proprietary valuation figures publicly.
+          <div className="mt-12 p-6 rounded-2xl bg-slate-100 dark:bg-dark-card border border-slate-200 dark:border-dark-border text-center text-xs text-slate-600 dark:text-slate-300 max-w-3xl mx-auto">
+            <span className="font-semibold text-navy-950 dark:text-white">Confidentiality Note:</span> In accordance with banking regulations and client privacy covenants, Kaltade does not publish individual borrower identities, confidential loan amounts, or proprietary valuation figures publicly.
           </div>
         </div>
       </section>
 
       {/* 9. Final Call to Action */}
-      <section className="py-20 sm:py-28 bg-navy-950 text-white relative overflow-hidden">
+      <section className="py-20 sm:py-28 bg-navy-950 dark:bg-dark-bg text-white relative overflow-hidden transition-colors">
         <div className="absolute inset-0 bg-grid-navy opacity-20 pointer-events-none" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center space-y-6">
-          <Badge variant="navy" size="md" className="bg-white/10 text-blue-200 border-white/20">
+          <Badge variant="navy" size="md" className="bg-white/10 dark:bg-dark-card text-blue-200 dark:text-sky-300 border-white/20 dark:border-dark-border">
             CONNECT WITH OUR TEAM
           </Badge>
 
@@ -714,7 +725,7 @@ export default function AboutPage() {
             Let&apos;s Discuss Your Engineering & Property Requirements.
           </h2>
 
-          <p className="text-sm sm:text-base text-slate-300 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-sm sm:text-base text-slate-300 dark:text-slate-400 max-w-2xl mx-auto leading-relaxed">
             Whether you need a property valuation, engineering building design, DPR study, or strategic real estate advice in Dhangadhi or across Nepal, Kaltade is ready to assist.
           </p>
 
@@ -739,7 +750,7 @@ export default function AboutPage() {
               href="/contact"
               variant="outline"
               size="lg"
-              className="bg-white/10 text-white border-white/20 hover:bg-white/20"
+              className="bg-white/10 dark:bg-dark-card text-white border-white/20 dark:border-dark-border hover:bg-white/20"
             >
               Contact Office
             </Button>
@@ -757,13 +768,13 @@ export default function AboutPage() {
       >
         {isSubmitted ? (
           <div className="py-8 text-center space-y-3">
-            <div className="w-14 h-14 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto">
+            <div className="w-14 h-14 rounded-full bg-emerald-100 dark:bg-emerald-950/80 text-emerald-600 dark:text-emerald-400 flex items-center justify-center mx-auto">
               <Check className="w-8 h-8" />
             </div>
-            <h4 className="text-xl font-bold text-navy-950">
+            <h4 className="text-xl font-bold text-navy-950 dark:text-white">
               Message Received!
             </h4>
-            <p className="text-xs sm:text-sm text-slate-600 max-w-md mx-auto">
+            <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 max-w-md mx-auto">
               Thank you for contacting Kaltade Engineering Services. A member of our technical advisory team will get in touch with you shortly.
             </p>
           </div>
@@ -771,7 +782,7 @@ export default function AboutPage() {
           <form onSubmit={handleSubmit} className="space-y-4 text-xs sm:text-sm">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block font-semibold text-slate-700 mb-1">
+                <label className="block font-semibold text-slate-700 dark:text-slate-300 mb-1">
                   Full Name *
                 </label>
                 <input
@@ -782,12 +793,12 @@ export default function AboutPage() {
                     setFormData({ ...formData, fullName: e.target.value })
                   }
                   placeholder="e.g. Shyam Sundar Chaudhary"
-                  className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-navy-900 focus:outline-none"
+                  className="w-full px-3 py-2 border border-slate-300 dark:border-dark-border rounded-lg focus:ring-2 focus:ring-navy-900 dark:focus:ring-sky-400 focus:outline-none bg-white dark:bg-dark-card text-slate-900 dark:text-white"
                 />
               </div>
 
               <div>
-                <label className="block font-semibold text-slate-700 mb-1">
+                <label className="block font-semibold text-slate-700 dark:text-slate-300 mb-1">
                   Phone Number (Mobile / WhatsApp) *
                 </label>
                 <input
@@ -798,14 +809,14 @@ export default function AboutPage() {
                     setFormData({ ...formData, phone: e.target.value })
                   }
                   placeholder="e.g. +977 98584XXXXX"
-                  className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-navy-900 focus:outline-none"
+                  className="w-full px-3 py-2 border border-slate-300 dark:border-dark-border rounded-lg focus:ring-2 focus:ring-navy-900 dark:focus:ring-sky-400 focus:outline-none bg-white dark:bg-dark-card text-slate-900 dark:text-white"
                 />
               </div>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block font-semibold text-slate-700 mb-1">
+                <label className="block font-semibold text-slate-700 dark:text-slate-300 mb-1">
                   Email Address
                 </label>
                 <input
@@ -815,12 +826,12 @@ export default function AboutPage() {
                     setFormData({ ...formData, email: e.target.value })
                   }
                   placeholder="e.g. shyam@example.com"
-                  className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-navy-900 focus:outline-none"
+                  className="w-full px-3 py-2 border border-slate-300 dark:border-dark-border rounded-lg focus:ring-2 focus:ring-navy-900 dark:focus:ring-sky-400 focus:outline-none bg-white dark:bg-dark-card text-slate-900 dark:text-white"
                 />
               </div>
 
               <div>
-                <label className="block font-semibold text-slate-700 mb-1">
+                <label className="block font-semibold text-slate-700 dark:text-slate-300 mb-1">
                   Service Interest
                 </label>
                 <select
@@ -828,7 +839,7 @@ export default function AboutPage() {
                   onChange={(e) =>
                     setFormData({ ...formData, serviceInterest: e.target.value })
                   }
-                  className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-navy-900 focus:outline-none bg-white"
+                  className="w-full px-3 py-2 border border-slate-300 dark:border-dark-border rounded-lg focus:ring-2 focus:ring-navy-900 dark:focus:ring-sky-400 focus:outline-none bg-white dark:bg-dark-card text-slate-900 dark:text-white"
                 >
                   <option value="Property Valuation">Property Valuation</option>
                   <option value="Engineering Consultancy & Building Design">Engineering Consultancy & Building Design</option>
@@ -843,7 +854,7 @@ export default function AboutPage() {
             </div>
 
             <div>
-              <label className="block font-semibold text-slate-700 mb-1">
+              <label className="block font-semibold text-slate-700 dark:text-slate-300 mb-1">
                 How Can We Help You?
               </label>
               <textarea
@@ -853,7 +864,7 @@ export default function AboutPage() {
                   setFormData({ ...formData, message: e.target.value })
                 }
                 placeholder="Share project details, location, timeline, or specific questions you'd like to discuss..."
-                className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-navy-900 focus:outline-none"
+                className="w-full px-3 py-2 border border-slate-300 dark:border-dark-border rounded-lg focus:ring-2 focus:ring-navy-900 dark:focus:ring-sky-400 focus:outline-none bg-white dark:bg-dark-card text-slate-900 dark:text-white"
               />
             </div>
 

@@ -16,20 +16,20 @@ import { Button } from '@/ui/Button';
 
 export function HeroSection() {
   return (
-    <section className="relative min-h-[90vh] lg:min-h-screen bg-navy-950 text-white flex items-center pt-24 pb-16 lg:py-28 overflow-hidden">
+    <section className="relative min-h-[90vh] lg:min-h-screen bg-navy-950 dark:bg-dark-bg text-white flex items-center pt-24 pb-16 lg:py-28 overflow-hidden transition-colors">
       {/* Background Architectural Blueprint Grid & Precision Linework */}
       <div className="absolute inset-0 bg-grid-navy opacity-30 pointer-events-none" />
       
       {/* Subtle radial ambient glow */}
-      <div className="absolute -top-40 -right-40 w-96 h-96 bg-blue-600/15 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-navy-700/30 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute -top-40 -right-40 w-96 h-96 bg-blue-600/15 dark:bg-sky-500/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-navy-700/30 dark:bg-navy-900/40 rounded-full blur-3xl pointer-events-none" />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
           {/* Left Column: Core Positioning & Actions (Col 7) */}
           <div className="lg:col-span-7 space-y-6 sm:space-y-8">
             {/* Eyebrow */}
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 border border-white/15 text-blue-200 text-xs font-bold tracking-wider uppercase backdrop-blur-md">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 dark:bg-dark-card/60 border border-white/15 dark:border-dark-border text-blue-200 dark:text-sky-300 text-xs font-bold tracking-wider uppercase backdrop-blur-md">
               <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
               <span>ENGINEERING • PROPERTY VALUATION • REAL ESTATE</span>
             </div>
@@ -37,7 +37,7 @@ export function HeroSection() {
             {/* Main Headline */}
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-[1.12] text-balance">
               Engineering Expertise.{' '}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-200 via-sky-100 to-blue-300">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-200 via-sky-100 to-blue-300 dark:from-sky-300 dark:via-blue-200 dark:to-indigo-300">
                 Property Intelligence.
               </span>{' '}
               Real Estate Solutions.
@@ -45,7 +45,7 @@ export function HeroSection() {
 
             {/* Supporting Copy */}
             <p className="text-base sm:text-lg text-slate-300 leading-relaxed max-w-2xl font-normal">
-              Kaltade Engineering Services Pvt. Ltd. integrates civil & structural
+              Kaltade Engineering Services Pvt. Ltd. integrates civil &amp; structural
               engineering, institutional property valuation, Detailed Project Reports
               (DPR), and professional property advisory into one trusted corporate
               consultancy based in Dhangadhi, Kailali, Nepal.
@@ -73,7 +73,7 @@ export function HeroSection() {
                 href="/properties"
                 variant="outline"
                 size="lg"
-                className="bg-white/10 text-white border-white/20 hover:bg-white/20 hover:border-white/30"
+                className="bg-white/10 text-white border-white/20 hover:bg-white/20 hover:border-white/30 dark:bg-dark-card/60 dark:border-dark-border"
               >
                 Find a Property
               </Button>
@@ -85,7 +85,7 @@ export function HeroSection() {
                 <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
                 <div>
                   <strong className="block text-white font-semibold">Institutional Grade</strong>
-                  <span>Valuations accepted by major Banks & BFIs</span>
+                  <span>Valuations accepted by major Banks &amp; BFIs</span>
                 </div>
               </div>
               <div className="flex items-start gap-2.5">
@@ -109,7 +109,7 @@ export function HeroSection() {
           <div className="lg:col-span-5 relative">
             <div className="relative mx-auto max-w-md lg:max-w-none">
               {/* Main Visual Card */}
-              <div className="relative rounded-2xl overflow-hidden border border-white/15 shadow-2xl bg-navy-900 aspect-[4/3] sm:aspect-[16/11]">
+              <div className="relative rounded-2xl overflow-hidden border border-white/15 dark:border-dark-border shadow-2xl bg-navy-900 dark:bg-dark-card aspect-[4/3] sm:aspect-[16/11]">
                 <Image
                   src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=80"
                   alt="Modern Architectural Engineering & Property Valuation"
@@ -119,7 +119,7 @@ export function HeroSection() {
                 />
                 
                 {/* Architectural Drafting Linework Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-navy-950 via-navy-950/40 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-navy-950 via-navy-950/40 to-transparent dark:from-dark-bg dark:via-dark-bg/40" />
                 
                 {/* Overlay Metadata Badges */}
                 <div className="absolute top-4 left-4 right-4 flex items-center justify-between pointer-events-none">
@@ -132,7 +132,7 @@ export function HeroSection() {
                 </div>
 
                 {/* Bottom Technical Caption Card */}
-                <div className="absolute bottom-4 left-4 right-4 p-3.5 rounded-xl bg-navy-950/90 backdrop-blur-md border border-white/15 text-xs">
+                <div className="absolute bottom-4 left-4 right-4 p-3.5 rounded-xl bg-navy-950/90 dark:bg-dark-surface/90 backdrop-blur-md border border-white/15 dark:border-dark-border text-xs">
                   <div className="flex items-center justify-between mb-1.5">
                     <span className="font-bold text-white text-sm">
                       Dhangadhi • Kailali • Sudurpashchim
@@ -141,36 +141,36 @@ export function HeroSection() {
                       REG: DHN-NP
                     </span>
                   </div>
-                  <p className="text-slate-300 text-[11px] leading-snug">
+                  <p className="text-slate-300 dark:text-slate-400 text-[11px] leading-snug">
                     Providing multi-disciplinary technical assessments, bank-format property valuations, and engineering designs across Nepal.
                   </p>
                 </div>
               </div>
 
-              {/* Floating Floating Stat Cards for Architectural Rigor */}
-              <div className="absolute -bottom-6 -left-6 hidden sm:flex items-center gap-3 p-3.5 rounded-xl bg-white text-navy-950 shadow-xl border border-slate-200">
-                <div className="p-2.5 rounded-lg bg-navy-50 text-navy-900">
-                  <Scale className="w-5 h-5 text-navy-900" />
+              {/* Floating Stat Cards */}
+              <div className="absolute -bottom-6 -left-6 hidden sm:flex items-center gap-3 p-3.5 rounded-xl bg-white dark:bg-dark-surface text-navy-950 dark:text-white shadow-xl dark:shadow-card-dark border border-slate-200 dark:border-dark-border">
+                <div className="p-2.5 rounded-lg bg-navy-50 dark:bg-dark-elevated text-navy-900 dark:text-sky-300">
+                  <Scale className="w-5 h-5" />
                 </div>
                 <div>
-                  <div className="text-xs font-bold uppercase tracking-wider text-slate-500">
+                  <div className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
                     Standardized Practice
                   </div>
-                  <div className="text-sm font-extrabold text-navy-950">
+                  <div className="text-sm font-extrabold text-navy-950 dark:text-white">
                     Certified Valuation
                   </div>
                 </div>
               </div>
 
-              <div className="absolute -top-6 -right-6 hidden sm:flex items-center gap-3 p-3.5 rounded-xl bg-white text-navy-950 shadow-xl border border-slate-200">
-                <div className="p-2.5 rounded-lg bg-blue-50 text-blue-900">
-                  <Compass className="w-5 h-5 text-blue-900" />
+              <div className="absolute -top-6 -right-6 hidden sm:flex items-center gap-3 p-3.5 rounded-xl bg-white dark:bg-dark-surface text-navy-950 dark:text-white shadow-xl dark:shadow-card-dark border border-slate-200 dark:border-dark-border">
+                <div className="p-2.5 rounded-lg bg-blue-50 dark:bg-dark-elevated text-blue-900 dark:text-sky-300">
+                  <Compass className="w-5 h-5" />
                 </div>
                 <div>
-                  <div className="text-xs font-bold uppercase tracking-wider text-slate-500">
+                  <div className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
                     NBC Code Compliant
                   </div>
-                  <div className="text-sm font-extrabold text-navy-950">
+                  <div className="text-sm font-extrabold text-navy-950 dark:text-white">
                     Structural Design
                   </div>
                 </div>

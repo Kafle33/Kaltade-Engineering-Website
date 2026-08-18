@@ -22,10 +22,10 @@ import {
   BarChart,
   HardHat,
 } from 'lucide-react';
-import { SectionHeader } from '@/ui/SectionHeader';
-import { Button } from '@/ui/Button';
-import { Badge } from '@/ui/Badge';
-import { Modal } from '@/ui/Modal';
+import { SectionHeader } from '@/components/ui/SectionHeader';
+import { Button } from '@/components/ui/Button';
+import { Badge } from '@/components/ui/Badge';
+import { Modal } from '@/components/ui/Modal';
 import { saveLead } from '@/lib/storage';
 import { sendInquiryNotification, generateWhatsAppUrl } from '@/lib/email';
 import { sqFtToTeraiUnits, sqFtToHillyUnits, formatAreaSqFt } from '@/lib/utils';
@@ -103,86 +103,88 @@ export default function LandDevelopmentPage() {
       step: '09',
       title: 'Engineering Consultancy',
       short: 'Execution Supervision',
-      desc: 'On-site civil engineering oversight, stormwater drainage gradients, culvert construction, and demarcation.',
+      desc: 'On-site civil engineering supervision ensuring roads, storm drains, and utilities match design drawings.',
     },
   ];
 
   // 10 Detailed Services (as specified in brief)
   const servicesList = [
     {
-      title: '1. Preliminary Site Assessment',
-      icon: MapPin,
-      desc: 'Comprehensive survey of raw land parcels including terrain contours, soil bearing traits, natural slope, existing vegetation, and perimeter boundary reconciliation.',
-    },
-    {
-      title: '2. Land Development Feasibility',
-      icon: TrendingUp,
-      desc: 'Market viability studies evaluating target buyer demographics, regional price trends, cash inflow timeline, and investment payback periods.',
-    },
-    {
-      title: '3. Site Planning & Master Layout',
+      title: 'Preliminary Site Assessment',
       icon: Compass,
-      desc: 'Architectural drafting of subdivision master plans with uniform plot dimensions, optimal frontages (East/North orientation priority), and balanced aspect ratios.',
+      desc: 'Initial site walkthrough, elevation survey, natural drainage slope analysis, and high-tension line screening.',
     },
     {
-      title: '4. Access & Road Assessment',
-      icon: Ruler,
-      desc: 'Evaluating public access rights-of-way, highway feeder connectivity, and engineering internal road networks with compliant minimum widths and emergency vehicle access.',
+      title: 'Land Development Feasibility Studies',
+      icon: TrendingUp,
+      desc: 'Micro-market demand evaluation, pricing benchmarking, and financial IRR modeling across multi-phase sales.',
     },
     {
-      title: '5. Area Utilization Optimization',
+      title: 'Site Planning & Master Layout Design',
       icon: Layers,
-      desc: 'Mathematical optimization of plot distribution to eliminate unbuildable dead corners, maximize sellable square footage, and incorporate green public spaces.',
+      desc: 'Comprehensive architectural master planning balancing plot dimensions, aspect orientation, and public greens.',
     },
     {
-      title: '6. Development Potential Analysis',
+      title: 'Access & Road Network Assessment',
+      icon: MapPin,
+      desc: 'Municipal right-of-way connectivity planning, internal road cross-sections, and heavy vehicle turning geometry.',
+    },
+    {
+      title: 'Area Utilization & Yield Optimization',
+      icon: Calculator,
+      desc: 'Mathematical geometry modeling to convert maximum land area into prime marketable frontages without dead spaces.',
+    },
+    {
+      title: 'Development Potential Evaluation',
       icon: Building2,
-      desc: 'Highest and Best Use (HBU) study determining whether the parcel generates superior returns as residential plotting, commercial retail strips, or logistics warehousing.',
+      desc: 'Analyzing municipal Ground Coverage (GC), Floor Area Ratio (FAR), and building typology allowances per plot.',
     },
     {
-      title: '7. Infrastructure Cost Estimation (BOQ)',
+      title: 'Infrastructure Cost Estimation & BOQ',
       icon: FileSpreadsheet,
-      desc: 'Itemized engineering cost estimation covering earthwork excavation, cut-and-fill balancing, road base gravel, storm water concrete drains, and power distribution.',
+      desc: 'Exhaustive Bill of Quantities for site levelling, road construction, RCC box culverts, and electrical poles.',
     },
     {
-      title: '8. Comprehensive Feasibility Studies',
+      title: 'Feasibility Studies & Market Validation',
       icon: BarChart,
-      desc: 'Deep-dive risk, environmental, and financial feasibility models detailing projected Return on Investment (ROI), Internal Rate of Return (IRR), and phased rollouts.',
+      desc: 'Competitive supply pipeline auditing, target buyer persona profiling, and phased cash flow forecasting.',
     },
     {
-      title: '9. DPR Preparation for Financing',
+      title: 'Detailed Project Report (DPR) Preparation',
       icon: ShieldCheck,
-      desc: 'Formulating authoritative, bankable Detailed Project Reports meeting all compliance requirements of commercial banks, BFIs, and municipal planning bodies.',
+      desc: 'Bankable DPR dossier complete with municipal compliance schedules and bank consortium loan presentations.',
     },
     {
-      title: '10. Engineering Consultancy & Supervision',
+      title: 'Civil & Structural Engineering Consultancy',
       icon: HardHat,
-      desc: 'Full-cycle civil engineering oversight during site grading, culvert casting, road compaction, plot pillar demarcation, and municipal permit processing.',
+      desc: 'Engineering oversight for retaining walls, stormwater drainage outfalls, soil stabilization, and quality control.',
     },
   ];
 
-  // Calculate parsed sqft for calculator
-  const getParsedSqFt = (): number => {
-    const val = parseFloat(calcInput) || 0;
-    if (calcUnit === 'sqft') return val;
-    if (calcUnit === 'katha') return val * 3645;
-    if (calcUnit === 'bigha') return val * 72900;
-    if (calcUnit === 'ropani') return val * 5476;
-    return val;
+  // Calculate Sq.Ft based on input & unit
+  const parseAreaInputToSqFt = (val: string, unit: string): number => {
+    const num = parseFloat(val) || 0;
+    if (unit === 'sqft') return num;
+    if (unit === 'katha') return num * 3645;
+    if (unit === 'bigha') return num * 72900;
+    if (unit === 'ropani') return num * 5476;
+    return num;
   };
 
-  const calculatedSqFt = getParsedSqFt();
+  const calculatedSqFt = parseAreaInputToSqFt(calcInput, calcUnit);
   const teraiResult = sqFtToTeraiUnits(calculatedSqFt);
   const hillyResult = sqFtToHillyUnits(calculatedSqFt);
-  const estimatedSellableArea = Math.round(calculatedSqFt * 0.7); // approx 70% sellable ratio
-  const estimatedPlots = Math.max(1, Math.floor(estimatedSellableArea / 3645)); // assuming 1 Katha per plot
+
+  // Estimated sellable yield (~70% benchmark in well-planned layouts)
+  const estimatedSellableArea = Math.round(calculatedSqFt * 0.7);
+  const estimatedPlots = Math.max(1, Math.floor(estimatedSellableArea / 3645)); // ~1 Katha average plot size
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.fullName || !formData.phone) return;
 
     const newLead = saveLead({
-      type: 'Property Inquiry',
+      type: 'Buyer Requirement',
       fullName: formData.fullName,
       phone: formData.phone,
       email: formData.email,
@@ -196,7 +198,7 @@ export default function LandDevelopmentPage() {
 
     sendInquiryNotification({
       leadId: newLead.id,
-      type: 'Land Development Consultancy',
+      type: 'Land Development Inquiry',
       fullName: newLead.fullName,
       phone: newLead.phone,
       email: newLead.email,
@@ -225,12 +227,12 @@ export default function LandDevelopmentPage() {
   };
 
   return (
-    <div className="pt-28 sm:pt-32 bg-white min-h-screen text-navy-950">
+    <div className="pt-28 sm:pt-32 bg-white dark:bg-dark-bg min-h-screen text-navy-950 dark:text-dark-text transition-colors">
       {/* 1. Hero Header */}
-      <section className="bg-gradient-to-b from-navy-950 via-navy-900 to-navy-950 text-white py-16 sm:py-24 relative overflow-hidden border-b border-navy-800">
+      <section className="bg-gradient-to-b from-navy-950 via-navy-900 to-navy-950 dark:from-dark-surface dark:via-dark-card dark:to-dark-surface text-white py-16 sm:py-24 relative overflow-hidden border-b border-navy-800 dark:border-dark-border">
         <div className="absolute inset-0 bg-grid-navy opacity-20 pointer-events-none" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <nav className="flex items-center gap-2 text-xs text-blue-200/80 mb-6 font-medium">
+          <nav className="flex items-center gap-2 text-xs text-blue-200/80 dark:text-sky-300/80 mb-6 font-medium">
             <Link href="/" className="hover:text-white transition-colors">
               Home
             </Link>
@@ -243,16 +245,16 @@ export default function LandDevelopmentPage() {
           </nav>
 
           <div className="max-w-3xl">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-white/10 text-blue-200 border border-white/15 text-xs font-bold uppercase tracking-wider mb-4">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-white/10 dark:bg-dark-elevated text-blue-200 dark:text-sky-300 border border-white/15 dark:border-dark-border text-xs font-bold uppercase tracking-wider mb-4">
               <span className="w-1.5 h-1.5 rounded-full bg-amber-500" />
-              Master Planning & Subdivision Engineering
+              Master Planning &amp; Subdivision Engineering
             </div>
 
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-tight">
               Maximize land value through intelligent planning.
             </h1>
 
-            <p className="mt-6 text-base sm:text-lg text-slate-300 leading-relaxed font-normal">
+            <p className="mt-6 text-base sm:text-lg text-slate-300 dark:text-slate-400 leading-relaxed font-normal">
               Transform raw acreage and agricultural land parcels into high-yield, legally compliant, and beautifully engineered residential or commercial subdivisions in Dhangadhi, Kailali, and across Nepal.
             </p>
 
@@ -269,29 +271,29 @@ export default function LandDevelopmentPage() {
                 href="/projects"
                 variant="outline"
                 size="lg"
-                className="bg-white/10 text-white border-white/20 hover:bg-white/20"
+                className="bg-white/10 dark:bg-dark-card text-white border-white/20 dark:border-dark-border hover:bg-white/20"
                 rightIcon={<ArrowRight className="w-4 h-4" />}
               >
                 View Subdivision Projects
               </Button>
             </div>
 
-            <div className="mt-10 pt-8 border-t border-white/10 grid grid-cols-2 sm:grid-cols-4 gap-4 text-xs">
+            <div className="mt-10 pt-8 border-t border-white/10 dark:border-dark-border grid grid-cols-2 sm:grid-cols-4 gap-4 text-xs">
               <div className="flex items-center gap-2">
                 <ShieldCheck className="w-4 h-4 text-emerald-400 shrink-0" />
-                <span className="text-slate-300">Municipal Bylaw Compliant</span>
+                <span className="text-slate-300 dark:text-slate-400">Municipal Bylaw Compliant</span>
               </div>
               <div className="flex items-center gap-2">
                 <Layers className="w-4 h-4 text-amber-400 shrink-0" />
-                <span className="text-slate-300">70%+ Sellable Ratio Target</span>
+                <span className="text-slate-300 dark:text-slate-400">70%+ Sellable Ratio Target</span>
               </div>
               <div className="flex items-center gap-2">
-                <FileSpreadsheet className="w-4 h-4 text-blue-400 shrink-0" />
-                <span className="text-slate-300">Bankable DPR & BOQ</span>
+                <FileSpreadsheet className="w-4 h-4 text-blue-400 dark:text-sky-400 shrink-0" />
+                <span className="text-slate-300 dark:text-slate-400">Bankable DPR &amp; BOQ</span>
               </div>
               <div className="flex items-center gap-2">
                 <HardHat className="w-4 h-4 text-emerald-400 shrink-0" />
-                <span className="text-slate-300">Civil Engineering Oversight</span>
+                <span className="text-slate-300 dark:text-slate-400">Civil Engineering Oversight</span>
               </div>
             </div>
           </div>
@@ -299,7 +301,7 @@ export default function LandDevelopmentPage() {
       </section>
 
       {/* 2. Visual 9-Step Process */}
-      <section className="py-20 sm:py-28 bg-slate-50 border-b border-slate-200/80">
+      <section className="py-20 sm:py-28 bg-slate-50 dark:bg-dark-bg border-b border-slate-200/80 dark:border-dark-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeader
             eyebrow="END-TO-END METHODOLOGY"
@@ -309,7 +311,7 @@ export default function LandDevelopmentPage() {
           />
 
           {/* Process Flow Overview Ribbon */}
-          <div className="mb-12 p-4 rounded-2xl bg-navy-950 text-white border border-navy-800 shadow-md flex items-center justify-between text-[11px] sm:text-xs font-bold overflow-x-auto whitespace-nowrap gap-3">
+          <div className="mb-12 p-4 rounded-2xl bg-navy-950 dark:bg-dark-surface text-white border border-navy-800 dark:border-dark-border shadow-md flex items-center justify-between text-[11px] sm:text-xs font-bold overflow-x-auto whitespace-nowrap gap-3">
             <span className="px-2.5 py-1 rounded bg-amber-600 text-white">1. Site</span>
             <span>→</span>
             <span>2. Assessment</span>
@@ -334,11 +336,11 @@ export default function LandDevelopmentPage() {
             {visualProcess.map((item, index) => (
               <div
                 key={item.step}
-                className="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm hover:shadow-xl hover:border-navy-900/30 transition-all flex flex-col justify-between group"
+                className="p-6 rounded-2xl bg-white dark:bg-dark-card border border-slate-200 dark:border-dark-border shadow-xs dark:shadow-card-dark hover:shadow-xl dark:hover:shadow-card-dark-hover hover:border-navy-900/30 dark:hover:border-sky-500/40 transition-all flex flex-col justify-between group"
               >
                 <div>
                   <div className="flex items-center justify-between mb-4">
-                    <span className="text-2xl font-black font-mono text-navy-300 group-hover:text-navy-900 transition-colors">
+                    <span className="text-2xl font-black font-mono text-navy-300 dark:text-navy-700 group-hover:text-navy-900 dark:group-hover:text-sky-300 transition-colors">
                       {item.step}
                     </span>
                     <Badge variant="navy" size="sm">
@@ -347,21 +349,21 @@ export default function LandDevelopmentPage() {
                   </div>
 
                   <div className="mb-2">
-                    <span className="text-[11px] font-bold uppercase tracking-wider text-amber-700 block">
+                    <span className="text-[11px] font-bold uppercase tracking-wider text-amber-700 dark:text-amber-400 block">
                       {item.short}
                     </span>
-                    <h3 className="text-xl font-bold text-navy-950 mt-1">
+                    <h3 className="text-xl font-bold text-navy-950 dark:text-white mt-1">
                       {item.title}
                     </h3>
                   </div>
 
-                  <p className="text-xs sm:text-sm text-slate-600 leading-relaxed mt-2">
+                  <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed mt-2">
                     {item.desc}
                   </p>
                 </div>
 
-                <div className="mt-6 pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-semibold text-navy-800">
-                  <span className="text-slate-400">Phase {index + 1} of 9</span>
+                <div className="mt-6 pt-3 border-t border-slate-100 dark:border-dark-border flex items-center justify-between text-xs font-semibold text-navy-800 dark:text-sky-400">
+                  <span className="text-slate-400 dark:text-slate-500">Phase {index + 1} of 9</span>
                   <div className="w-2 h-2 rounded-full bg-amber-500" />
                 </div>
               </div>
@@ -371,7 +373,7 @@ export default function LandDevelopmentPage() {
       </section>
 
       {/* 3. Comprehensive 10 Core Services */}
-      <section className="py-20 sm:py-28 bg-white border-b border-slate-200/80">
+      <section className="py-20 sm:py-28 bg-white dark:bg-dark-card border-b border-slate-200/80 dark:border-dark-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeader
             eyebrow="SPECIALIZED CAPABILITIES"
@@ -386,16 +388,16 @@ export default function LandDevelopmentPage() {
               return (
                 <div
                   key={svc.title}
-                  className="p-6 sm:p-8 rounded-2xl bg-slate-50 border border-slate-200/90 hover:border-navy-900/30 hover:shadow-lg transition-all flex items-start gap-4 group"
+                  className="p-6 sm:p-8 rounded-2xl bg-slate-50 dark:bg-dark-surface border border-slate-200/90 dark:border-dark-border hover:border-navy-900/30 dark:hover:border-sky-500/40 hover:shadow-lg dark:hover:shadow-card-dark-hover transition-all flex items-start gap-4 group"
                 >
-                  <div className="p-3 rounded-xl bg-white border border-slate-200 text-navy-900 shadow-sm shrink-0 group-hover:bg-navy-900 group-hover:text-white transition-colors">
-                    <Icon className="w-5 h-5 text-amber-600 group-hover:text-amber-400" />
+                  <div className="p-3 rounded-xl bg-white dark:bg-dark-card border border-slate-200 dark:border-dark-border text-navy-900 dark:text-white shadow-xs shrink-0 group-hover:bg-navy-900 dark:group-hover:bg-navy-700 group-hover:text-white transition-colors">
+                    <Icon className="w-5 h-5 text-amber-600 dark:text-amber-400 group-hover:text-amber-400" />
                   </div>
                   <div>
-                    <h3 className="text-base sm:text-lg font-bold text-navy-950 mb-1.5">
+                    <h3 className="text-base sm:text-lg font-bold text-navy-950 dark:text-white mb-1.5">
                       {svc.title}
                     </h3>
-                    <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                    <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
                       {svc.desc}
                     </p>
                   </div>
@@ -407,7 +409,7 @@ export default function LandDevelopmentPage() {
       </section>
 
       {/* 4. Interactive Land Area & Plotting Yield Estimator */}
-      <section className="py-20 sm:py-28 bg-navy-950 text-white relative overflow-hidden">
+      <section className="py-20 sm:py-28 bg-navy-950 dark:bg-dark-surface text-white relative overflow-hidden border-b border-navy-800 dark:border-dark-border shadow-xl dark:shadow-card-dark">
         <div className="absolute inset-0 bg-grid-navy opacity-20 pointer-events-none" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
@@ -421,11 +423,11 @@ export default function LandDevelopmentPage() {
                 Estimate the Plot Potential of Your Land Parcel.
               </h2>
 
-              <p className="text-sm sm:text-base text-slate-300 leading-relaxed font-normal">
+              <p className="text-sm sm:text-base text-slate-300 dark:text-slate-400 leading-relaxed font-normal">
                 Enter your total land parcel area below. See instant conversion across Terai units (Bigha-Katha-Dhur), Hilly units (Ropani-Aana), and estimated plotted subdivision yield.
               </p>
 
-              <div className="p-6 rounded-2xl bg-white/5 border border-white/10 space-y-4">
+              <div className="p-6 rounded-2xl bg-white/5 dark:bg-dark-elevated/60 border border-white/10 dark:border-dark-border space-y-4">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-xs font-semibold text-slate-300 mb-1">
@@ -436,7 +438,7 @@ export default function LandDevelopmentPage() {
                       value={calcInput}
                       onChange={(e) => setCalcInput(e.target.value)}
                       placeholder="e.g. 72900"
-                      className="w-full px-3 py-2.5 rounded-lg bg-navy-900 border border-white/20 text-white focus:ring-2 focus:ring-amber-500 focus:outline-none text-sm font-mono"
+                      className="w-full px-3 py-2.5 rounded-lg bg-navy-900 dark:bg-dark-surface border border-white/20 dark:border-dark-border text-white focus:ring-2 focus:ring-amber-500 focus:outline-none text-sm font-mono"
                     />
                   </div>
 
@@ -447,7 +449,7 @@ export default function LandDevelopmentPage() {
                     <select
                       value={calcUnit}
                       onChange={(e) => setCalcUnit(e.target.value as any)}
-                      className="w-full px-3 py-2.5 rounded-lg bg-navy-900 border border-white/20 text-white focus:ring-2 focus:ring-amber-500 focus:outline-none text-sm font-semibold"
+                      className="w-full px-3 py-2.5 rounded-lg bg-navy-900 dark:bg-dark-surface border border-white/20 dark:border-dark-border text-white focus:ring-2 focus:ring-amber-500 focus:outline-none text-sm font-semibold cursor-pointer"
                     >
                       <option value="sqft">Square Feet (sq.ft.)</option>
                       <option value="katha">Katha (3,645 sq.ft.)</option>
@@ -464,9 +466,9 @@ export default function LandDevelopmentPage() {
             </div>
 
             {/* Live Estimation Output Card */}
-            <div className="lg:col-span-6 bg-white text-navy-950 p-8 rounded-3xl shadow-2xl space-y-6">
-              <div className="flex items-center justify-between border-b border-slate-100 pb-4">
-                <h3 className="text-lg font-bold text-navy-950">
+            <div className="lg:col-span-6 bg-white dark:bg-dark-card text-navy-950 dark:text-white p-8 rounded-3xl shadow-2xl dark:shadow-card-dark border border-slate-200 dark:border-dark-border space-y-6">
+              <div className="flex items-center justify-between border-b border-slate-100 dark:border-dark-border pb-4">
+                <h3 className="text-lg font-bold text-navy-950 dark:text-white">
                   Subdivision Modeling Output
                 </h3>
                 <Badge variant="navy" size="sm">
@@ -475,43 +477,43 @@ export default function LandDevelopmentPage() {
               </div>
 
               <div className="grid grid-cols-2 gap-4">
-                <div className="p-4 rounded-xl bg-slate-50 border border-slate-200">
-                  <span className="text-[11px] uppercase font-bold text-slate-500 block">
+                <div className="p-4 rounded-xl bg-slate-50 dark:bg-dark-surface border border-slate-200 dark:border-dark-border">
+                  <span className="text-[11px] uppercase font-bold text-slate-500 dark:text-slate-400 block">
                     Terai Units (Dhangadhi/Kailali)
                   </span>
-                  <span className="text-base sm:text-lg font-black text-navy-950 mt-1 block">
+                  <span className="text-base sm:text-lg font-black text-navy-950 dark:text-white mt-1 block">
                     {teraiResult.label}
                   </span>
                 </div>
 
-                <div className="p-4 rounded-xl bg-slate-50 border border-slate-200">
-                  <span className="text-[11px] uppercase font-bold text-slate-500 block">
+                <div className="p-4 rounded-xl bg-slate-50 dark:bg-dark-surface border border-slate-200 dark:border-dark-border">
+                  <span className="text-[11px] uppercase font-bold text-slate-500 dark:text-slate-400 block">
                     Hilly Units (Kathmandu/Hills)
                   </span>
-                  <span className="text-base sm:text-lg font-black text-navy-950 mt-1 block">
+                  <span className="text-base sm:text-lg font-black text-navy-950 dark:text-white mt-1 block">
                     {hillyResult.label}
                   </span>
                 </div>
               </div>
 
-              <div className="p-5 rounded-2xl bg-amber-50/80 border border-amber-200 space-y-2">
+              <div className="p-5 rounded-2xl bg-amber-50/80 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-800/60 space-y-2">
                 <div className="flex items-center justify-between">
-                  <span className="text-xs font-bold text-amber-900 uppercase tracking-wide">
+                  <span className="text-xs font-bold text-amber-900 dark:text-amber-300 uppercase tracking-wide">
                     Est. Sellable Plot Area (~70% ratio)
                   </span>
-                  <span className="font-mono text-sm font-extrabold text-amber-900">
+                  <span className="font-mono text-sm font-extrabold text-amber-900 dark:text-amber-300">
                     {formatAreaSqFt(estimatedSellableArea)}
                   </span>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="text-xs font-bold text-amber-900 uppercase tracking-wide">
+                  <span className="text-xs font-bold text-amber-900 dark:text-amber-300 uppercase tracking-wide">
                     Est. Residential Plots (~1 Katha each)
                   </span>
-                  <span className="font-mono text-base font-black text-amber-900">
+                  <span className="font-mono text-base font-black text-amber-900 dark:text-amber-300">
                     ~{estimatedPlots} Plots
                   </span>
                 </div>
-                <p className="text-[11px] text-amber-800/80 pt-1 leading-snug">
+                <p className="text-[11px] text-amber-800/80 dark:text-amber-400/80 pt-1 leading-snug">
                   *Assumes 30% area allocation for 20-24ft internal roads, drainage corridors, and municipal open green space.
                 </p>
               </div>
@@ -536,61 +538,61 @@ export default function LandDevelopmentPage() {
       </section>
 
       {/* 5. Featured Case Study Highlight */}
-      <section className="py-20 sm:py-28 bg-white border-b border-slate-200/80">
+      <section className="py-20 sm:py-28 bg-white dark:bg-dark-card border-b border-slate-200/80 dark:border-dark-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="p-8 sm:p-12 rounded-3xl bg-slate-50 border border-slate-200/90 shadow-sm">
+          <div className="p-8 sm:p-12 rounded-3xl bg-slate-50 dark:bg-dark-surface border border-slate-200/90 dark:border-dark-border shadow-xs">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
               <div className="lg:col-span-7 space-y-4">
-                <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-amber-700 bg-amber-100/80 px-3 py-1 rounded-md">
+                <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-amber-700 dark:text-amber-400 bg-amber-100/80 dark:bg-amber-950/60 px-3 py-1 rounded-md">
                   <Sparkles className="w-3.5 h-3.5" />
                   <span>Featured Subdivision Case Study</span>
                 </div>
 
-                <h3 className="text-2xl sm:text-3xl font-extrabold text-navy-950 tracking-tight leading-tight">
+                <h3 className="text-2xl sm:text-3xl font-extrabold text-navy-950 dark:text-white tracking-tight leading-tight">
                   8-Bigha Residential Subdivision Master Plan (Kailali District)
                 </h3>
 
-                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                  Kaltade provided full-phase topographical contour surveying, plotted subdivision layout design, internal road network modeling (24ft primary & 20ft secondary), and stormwater drainage engineering for an 8-Bigha raw parcel.
+                <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                  Kaltade provided full-phase topographical contour surveying, plotted subdivision layout design, internal road network modeling (24ft primary &amp; 20ft secondary), and stormwater drainage engineering for an 8-Bigha raw parcel.
                 </p>
 
                 <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 pt-2">
-                  <div className="p-3 bg-white rounded-xl border border-slate-200 text-center">
-                    <span className="text-[10px] text-slate-500 font-semibold uppercase block">Total Area</span>
-                    <strong className="text-sm font-bold text-navy-950">8 Bigha (5.83L sqft)</strong>
+                  <div className="p-3 bg-white dark:bg-dark-card rounded-xl border border-slate-200 dark:border-dark-border text-center">
+                    <span className="text-[10px] text-slate-500 dark:text-slate-400 font-semibold uppercase block">Total Area</span>
+                    <strong className="text-sm font-bold text-navy-950 dark:text-white">8 Bigha (5.83L sqft)</strong>
                   </div>
-                  <div className="p-3 bg-white rounded-xl border border-slate-200 text-center">
-                    <span className="text-[10px] text-slate-500 font-semibold uppercase block">Plot Yield</span>
-                    <strong className="text-sm font-bold text-navy-950">64 Residential Plots</strong>
+                  <div className="p-3 bg-white dark:bg-dark-card rounded-xl border border-slate-200 dark:border-dark-border text-center">
+                    <span className="text-[10px] text-slate-500 dark:text-slate-400 font-semibold uppercase block">Plot Yield</span>
+                    <strong className="text-sm font-bold text-navy-950 dark:text-white">64 Residential Plots</strong>
                   </div>
-                  <div className="p-3 bg-white rounded-xl border border-slate-200 text-center">
-                    <span className="text-[10px] text-slate-500 font-semibold uppercase block">Sellable Efficiency</span>
-                    <strong className="text-sm font-bold text-emerald-700">72% Net Sellable</strong>
+                  <div className="p-3 bg-white dark:bg-dark-card rounded-xl border border-slate-200 dark:border-dark-border text-center">
+                    <span className="text-[10px] text-slate-500 dark:text-slate-400 font-semibold uppercase block">Sellable Efficiency</span>
+                    <strong className="text-sm font-bold text-emerald-700 dark:text-emerald-400">72% Net Sellable</strong>
                   </div>
                 </div>
               </div>
 
               <div className="lg:col-span-5 flex flex-col justify-center space-y-4">
-                <div className="p-6 bg-white rounded-2xl border border-slate-200 space-y-3">
-                  <h4 className="text-sm font-bold text-navy-950">
+                <div className="p-6 bg-white dark:bg-dark-card rounded-2xl border border-slate-200 dark:border-dark-border space-y-3 shadow-xs">
+                  <h4 className="text-sm font-bold text-navy-950 dark:text-white">
                     Services Delivered in Project:
                   </h4>
-                  <ul className="space-y-2 text-xs text-slate-600">
+                  <ul className="space-y-2 text-xs text-slate-600 dark:text-slate-300">
                     <li className="flex items-center gap-2">
-                      <Check className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
-                      <span>Total Station boundary & contour survey</span>
+                      <Check className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400 shrink-0" />
+                      <span>Total Station boundary &amp; contour survey</span>
                     </li>
                     <li className="flex items-center gap-2">
-                      <Check className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+                      <Check className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400 shrink-0" />
                       <span>Municipal plotting bylaw compliance dossier</span>
                     </li>
                     <li className="flex items-center gap-2">
-                      <Check className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
-                      <span>Culvert drainage & road cross-section engineering</span>
+                      <Check className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400 shrink-0" />
+                      <span>Culvert drainage &amp; road cross-section engineering</span>
                     </li>
                     <li className="flex items-center gap-2">
-                      <Check className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
-                      <span>Infrastructure BOQ & phasing budget</span>
+                      <Check className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400 shrink-0" />
+                      <span>Infrastructure BOQ &amp; phasing budget</span>
                     </li>
                   </ul>
 
@@ -612,18 +614,18 @@ export default function LandDevelopmentPage() {
       </section>
 
       {/* 6. Final Call to Action */}
-      <section className="py-20 sm:py-28 bg-navy-950 text-white relative overflow-hidden">
+      <section className="py-20 sm:py-28 bg-navy-950 dark:bg-dark-surface text-white relative overflow-hidden border-t border-navy-800 dark:border-dark-border shadow-xl dark:shadow-card-dark">
         <div className="absolute inset-0 bg-grid-navy opacity-20 pointer-events-none" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center space-y-6">
-          <Badge variant="navy" size="md" className="bg-white/10 text-blue-200 border-white/20">
-            LANDOWNERS & DEVELOPERS
+          <Badge variant="navy" size="md" className="bg-white/10 dark:bg-dark-elevated text-blue-200 dark:text-sky-300 border-white/20 dark:border-dark-border">
+            LANDOWNERS &amp; DEVELOPERS
           </Badge>
 
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight max-w-3xl mx-auto leading-tight">
             Unlock the Peak Potential of Your Land.
           </h2>
 
-          <p className="text-sm sm:text-base text-slate-300 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-sm sm:text-base text-slate-300 dark:text-slate-400 max-w-2xl mx-auto leading-relaxed">
             Contact Kaltade Engineering Services today to discuss preliminary site assessments, subdivision master plans, and feasibility studies.
           </p>
 
@@ -648,7 +650,7 @@ export default function LandDevelopmentPage() {
               href="/contact"
               variant="outline"
               size="lg"
-              className="bg-white/10 text-white border-white/20 hover:bg-white/20"
+              className="bg-white/10 dark:bg-dark-card text-white border-white/20 dark:border-dark-border hover:bg-white/20"
             >
               Contact Dhangadhi Office
             </Button>
@@ -666,18 +668,18 @@ export default function LandDevelopmentPage() {
       >
         {isSubmitted ? (
           <div className="py-8 text-center space-y-4">
-            <div className="w-14 h-14 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto">
+            <div className="w-14 h-14 rounded-full bg-emerald-100 dark:bg-emerald-950/80 text-emerald-600 dark:text-emerald-400 flex items-center justify-center mx-auto">
               <Check className="w-8 h-8" />
             </div>
             <div className="space-y-1">
-              <h4 className="text-xl font-bold text-navy-950">
+              <h4 className="text-xl font-bold text-navy-950 dark:text-white">
                 Consultation Request Received!
               </h4>
-              <p className="text-xs sm:text-sm text-slate-600 max-w-md mx-auto">
+              <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 max-w-md mx-auto">
                 Our land development and survey engineers will review your parcel details.
               </p>
             </div>
-            <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-3 max-w-md mx-auto text-xs text-emerald-800 text-center">
+            <div className="bg-emerald-50 dark:bg-emerald-950/50 border border-emerald-200 dark:border-emerald-800/60 rounded-xl p-3 max-w-md mx-auto text-xs text-emerald-800 dark:text-emerald-300 text-center">
               ✉️ Notification sent to <strong>kaltadeengineeringservices@gmail.com</strong> &amp; <strong>ai.antigravity11@gmail.com</strong>
             </div>
             <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3">
@@ -707,7 +709,7 @@ export default function LandDevelopmentPage() {
                   setIsSubmitted(false);
                   setIsModalOpen(false);
                 }}
-                className="px-4 py-2.5 rounded-xl border border-slate-200 hover:bg-slate-50 text-xs font-semibold text-slate-700"
+                className="px-4 py-2.5 rounded-xl border border-slate-200 dark:border-dark-border hover:bg-slate-50 dark:hover:bg-dark-elevated text-xs font-semibold text-slate-700 dark:text-slate-300"
               >
                 Close Window
               </button>
@@ -717,7 +719,7 @@ export default function LandDevelopmentPage() {
           <form onSubmit={handleSubmit} className="space-y-4 text-xs sm:text-sm">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block font-semibold text-slate-700 mb-1">
+                <label className="block font-semibold text-slate-700 dark:text-slate-300 mb-1">
                   Full Name *
                 </label>
                 <input
@@ -728,12 +730,12 @@ export default function LandDevelopmentPage() {
                     setFormData({ ...formData, fullName: e.target.value })
                   }
                   placeholder="e.g. Bikash Rana"
-                  className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-navy-900 focus:outline-none"
+                  className="w-full px-3 py-2 border border-slate-300 dark:border-dark-border rounded-lg focus:ring-2 focus:ring-navy-900 dark:focus:ring-sky-400 focus:outline-none bg-white dark:bg-dark-card text-slate-900 dark:text-white"
                 />
               </div>
 
               <div>
-                <label className="block font-semibold text-slate-700 mb-1">
+                <label className="block font-semibold text-slate-700 dark:text-slate-300 mb-1">
                   Phone Number (Mobile / WhatsApp) *
                 </label>
                 <input
@@ -744,14 +746,14 @@ export default function LandDevelopmentPage() {
                     setFormData({ ...formData, phone: e.target.value })
                   }
                   placeholder="e.g. +977 98584XXXXX"
-                  className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-navy-900 focus:outline-none"
+                  className="w-full px-3 py-2 border border-slate-300 dark:border-dark-border rounded-lg focus:ring-2 focus:ring-navy-900 dark:focus:ring-sky-400 focus:outline-none bg-white dark:bg-dark-card text-slate-900 dark:text-white"
                 />
               </div>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block font-semibold text-slate-700 mb-1">
+                <label className="block font-semibold text-slate-700 dark:text-slate-300 mb-1">
                   Email Address
                 </label>
                 <input
@@ -761,12 +763,12 @@ export default function LandDevelopmentPage() {
                     setFormData({ ...formData, email: e.target.value })
                   }
                   placeholder="e.g. bikash@example.com"
-                  className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-navy-900 focus:outline-none"
+                  className="w-full px-3 py-2 border border-slate-300 dark:border-dark-border rounded-lg focus:ring-2 focus:ring-navy-900 dark:focus:ring-sky-400 focus:outline-none bg-white dark:bg-dark-card text-slate-900 dark:text-white"
                 />
               </div>
 
               <div>
-                <label className="block font-semibold text-slate-700 mb-1">
+                <label className="block font-semibold text-slate-700 dark:text-slate-300 mb-1">
                   Estimated Total Land Area
                 </label>
                 <input
@@ -776,14 +778,14 @@ export default function LandDevelopmentPage() {
                     setFormData({ ...formData, landArea: e.target.value })
                   }
                   placeholder="e.g. 4 Bigha or 10 Katha"
-                  className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-navy-900 focus:outline-none"
+                  className="w-full px-3 py-2 border border-slate-300 dark:border-dark-border rounded-lg focus:ring-2 focus:ring-navy-900 dark:focus:ring-sky-400 focus:outline-none bg-white dark:bg-dark-card text-slate-900 dark:text-white"
                 />
               </div>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block font-semibold text-slate-700 mb-1">
+                <label className="block font-semibold text-slate-700 dark:text-slate-300 mb-1">
                   Land Location / Municipality
                 </label>
                 <input
@@ -793,12 +795,12 @@ export default function LandDevelopmentPage() {
                     setFormData({ ...formData, landLocation: e.target.value })
                   }
                   placeholder="e.g. Dhangadhi Ward 7 / Attariya / Godawari"
-                  className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-navy-900 focus:outline-none"
+                  className="w-full px-3 py-2 border border-slate-300 dark:border-dark-border rounded-lg focus:ring-2 focus:ring-navy-900 dark:focus:ring-sky-400 focus:outline-none bg-white dark:bg-dark-card text-slate-900 dark:text-white"
                 />
               </div>
 
               <div>
-                <label className="block font-semibold text-slate-700 mb-1">
+                <label className="block font-semibold text-slate-700 dark:text-slate-300 mb-1">
                   Development Intent
                 </label>
                 <select
@@ -806,19 +808,19 @@ export default function LandDevelopmentPage() {
                   onChange={(e) =>
                     setFormData({ ...formData, developmentIntent: e.target.value })
                   }
-                  className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-navy-900 focus:outline-none bg-white"
+                  className="w-full px-3 py-2 border border-slate-300 dark:border-dark-border rounded-lg focus:ring-2 focus:ring-navy-900 dark:focus:ring-sky-400 focus:outline-none bg-white dark:bg-dark-card text-slate-900 dark:text-white"
                 >
                   <option value="Residential Plotted Subdivision">Residential Plotted Subdivision</option>
                   <option value="Commercial Land Subdivision">Commercial Land Subdivision</option>
                   <option value="Industrial / Warehouse Park">Industrial / Warehouse Park</option>
                   <option value="Mixed-Use Integrated Township">Mixed-Use Integrated Township</option>
-                  <option value="Preliminary Site & Bylaw Audit Only">Preliminary Site & Bylaw Audit Only</option>
+                  <option value="Preliminary Site & Bylaw Audit Only">Preliminary Site &amp; Bylaw Audit Only</option>
                 </select>
               </div>
             </div>
 
             <div>
-              <label className="block font-semibold text-slate-700 mb-1">
+              <label className="block font-semibold text-slate-700 dark:text-slate-300 mb-1">
                 Estimated Infrastructure Budget
               </label>
               <select
@@ -826,7 +828,7 @@ export default function LandDevelopmentPage() {
                 onChange={(e) =>
                   setFormData({ ...formData, estimatedBudget: e.target.value })
                 }
-                className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-navy-900 focus:outline-none bg-white"
+                className="w-full px-3 py-2 border border-slate-300 dark:border-dark-border rounded-lg focus:ring-2 focus:ring-navy-900 dark:focus:ring-sky-400 focus:outline-none bg-white dark:bg-dark-card text-slate-900 dark:text-white"
               >
                 <option value="Under NPR 50 Lakh">Under NPR 50 Lakh</option>
                 <option value="NPR 50 Lakh - 1.5 Crore">NPR 50 Lakh - 1.5 Crore</option>
@@ -837,7 +839,7 @@ export default function LandDevelopmentPage() {
             </div>
 
             <div>
-              <label className="block font-semibold text-slate-700 mb-1">
+              <label className="block font-semibold text-slate-700 dark:text-slate-300 mb-1">
                 Project Specifics or Current Status
               </label>
               <textarea
@@ -847,7 +849,7 @@ export default function LandDevelopmentPage() {
                   setFormData({ ...formData, message: e.target.value })
                 }
                 placeholder="Mention current land state (agricultural, vacant, filled), existing road access width, available Cadastral Trace map (Naksha), or target completion timeline..."
-                className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-navy-900 focus:outline-none"
+                className="w-full px-3 py-2 border border-slate-300 dark:border-dark-border rounded-lg focus:ring-2 focus:ring-navy-900 dark:focus:ring-sky-400 focus:outline-none bg-white dark:bg-dark-card text-slate-900 dark:text-white"
               />
             </div>
 

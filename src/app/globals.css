@@ -8,6 +8,27 @@
     --brand-blue: #163E70;
     --brand-light: #F8FAFC;
     --brand-border: #E2E8F0;
+    --background: #FFFFFF;
+    --surface-page: #F8FAFC;
+    --surface-card: #FFFFFF;
+    --surface-elevated: #F1F5F9;
+    --foreground: #0F172A;
+    --muted-foreground: #64748B;
+    --border-color: #E2E8F0;
+  }
+
+  .dark {
+    --brand-navy: #162C4E;
+    --brand-blue: #255896;
+    --brand-light: #0B1120;
+    --brand-border: #1E293B;
+    --background: #0B1120;
+    --surface-page: #0B1120;
+    --surface-card: #111C30;
+    --surface-elevated: #162238;
+    --foreground: #F8FAFC;
+    --muted-foreground: #94A3B8;
+    --border-color: #233554;
   }
 
   html {
@@ -17,12 +38,36 @@
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
   }
 
+  html.dark {
+    color: #F8FAFC;
+    background-color: #0B1120;
+    color-scheme: dark;
+  }
+
   body {
     overflow-x: hidden;
     min-height: 100vh;
+    background-color: #F8FAFC;
+    color: #0F172A;
   }
 
-  /* Custom Clean Scrollbar */
+  .dark body {
+    background-color: #0B1120;
+    color: #F8FAFC;
+  }
+
+  /* Smooth Theme Transitions on Colors & Backgrounds */
+  @media (prefers-reduced-motion: no-preference) {
+    *,
+    *::before,
+    *::after {
+      transition-property: background-color, border-color, color, fill, stroke;
+      transition-duration: 200ms;
+      transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    }
+  }
+
+  /* Custom Clean Scrollbar - Light & Dark */
   ::-webkit-scrollbar {
     width: 8px;
     height: 8px;
@@ -30,12 +75,21 @@
   ::-webkit-scrollbar-track {
     background: #F1F5F9;
   }
+  .dark ::-webkit-scrollbar-track {
+    background: #0B1120;
+  }
   ::-webkit-scrollbar-thumb {
     background: #94A3B8;
     border-radius: 4px;
   }
+  .dark ::-webkit-scrollbar-thumb {
+    background: #233554;
+  }
   ::-webkit-scrollbar-thumb:hover {
     background: #64748B;
+  }
+  .dark ::-webkit-scrollbar-thumb:hover {
+    background: #334B73;
   }
 }
 
@@ -48,6 +102,12 @@
       linear-gradient(to bottom, rgba(11, 29, 58, 0.05) 1px, transparent 1px);
   }
 
+  .dark .bg-grid-slate {
+    background-image: 
+      linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  }
+
   .bg-grid-navy {
     background-size: 36px 36px;
     background-image: 
@@ -55,8 +115,19 @@
       linear-gradient(to bottom, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
   }
 
+  .dark .bg-grid-navy {
+    background-image: 
+      linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  }
+
   .bg-blueprint-lines {
     background-image: radial-gradient(circle at 1px 1px, rgba(22, 62, 112, 0.12) 1px, transparent 0);
+    background-size: 24px 24px;
+  }
+
+  .dark .bg-blueprint-lines {
+    background-image: radial-gradient(circle at 1px 1px, rgba(56, 189, 248, 0.1) 1px, transparent 0);
     background-size: 24px 24px;
   }
 
@@ -67,11 +138,25 @@
     border: 1px solid rgba(226, 232, 240, 0.8);
   }
 
+  .dark .glass-card {
+    background: rgba(17, 28, 48, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(35, 53, 84, 0.8);
+  }
+
   .glass-navy {
     background: rgba(11, 29, 58, 0.88);
     backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
     border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .dark .glass-navy {
+    background: rgba(6, 15, 30, 0.92);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
   }
 
   .text-balance {

@@ -113,54 +113,47 @@ export function ValuationFlagship() {
   };
 
   return (
-    <section className="py-20 sm:py-28 bg-white border-b border-slate-200/80 relative">
+    <section className="py-20 sm:py-28 bg-white dark:bg-dark-bg relative transition-colors">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
         <SectionHeader
-          eyebrow="FLAGSHIP SERVICE"
-          title="Know what your property is worth."
-          subtitle="Kaltade provides standardized, professional property valuation for land, buildings, residential, commercial, industrial, and agricultural assets across Far-Western Nepal and beyond."
+          eyebrow="FLAGSHIP DISCIPLINE"
+          title="Institutional Property Valuation Methodology"
+          subtitle="Accredited engineering assessments bridging technical asset condition, cadastral alignment, and verifiable market data."
           align="center"
         />
 
-        {/* 5-Step Process Horizontal Flow */}
-        <div className="mt-8 mb-16">
-          <div className="text-center mb-8">
-            <span className="text-xs font-bold uppercase tracking-wider text-navy-800 bg-navy-50 px-3 py-1 rounded-md border border-navy-100">
-              The 5-Step Professional Valuation Methodology
-            </span>
-          </div>
-
+        {/* 5-Step Process Cards */}
+        <div className="mb-20">
           <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4">
             {steps.map((st, idx) => {
               const Icon = st.icon;
               return (
                 <div
                   key={st.num}
-                  className="relative p-6 rounded-2xl bg-slate-50 border border-slate-200/90 flex flex-col justify-between hover:shadow-md hover:border-navy-900/30 transition-all group"
+                  className="relative p-6 rounded-2xl bg-slate-50 dark:bg-dark-card border border-slate-200/90 dark:border-dark-border flex flex-col justify-between hover:shadow-md dark:hover:shadow-card-dark hover:border-navy-900/30 dark:hover:border-sky-500/30 transition-all group"
                 >
                   {/* Step number badge */}
                   <div>
                     <div className="flex items-center justify-between mb-4">
-                      <span className="text-2xl font-black font-mono text-navy-300 group-hover:text-navy-900 transition-colors">
+                      <span className="text-2xl font-black font-mono text-navy-300 dark:text-navy-700 group-hover:text-navy-900 dark:group-hover:text-sky-300 transition-colors">
                         {st.num}
                       </span>
-                      <div className="p-2 rounded-lg bg-white border border-slate-200 text-navy-900 group-hover:bg-navy-900 group-hover:text-white transition-colors">
+                      <div className="p-2 rounded-lg bg-white dark:bg-dark-elevated border border-slate-200 dark:border-dark-border text-navy-900 dark:text-sky-300 group-hover:bg-navy-900 dark:group-hover:bg-navy-800 group-hover:text-white transition-colors">
                         <Icon className="w-4 h-4" />
                       </div>
                     </div>
 
-                    <h4 className="text-base font-bold text-navy-950 mb-2 leading-snug">
+                    <h4 className="text-base font-bold text-navy-950 dark:text-white mb-2 leading-snug">
                       {st.title}
                     </h4>
 
-                    <p className="text-xs text-slate-600 leading-relaxed">
+                    <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
                       {st.desc}
                     </p>
                   </div>
 
                   {idx < steps.length - 1 && (
-                    <div className="hidden lg:block absolute -right-2.5 top-1/2 -translate-y-1/2 z-10 w-5 h-5 rounded-full bg-navy-900 text-white flex items-center justify-center text-[10px]">
+                    <div className="hidden lg:block absolute -right-2.5 top-1/2 -translate-y-1/2 z-10 w-5 h-5 rounded-full bg-navy-900 dark:bg-navy-700 text-white flex items-center justify-center text-[10px]">
                       →
                     </div>
                   )}
@@ -171,7 +164,7 @@ export function ValuationFlagship() {
         </div>
 
         {/* Valuation Applications & Direct CTA Banner */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center p-8 sm:p-12 rounded-3xl bg-navy-950 text-white border border-navy-800">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center p-8 sm:p-12 rounded-3xl bg-navy-950 dark:bg-dark-surface text-white border border-navy-800 dark:border-dark-border">
           <div className="lg:col-span-7 space-y-6">
             <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-amber-400">
               <Landmark className="w-4 h-4" />
@@ -184,37 +177,37 @@ export function ValuationFlagship() {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2 text-xs text-slate-300">
               {useCases.map((uc) => (
-                <div key={uc.label} className="p-3 rounded-xl bg-white/5 border border-white/10">
+                <div key={uc.label} className="p-3 rounded-xl bg-white/5 dark:bg-dark-elevated/50 border border-white/10 dark:border-dark-border">
                   <strong className="block text-white text-sm font-semibold mb-0.5">
                     {uc.label}
                   </strong>
-                  <span>{uc.desc}</span>
+                  <span className="text-slate-300 dark:text-slate-400">{uc.desc}</span>
                 </div>
               ))}
             </div>
           </div>
 
-          <div className="lg:col-span-5 bg-white text-navy-950 p-6 sm:p-8 rounded-2xl shadow-xl space-y-4">
-            <div className="flex items-center gap-2 text-navy-900">
-              <Scale className="w-5 h-5 text-amber-600" />
+          <div className="lg:col-span-5 bg-white dark:bg-dark-card text-navy-950 dark:text-white p-6 sm:p-8 rounded-2xl shadow-xl dark:shadow-card-dark border border-transparent dark:border-dark-border space-y-4">
+            <div className="flex items-center gap-2 text-navy-900 dark:text-white">
+              <Scale className="w-5 h-5 text-amber-600 dark:text-amber-400" />
               <h4 className="text-lg font-bold">Request a Property Valuation</h4>
             </div>
 
-            <p className="text-xs text-slate-600 leading-relaxed">
+            <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
               Initiate a formal valuation inquiry for residential, commercial, or industrial land and buildings. Our valuation engineers will contact you promptly.
             </p>
 
-            <div className="space-y-2 pt-2 text-xs text-slate-700">
+            <div className="space-y-2 pt-2 text-xs text-slate-700 dark:text-slate-300">
               <div className="flex items-center gap-2">
-                <Check className="w-4 h-4 text-emerald-600 shrink-0" />
+                <Check className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0" />
                 <span>On-site electronic measurement and photography</span>
               </div>
               <div className="flex items-center gap-2">
-                <Check className="w-4 h-4 text-emerald-600 shrink-0" />
+                <Check className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0" />
                 <span>Bank-compliant distress and fair market valuation</span>
               </div>
               <div className="flex items-center gap-2">
-                <Check className="w-4 h-4 text-emerald-600 shrink-0" />
+                <Check className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0" />
                 <span>Fast turnaround with strict confidential handling</span>
               </div>
             </div>
@@ -243,18 +236,18 @@ export function ValuationFlagship() {
       >
         {isSubmitted ? (
           <div className="py-8 text-center space-y-4">
-            <div className="w-14 h-14 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto">
+            <div className="w-14 h-14 rounded-full bg-emerald-100 dark:bg-emerald-950/80 text-emerald-600 dark:text-emerald-400 flex items-center justify-center mx-auto">
               <Check className="w-8 h-8" />
             </div>
             <div className="space-y-1">
-              <h4 className="text-xl font-bold text-navy-950">
+              <h4 className="text-xl font-bold text-navy-950 dark:text-white">
                 Valuation Request Received!
               </h4>
-              <p className="text-sm text-slate-600 max-w-md mx-auto">
+              <p className="text-sm text-slate-600 dark:text-slate-300 max-w-md mx-auto">
                 Our engineering valuation department has logged your request.
               </p>
             </div>
-            <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-3 max-w-md mx-auto text-xs text-emerald-800 text-center">
+            <div className="bg-emerald-50 dark:bg-emerald-950/50 border border-emerald-200 dark:border-emerald-800/60 rounded-xl p-3 max-w-md mx-auto text-xs text-emerald-800 dark:text-emerald-300 text-center">
               ✉️ Notification sent to <strong>kaltadeengineeringservices@gmail.com</strong> &amp; <strong>ai.antigravity11@gmail.com</strong>
             </div>
             <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3">
@@ -284,7 +277,7 @@ export function ValuationFlagship() {
                   setIsSubmitted(false);
                   setIsModalOpen(false);
                 }}
-                className="px-4 py-2.5 rounded-xl border border-slate-200 hover:bg-slate-50 text-xs font-semibold text-slate-700"
+                className="px-4 py-2.5 rounded-xl border border-slate-200 dark:border-dark-border hover:bg-slate-50 dark:hover:bg-dark-elevated text-xs font-semibold text-slate-700 dark:text-slate-300"
               >
                 Close Window
               </button>
@@ -294,7 +287,7 @@ export function ValuationFlagship() {
           <form onSubmit={handleSubmit} className="space-y-4 text-xs sm:text-sm">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block font-semibold text-slate-700 mb-1">
+                <label className="block font-semibold text-slate-700 dark:text-slate-300 mb-1">
                   Full Name *
                 </label>
                 <input
@@ -305,12 +298,12 @@ export function ValuationFlagship() {
                     setFormData({ ...formData, fullName: e.target.value })
                   }
                   placeholder="e.g. Ramesh Chaudhary"
-                  className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-navy-900 focus:outline-none"
+                  className="w-full px-3 py-2 border border-slate-300 dark:border-dark-border rounded-lg focus:ring-2 focus:ring-navy-900 dark:focus:ring-sky-400 focus:outline-none bg-white dark:bg-dark-card text-slate-900 dark:text-white"
                 />
               </div>
 
               <div>
-                <label className="block font-semibold text-slate-700 mb-1">
+                <label className="block font-semibold text-slate-700 dark:text-slate-300 mb-1">
                   Phone Number (Mobile / WhatsApp) *
                 </label>
                 <input
@@ -321,14 +314,14 @@ export function ValuationFlagship() {
                     setFormData({ ...formData, phone: e.target.value })
                   }
                   placeholder="e.g. +977 98584XXXXX"
-                  className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-navy-900 focus:outline-none"
+                  className="w-full px-3 py-2 border border-slate-300 dark:border-dark-border rounded-lg focus:ring-2 focus:ring-navy-900 dark:focus:ring-sky-400 focus:outline-none bg-white dark:bg-dark-card text-slate-900 dark:text-white"
                 />
               </div>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block font-semibold text-slate-700 mb-1">
+                <label className="block font-semibold text-slate-700 dark:text-slate-300 mb-1">
                   Email Address
                 </label>
                 <input
@@ -338,12 +331,12 @@ export function ValuationFlagship() {
                     setFormData({ ...formData, email: e.target.value })
                   }
                   placeholder="e.g. ramesh@example.com"
-                  className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-navy-900 focus:outline-none"
+                  className="w-full px-3 py-2 border border-slate-300 dark:border-dark-border rounded-lg focus:ring-2 focus:ring-navy-900 dark:focus:ring-sky-400 focus:outline-none bg-white dark:bg-dark-card text-slate-900 dark:text-white"
                 />
               </div>
 
               <div>
-                <label className="block font-semibold text-slate-700 mb-1">
+                <label className="block font-semibold text-slate-700 dark:text-slate-300 mb-1">
                   Property Type
                 </label>
                 <select
@@ -351,7 +344,7 @@ export function ValuationFlagship() {
                   onChange={(e) =>
                     setFormData({ ...formData, propertyType: e.target.value })
                   }
-                  className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-navy-900 focus:outline-none bg-white"
+                  className="w-full px-3 py-2 border border-slate-300 dark:border-dark-border rounded-lg focus:ring-2 focus:ring-navy-900 dark:focus:ring-sky-400 focus:outline-none bg-white dark:bg-dark-card text-slate-900 dark:text-white"
                 >
                   <option value="Land Only">Land Only</option>
                   <option value="Residential Building & Land">Residential Building & Land</option>
@@ -365,7 +358,7 @@ export function ValuationFlagship() {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block font-semibold text-slate-700 mb-1">
+                <label className="block font-semibold text-slate-700 dark:text-slate-300 mb-1">
                   Location (Municipality / Ward / Landmark)
                 </label>
                 <input
@@ -375,12 +368,12 @@ export function ValuationFlagship() {
                     setFormData({ ...formData, location: e.target.value })
                   }
                   placeholder="e.g. Dhangadhi Ward 1, Main Road"
-                  className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-navy-900 focus:outline-none"
+                  className="w-full px-3 py-2 border border-slate-300 dark:border-dark-border rounded-lg focus:ring-2 focus:ring-navy-900 dark:focus:ring-sky-400 focus:outline-none bg-white dark:bg-dark-card text-slate-900 dark:text-white"
                 />
               </div>
 
               <div>
-                <label className="block font-semibold text-slate-700 mb-1">
+                <label className="block font-semibold text-slate-700 dark:text-slate-300 mb-1">
                   Approximate Land / Built Area
                 </label>
                 <input
@@ -390,13 +383,13 @@ export function ValuationFlagship() {
                     setFormData({ ...formData, approxArea: e.target.value })
                   }
                   placeholder="e.g. 2 Katha or 4,500 sq.ft."
-                  className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-navy-900 focus:outline-none"
+                  className="w-full px-3 py-2 border border-slate-300 dark:border-dark-border rounded-lg focus:ring-2 focus:ring-navy-900 dark:focus:ring-sky-400 focus:outline-none bg-white dark:bg-dark-card text-slate-900 dark:text-white"
                 />
               </div>
             </div>
 
             <div>
-              <label className="block font-semibold text-slate-700 mb-1">
+              <label className="block font-semibold text-slate-700 dark:text-slate-300 mb-1">
                 Valuation Purpose
               </label>
               <select
@@ -404,7 +397,7 @@ export function ValuationFlagship() {
                 onChange={(e) =>
                   setFormData({ ...formData, purpose: e.target.value })
                 }
-                className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-navy-900 focus:outline-none bg-white"
+                className="w-full px-3 py-2 border border-slate-300 dark:border-dark-border rounded-lg focus:ring-2 focus:ring-navy-900 dark:focus:ring-sky-400 focus:outline-none bg-white dark:bg-dark-card text-slate-900 dark:text-white"
               >
                 <option value="Bank Financing / Mortgage">Bank Financing / Mortgage Credit</option>
                 <option value="Property Buying / Selling">Property Buying / Selling Decision</option>
@@ -416,7 +409,7 @@ export function ValuationFlagship() {
             </div>
 
             <div>
-              <label className="block font-semibold text-slate-700 mb-1">
+              <label className="block font-semibold text-slate-700 dark:text-slate-300 mb-1">
                 Additional Notes / Message
               </label>
               <textarea
@@ -426,7 +419,7 @@ export function ValuationFlagship() {
                   setFormData({ ...formData, message: e.target.value })
                 }
                 placeholder="Mention any urgent deadlines, available documents (Lalpurja, Naksha Trace), or specific requests..."
-                className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-navy-900 focus:outline-none"
+                className="w-full px-3 py-2 border border-slate-300 dark:border-dark-border rounded-lg focus:ring-2 focus:ring-navy-900 dark:focus:ring-sky-400 focus:outline-none bg-white dark:bg-dark-card text-slate-900 dark:text-white"
               />
             </div>
 

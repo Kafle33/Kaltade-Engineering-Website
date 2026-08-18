@@ -101,102 +101,102 @@ export default function DueDiligencePage() {
     {
       num: '03',
       title: 'Electronic Field Measurement',
-      desc: 'Precision survey of boundary lengths, frontage, and depth to cross-verify against the official Survey Office Cadastral Trace map.',
+      desc: 'High-precision boundary measurement verifying whether on-ground dimensions match Lalpurja area.',
       icon: Ruler,
     },
     {
       num: '04',
       title: 'Building Structural Assessment',
-      desc: 'Evaluating structural integrity, foundation signs, wall cracks, RCC quality, and building age/depreciation for built properties.',
+      desc: 'Inspecting RCC framing integrity, load-bearing walls, crack patterns, built age, and material soundness.',
       icon: Building,
     },
     {
       num: '05',
-      title: 'Road Access & Right-of-Way Check',
-      desc: 'Verifying actual physical road width versus municipal right-of-way Master Plan and setback dedication requirements.',
+      title: 'Road Access & Right-of-Way Verification',
+      desc: 'Checking municipal road categorization, actual physical width, statutory setbacks, and expansion plans.',
       icon: Layers,
     },
     {
       num: '06',
-      title: 'Document Technical Review',
-      desc: 'Reviewing approved building drawings, municipal completion certificates, tax receipts, and trace map alignments.',
+      title: 'Municipal & Regulatory Document Review',
+      desc: 'Review of municipal building approval (Naxa Paas), completion certificate (Nirman Sampanna), and tax receipts.',
       icon: FileCheck2,
     },
     {
       num: '07',
-      title: 'Development Potential & Zoning',
-      desc: 'Assessing maximum Floor Area Ratio (FAR), Ground Coverage limits, and permitted commercial/residential usages under local bylaws.',
+      title: 'Development Potential & Zoning Check',
+      desc: 'Analyzing maximum permissible Ground Coverage, Floor Area Ratio (FAR), height limits, and future zoning.',
       icon: TrendingUp,
     },
     {
       num: '08',
       title: 'Technical & Utility Feasibility',
-      desc: 'Confirming access to municipal water, three-phase power lines, stormwater drains, and high-tension corridor safety clearance.',
+      desc: 'Verifying high-tension power line clearances, river/canal buffer setbacks, and storm water disposal outfalls.',
       icon: Zap,
     },
     {
       num: '09',
-      title: 'Independent Valuation Benchmark',
-      desc: 'Establishing the realistic Fair Market Value and Distress Value to provide a mathematical upper ceiling for negotiation.',
+      title: 'Engineering Valuation & Price Check',
+      desc: 'Calculating fair market value vs government rate (Malpot rate) to ensure you are not overpaying.',
       icon: Scale,
     },
     {
       num: '10',
-      title: 'Local Market & Neighborhood Check',
-      desc: 'Cross-checking recent real transaction prices in the immediate vicinity to prevent paying an inflated rate.',
+      title: 'Micro-Market & Liquidity Assessment',
+      desc: 'Analyzing recent transactions in the immediate neighborhood to evaluate resale liquidity and rental potential.',
       icon: FileSpreadsheet,
     },
   ];
 
   const commonRisksPrevented = [
     {
-      title: 'Cadastral Map vs. Field Discrepancies',
-      desc: 'Plots often have mismatched dimensions on the ground compared to Cadastral Naksha, leading to land loss or boundary disputes with neighbors.',
+      title: 'Encroachment & Kitta Mismatch',
+      desc: 'Buying a plot that is physically different or overlapping neighboring boundaries due to unverified trace maps.',
     },
     {
-      title: 'Municipal Road Expansion Cuts',
-      desc: 'Unsuspecting buyers purchase land without realizing that a planned 30-ft municipal road widening will cut through their front boundary or building.',
+      title: 'Undisclosed Road Expansion Setbacks',
+      desc: 'Losing 3 to 10 meters of valuable frontage to upcoming municipality or highway right-of-way expansions.',
     },
     {
-      title: 'Unapproved Construction & Setback Violations',
-      desc: 'Buildings constructed without approved municipal drawings or violating setback bylaws cannot obtain completion certificates or bank mortgages.',
+      title: 'Illegal / Unapproved Floor Additions',
+      desc: 'Purchasing a building with unapproved floors that cannot be mortgaged or legally transferred.',
     },
     {
-      title: 'High-Tension Power Line & River Buffers',
-      desc: 'Proximity to high-voltage transmission lines or river banks imposes strict statutory no-construction buffer zones that render land unusable.',
+      title: 'High-Tension Wire & River Buffer Restrictions',
+      desc: 'Parcels rendered unbuildable due to mandatory statutory clearances for electricity corridors or irrigation canals.',
     },
     {
-      title: 'Waterlogging & Flood Plain Hazards',
-      desc: 'Low-lying land parcels in the Terai can suffer severe seasonal waterlogging, requiring extensive earth filling and costly drainage works.',
+      title: 'Severe Artificial Price Inflation',
+      desc: 'Overpaying up to 40% above fair market value due to speculative broker hype without empirical valuation.',
     },
     {
-      title: 'Arbitrary Price Inflation',
-      desc: 'Intermediary speculation often drives quoted prices 20%–40% above fair market value. Our engineering benchmark protects your capital.',
+      title: 'Waterlogging & Low-Lying Fill Pitfalls',
+      desc: 'Unforeseen land filling and foundation stabilization expenses running into millions of rupees.',
     },
   ];
 
   return (
-    <main className="min-h-screen bg-slate-50 pt-28 sm:pt-32 pb-20">
-      {/* Hero Section */}
-      <section className="relative overflow-hidden bg-navy-950 text-white py-16 sm:py-24 mb-16">
+    <main className="min-h-screen bg-slate-50 dark:bg-dark-bg text-navy-950 dark:text-dark-text pt-28 sm:pt-32 pb-20 transition-colors">
+      {/* Hero Header */}
+      <section className="relative overflow-hidden bg-navy-950 dark:bg-dark-surface text-white py-16 sm:py-24 mb-16 border-b border-navy-800 dark:border-dark-border">
         <div className="absolute inset-0 bg-grid-pattern opacity-10 pointer-events-none" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="max-w-3xl">
             <div className="flex items-center gap-2 mb-4">
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md text-xs font-bold tracking-wider uppercase bg-white/10 text-blue-200 border border-white/15">
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md text-xs font-bold tracking-wider uppercase bg-white/10 dark:bg-dark-elevated text-blue-200 dark:text-sky-300 border border-white/15 dark:border-dark-border">
                 <ShieldCheck className="w-3.5 h-3.5 text-amber-400" />
-                TECHNICAL RISK MANAGEMENT
+                PRE-PURCHASE RISK AUDIT
               </span>
               <Badge variant="warning" size="sm">
-                10-Point Technical Audit
+                10-Point Technical Check
               </Badge>
             </div>
 
             <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight leading-tight">
               Verify before you invest.
             </h1>
-            <p className="mt-4 text-base sm:text-lg text-slate-300 leading-relaxed font-normal">
-              Property purchases are among the largest financial decisions of a lifetime. Kaltade conducts independent technical due diligence, boundary verification, and structural audits to safeguard your capital.
+            <p className="mt-4 text-base sm:text-lg text-slate-300 dark:text-slate-400 leading-relaxed font-normal">
+              Property purchases in Nepal represent major capital investments. Kaltade conducts comprehensive on-ground technical due diligence, boundary verification, municipal setback audits, and structural inspections before you sign.
             </p>
 
             <div className="mt-8 flex flex-wrap items-center gap-4">
@@ -221,19 +221,19 @@ export default function DueDiligencePage() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-20 sm:space-y-28">
         {/* PROMINENT MANDATORY LEGAL DISCLAIMER BANNER */}
-        <section className="p-6 sm:p-8 rounded-3xl bg-amber-50 border-2 border-amber-300/80 shadow-sm text-amber-950">
+        <section className="p-6 sm:p-8 rounded-3xl bg-amber-50 dark:bg-amber-950/40 border-2 border-amber-300/80 dark:border-amber-800/60 shadow-xs text-amber-950 dark:text-amber-300">
           <div className="flex items-start gap-4">
-            <div className="p-3 rounded-2xl bg-amber-200/80 text-amber-900 shrink-0 mt-0.5">
+            <div className="p-3 rounded-2xl bg-amber-200/80 dark:bg-amber-900/60 text-amber-900 dark:text-amber-300 shrink-0 mt-0.5">
               <ShieldAlert className="w-6 h-6" />
             </div>
             <div className="space-y-2">
-              <h3 className="text-base sm:text-lg font-extrabold text-amber-900 tracking-tight">
-                Important Notice on Technical Due Diligence & Legal Title Verification
+              <h3 className="text-base sm:text-lg font-extrabold text-amber-900 dark:text-amber-200 tracking-tight">
+                Important Notice on Technical Due Diligence &amp; Legal Title Verification
               </h3>
-              <p className="text-xs sm:text-sm text-amber-900/90 leading-relaxed font-medium">
+              <p className="text-xs sm:text-sm text-amber-900/90 dark:text-amber-300/90 leading-relaxed font-medium">
                 Technical/property due diligence does not replace legal title verification or advice from qualified legal professionals. Legal and government-record verification shall be carried out through the appropriate authorities and professionals.
               </p>
-              <p className="text-xs text-amber-800 leading-relaxed">
+              <p className="text-xs text-amber-800 dark:text-amber-400 leading-relaxed">
                 Kaltade Engineering Services Pvt. Ltd. provides physical, structural, setback, Cadastral trace discrepancy, and market valuation assessments. Official land title ownership history, court litigation checks, encumbrances (Rokka/Dharauti), and formal conveyancing should be conducted in coordination with licensed Advocates and the Land Revenue Office (Malpot Karyalaya).
               </p>
             </div>
@@ -255,27 +255,27 @@ export default function DueDiligencePage() {
               return (
                 <div
                   key={check.num}
-                  className="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm hover:shadow-md hover:border-navy-900/40 transition-all flex flex-col justify-between group"
+                  className="p-6 rounded-2xl bg-white dark:bg-dark-card border border-slate-200 dark:border-dark-border shadow-xs dark:shadow-card-dark hover:shadow-md hover:border-navy-900/40 dark:hover:border-sky-500/40 transition-all flex flex-col justify-between group"
                 >
                   <div>
                     <div className="flex items-center justify-between mb-4">
-                      <span className="text-2xl font-black font-mono text-navy-300 group-hover:text-navy-900 transition-colors">
+                      <span className="text-2xl font-black font-mono text-navy-300 dark:text-navy-700 group-hover:text-navy-900 dark:group-hover:text-sky-300 transition-colors">
                         {check.num}
                       </span>
-                      <div className="p-2.5 rounded-xl bg-navy-50 text-navy-900 border border-navy-100 group-hover:bg-navy-900 group-hover:text-white transition-colors">
+                      <div className="p-2.5 rounded-xl bg-navy-50 dark:bg-dark-elevated text-navy-900 dark:text-sky-300 border border-navy-100 dark:border-dark-border group-hover:bg-navy-900 dark:group-hover:bg-navy-700 group-hover:text-white transition-colors">
                         <Icon className="w-4 h-4" />
                       </div>
                     </div>
 
-                    <h3 className="text-base font-bold text-navy-950 mb-2 leading-snug">
+                    <h3 className="text-base font-bold text-navy-950 dark:text-white mb-2 leading-snug">
                       {check.title}
                     </h3>
-                    <p className="text-xs text-slate-600 leading-relaxed font-normal">
+                    <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed font-normal">
                       {check.desc}
                     </p>
                   </div>
 
-                  <div className="mt-4 pt-3 border-t border-slate-100 flex items-center gap-1 text-[11px] font-semibold text-emerald-700">
+                  <div className="mt-4 pt-3 border-t border-slate-100 dark:border-dark-border flex items-center gap-1 text-[11px] font-semibold text-emerald-700 dark:text-emerald-400">
                     <Check className="w-3.5 h-3.5" />
                     <span>Included in Report</span>
                   </div>
@@ -286,7 +286,7 @@ export default function DueDiligencePage() {
         </section>
 
         {/* Common Risks Prevented */}
-        <section className="bg-navy-950 text-white rounded-3xl p-8 sm:p-12 border border-navy-800">
+        <section className="bg-navy-950 dark:bg-dark-surface text-white rounded-3xl p-8 sm:p-12 border border-navy-800 dark:border-dark-border shadow-xl dark:shadow-card-dark">
           <div className="flex items-center gap-2 mb-3">
             <AlertTriangle className="w-5 h-5 text-amber-400" />
             <span className="text-xs font-bold uppercase tracking-wider text-amber-400">
@@ -297,7 +297,7 @@ export default function DueDiligencePage() {
           <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight mb-4">
             Costly Property Risks Prevented by Technical Diligence
           </h2>
-          <p className="text-sm sm:text-base text-slate-300 max-w-3xl leading-relaxed mb-10">
+          <p className="text-sm sm:text-base text-slate-300 dark:text-slate-400 max-w-3xl leading-relaxed mb-10">
             Real estate disputes in Nepal often arise from unverified boundaries, undisclosed municipal setbacks, and unapproved buildings. Here is what our diligence safeguards you against:
           </p>
 
@@ -305,7 +305,7 @@ export default function DueDiligencePage() {
             {commonRisksPrevented.map((risk, idx) => (
               <div
                 key={idx}
-                className="p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-amber-400/40 transition-colors"
+                className="p-6 rounded-2xl bg-white/5 dark:bg-dark-elevated/60 border border-white/10 dark:border-dark-border hover:border-amber-400/40 transition-colors"
               >
                 <div className="w-8 h-8 rounded-lg bg-rose-500/20 text-rose-300 flex items-center justify-center mb-3 font-bold text-xs">
                   0{idx + 1}
@@ -313,7 +313,7 @@ export default function DueDiligencePage() {
                 <h4 className="text-base font-bold text-white mb-2">
                   {risk.title}
                 </h4>
-                <p className="text-xs text-slate-300 leading-relaxed font-normal">
+                <p className="text-xs text-slate-300 dark:text-slate-400 leading-relaxed font-normal">
                   {risk.desc}
                 </p>
               </div>
@@ -322,11 +322,11 @@ export default function DueDiligencePage() {
         </section>
 
         {/* What You Receive / Deliverables */}
-        <section className="p-8 sm:p-12 rounded-3xl bg-white border border-slate-200 shadow-sm max-w-4xl mx-auto space-y-6 text-center">
-          <h3 className="text-2xl sm:text-3xl font-extrabold text-navy-950 tracking-tight">
+        <section className="p-8 sm:p-12 rounded-3xl bg-white dark:bg-dark-card border border-slate-200 dark:border-dark-border shadow-xs dark:shadow-card-dark max-w-4xl mx-auto space-y-6 text-center">
+          <h3 className="text-2xl sm:text-3xl font-extrabold text-navy-950 dark:text-white tracking-tight">
             The Technical Due Diligence Deliverable
           </h3>
-          <p className="text-sm text-slate-600 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-sm text-slate-600 dark:text-slate-300 max-w-2xl mx-auto leading-relaxed">
             Upon completing field inspection and document review, you receive a bound and signed Technical Due Diligence Memorandum complete with survey drawings, photographic proof, setback clearance status, and fair market valuation.
           </p>
 
@@ -340,9 +340,9 @@ export default function DueDiligencePage() {
             </Button>
             <a
               href="tel:+9779858425256"
-              className="inline-flex items-center justify-center font-medium rounded-lg transition-all duration-200 border border-slate-300 bg-white text-slate-800 hover:bg-slate-50 hover:border-slate-400 text-base px-6 py-3.5 gap-2.5 shadow-sm"
+              className="inline-flex items-center justify-center font-medium rounded-lg transition-all duration-200 border border-slate-300 dark:border-dark-border bg-white dark:bg-dark-elevated text-slate-800 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-dark-card text-base px-6 py-3.5 gap-2.5 shadow-xs"
             >
-              <Phone className="w-4 h-4 text-amber-600" />
+              <Phone className="w-4 h-4 text-amber-600 dark:text-amber-400" />
               <span>Call +977-9858425256</span>
             </a>
           </div>
@@ -359,18 +359,18 @@ export default function DueDiligencePage() {
       >
         {isSubmitted ? (
           <div className="py-8 text-center space-y-4">
-            <div className="w-14 h-14 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto">
+            <div className="w-14 h-14 rounded-full bg-emerald-100 dark:bg-emerald-950/80 text-emerald-600 dark:text-emerald-400 flex items-center justify-center mx-auto">
               <Check className="w-8 h-8" />
             </div>
             <div className="space-y-1">
-              <h4 className="text-xl font-bold text-navy-950">
+              <h4 className="text-xl font-bold text-navy-950 dark:text-white">
                 Due Diligence Request Received!
               </h4>
-              <p className="text-sm text-slate-600 max-w-md mx-auto">
+              <p className="text-sm text-slate-600 dark:text-slate-300 max-w-md mx-auto">
                 Our engineering team has logged your verification request.
               </p>
             </div>
-            <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-3 max-w-md mx-auto text-xs text-emerald-800 text-center">
+            <div className="bg-emerald-50 dark:bg-emerald-950/50 border border-emerald-200 dark:border-emerald-800/60 rounded-xl p-3 max-w-md mx-auto text-xs text-emerald-800 dark:text-emerald-300 text-center">
               ✉️ Notification sent to <strong>kaltadeengineeringservices@gmail.com</strong> &amp; <strong>ai.antigravity11@gmail.com</strong>
             </div>
             <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3">
@@ -399,7 +399,7 @@ export default function DueDiligencePage() {
                   setIsSubmitted(false);
                   setIsModalOpen(false);
                 }}
-                className="px-4 py-2.5 rounded-xl border border-slate-200 hover:bg-slate-50 text-xs font-semibold text-slate-700"
+                className="px-4 py-2.5 rounded-xl border border-slate-200 dark:border-dark-border hover:bg-slate-50 dark:hover:bg-dark-elevated text-xs font-semibold text-slate-700 dark:text-slate-300"
               >
                 Close Window
               </button>
@@ -408,7 +408,7 @@ export default function DueDiligencePage() {
         ) : (
           <form onSubmit={handleSubmit} className="space-y-4 text-xs sm:text-sm">
             <div>
-              <label className="block font-semibold text-slate-700 mb-1">
+              <label className="block font-semibold text-slate-700 dark:text-slate-300 mb-1">
                 Full Name *
               </label>
               <input
@@ -419,13 +419,13 @@ export default function DueDiligencePage() {
                   setFormData({ ...formData, fullName: e.target.value })
                 }
                 placeholder="e.g. Ramesh Bahadur Singh"
-                className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-navy-900 focus:outline-none"
+                className="w-full px-3 py-2 border border-slate-300 dark:border-dark-border rounded-lg focus:ring-2 focus:ring-navy-900 dark:focus:ring-sky-400 focus:outline-none bg-white dark:bg-dark-card text-slate-900 dark:text-white"
               />
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block font-semibold text-slate-700 mb-1">
+                <label className="block font-semibold text-slate-700 dark:text-slate-300 mb-1">
                   Phone Number (WhatsApp) *
                 </label>
                 <input
@@ -436,12 +436,12 @@ export default function DueDiligencePage() {
                     setFormData({ ...formData, phone: e.target.value })
                   }
                   placeholder="e.g. +977 98480XXXXX"
-                  className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-navy-900 focus:outline-none"
+                  className="w-full px-3 py-2 border border-slate-300 dark:border-dark-border rounded-lg focus:ring-2 focus:ring-navy-900 dark:focus:ring-sky-400 focus:outline-none bg-white dark:bg-dark-card text-slate-900 dark:text-white"
                 />
               </div>
 
               <div>
-                <label className="block font-semibold text-slate-700 mb-1">
+                <label className="block font-semibold text-slate-700 dark:text-slate-300 mb-1">
                   Email Address
                 </label>
                 <input
@@ -451,14 +451,14 @@ export default function DueDiligencePage() {
                     setFormData({ ...formData, email: e.target.value })
                   }
                   placeholder="e.g. ramesh@example.com"
-                  className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-navy-900 focus:outline-none"
+                  className="w-full px-3 py-2 border border-slate-300 dark:border-dark-border rounded-lg focus:ring-2 focus:ring-navy-900 dark:focus:ring-sky-400 focus:outline-none bg-white dark:bg-dark-card text-slate-900 dark:text-white"
                 />
               </div>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block font-semibold text-slate-700 mb-1">
+                <label className="block font-semibold text-slate-700 dark:text-slate-300 mb-1">
                   Property Type
                 </label>
                 <select
@@ -466,7 +466,7 @@ export default function DueDiligencePage() {
                   onChange={(e) =>
                     setFormData({ ...formData, propertyType: e.target.value })
                   }
-                  className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-navy-900 focus:outline-none bg-white"
+                  className="w-full px-3 py-2 border border-slate-300 dark:border-dark-border rounded-lg focus:ring-2 focus:ring-navy-900 dark:focus:ring-sky-400 focus:outline-none bg-white dark:bg-dark-card text-slate-900 dark:text-white"
                 >
                   <option value="Land Parcel for Acquisition">Land Parcel for Acquisition</option>
                   <option value="Residential House / Villa">Residential House / Villa</option>
@@ -478,7 +478,7 @@ export default function DueDiligencePage() {
               </div>
 
               <div>
-                <label className="block font-semibold text-slate-700 mb-1">
+                <label className="block font-semibold text-slate-700 dark:text-slate-300 mb-1">
                   Property Location (Ward / Landmark) *
                 </label>
                 <input
@@ -489,14 +489,14 @@ export default function DueDiligencePage() {
                     setFormData({ ...formData, propertyLocation: e.target.value })
                   }
                   placeholder="e.g. Hasanpur, Dhangadhi-5"
-                  className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-navy-900 focus:outline-none"
+                  className="w-full px-3 py-2 border border-slate-300 dark:border-dark-border rounded-lg focus:ring-2 focus:ring-navy-900 dark:focus:ring-sky-400 focus:outline-none bg-white dark:bg-dark-card text-slate-900 dark:text-white"
                 />
               </div>
             </div>
 
             <div>
-              <label className="block font-semibold text-slate-700 mb-1">
-                Transaction Status & Specific Concerns
+              <label className="block font-semibold text-slate-700 dark:text-slate-300 mb-1">
+                Transaction Status &amp; Specific Concerns
               </label>
               <textarea
                 rows={3}
@@ -505,11 +505,11 @@ export default function DueDiligencePage() {
                   setFormData({ ...formData, message: e.target.value })
                 }
                 placeholder="Mention whether negotiation is ongoing, if you suspect boundary discrepancy, road width questions, or need urgent report..."
-                className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-navy-900 focus:outline-none"
+                className="w-full px-3 py-2 border border-slate-300 dark:border-dark-border rounded-lg focus:ring-2 focus:ring-navy-900 dark:focus:ring-sky-400 focus:outline-none bg-white dark:bg-dark-card text-slate-900 dark:text-white"
               />
             </div>
 
-            <div className="p-3 bg-slate-50 border border-slate-200 rounded-lg text-[11px] text-slate-600">
+            <div className="p-3 bg-slate-50 dark:bg-dark-surface border border-slate-200 dark:border-dark-border rounded-lg text-[11px] text-slate-600 dark:text-slate-300">
               <strong>Notice:</strong> Technical due diligence focuses on physical, engineering, setback, and valuation assessment. Legal title conveyancing is carried out through licensed legal professionals and the Land Revenue Office.
             </div>
 

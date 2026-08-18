@@ -14,9 +14,9 @@ import {
   Scale,
   Compass,
   ArrowRight,
-  ShieldAlert,
 } from 'lucide-react';
 import { Button } from '@/ui/Button';
+import { ThemeToggle } from '@/components/theme/ThemeToggle';
 import { cn } from '@/lib/utils';
 
 export function Navbar() {
@@ -93,10 +93,10 @@ export function Navbar() {
         className={cn(
           'fixed top-0 left-0 right-0 z-40 transition-all duration-300',
           isScrolled
-            ? 'bg-white/95 backdrop-blur-md shadow-sm border-b border-slate-200/80 py-3'
+            ? 'bg-white/95 dark:bg-dark-bg/95 backdrop-blur-md shadow-xs dark:shadow-card-dark border-b border-slate-200/80 dark:border-dark-border py-2.5 sm:py-3'
             : isHomePage
-            ? 'bg-gradient-to-b from-navy-950/90 via-navy-950/40 to-transparent py-4 text-white'
-            : 'bg-white border-b border-slate-200 py-3'
+            ? 'bg-gradient-to-b from-navy-950/95 via-navy-950/60 to-transparent py-3 sm:py-4 text-white'
+            : 'bg-white dark:bg-dark-bg border-b border-slate-200 dark:border-dark-border py-2.5 sm:py-3'
         )}
       >
         {/* Top mini-bar for contact & fast action */}
@@ -134,7 +134,7 @@ export function Navbar() {
           <div className="flex items-center justify-between">
             {/* Logo */}
             <Link href="/" className="flex items-center gap-3 group">
-              <div className="relative w-10 h-10 sm:w-11 sm:h-11 rounded-lg overflow-hidden border border-slate-200/60 bg-white p-0.5 shadow-sm transition-transform group-hover:scale-105">
+              <div className="relative w-10 h-10 sm:w-11 sm:h-11 rounded-lg overflow-hidden border border-slate-200/80 dark:border-dark-border bg-white p-0.5 shadow-xs transition-transform group-hover:scale-105">
                 <Image
                   src="/logo.jpeg"
                   alt="Kaltade Engineering Services Logo"
@@ -147,7 +147,9 @@ export function Navbar() {
                 <span
                   className={cn(
                     'font-black text-lg sm:text-xl tracking-tight leading-tight',
-                    !isScrolled && isHomePage ? 'text-white' : 'text-navy-950'
+                    !isScrolled && isHomePage
+                      ? 'text-white'
+                      : 'text-navy-950 dark:text-white'
                   )}
                 >
                   KALTADE
@@ -157,7 +159,7 @@ export function Navbar() {
                     'text-[10px] sm:text-[11px] font-semibold tracking-wider uppercase leading-tight',
                     !isScrolled && isHomePage
                       ? 'text-blue-200'
-                      : 'text-navy-700'
+                      : 'text-navy-700 dark:text-sky-400'
                   )}
                 >
                   Engineering Services
@@ -186,8 +188,8 @@ export function Navbar() {
                           !isScrolled && isHomePage
                             ? 'text-slate-200 hover:text-white hover:bg-white/10'
                             : isActive
-                            ? 'text-navy-900 bg-navy-50'
-                            : 'text-slate-700 hover:text-navy-900 hover:bg-slate-50'
+                            ? 'text-navy-900 dark:text-sky-300 bg-navy-50 dark:bg-dark-card'
+                            : 'text-slate-700 dark:text-slate-200 hover:text-navy-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-dark-card'
                         )}
                       >
                         {link.name}
@@ -197,30 +199,30 @@ export function Navbar() {
                       {/* Dropdown Menu */}
                       {servicesDropdownOpen && (
                         <div className="absolute top-full left-0 w-80 pt-2 z-50">
-                          <div className="bg-white rounded-xl shadow-xl border border-slate-200 p-2 text-slate-800">
+                          <div className="bg-white dark:bg-dark-surface rounded-xl shadow-xl dark:shadow-card-dark border border-slate-200 dark:border-dark-border p-2 text-slate-800 dark:text-slate-200">
                             {link.subItems?.map((sub) => (
                               <Link
                                 key={sub.name}
                                 href={sub.href}
-                                className="flex items-start gap-3 p-2.5 rounded-lg hover:bg-slate-50 transition-colors group/sub"
+                                className="flex items-start gap-3 p-2.5 rounded-lg hover:bg-slate-50 dark:hover:bg-dark-card transition-colors group/sub"
                               >
-                                <div className="p-2 rounded-lg bg-navy-50 text-navy-800 group-hover/sub:bg-navy-900 group-hover/sub:text-white transition-colors">
+                                <div className="p-2 rounded-lg bg-navy-50 dark:bg-navy-900/60 text-navy-800 dark:text-sky-400 group-hover/sub:bg-navy-900 group-hover/sub:text-white dark:group-hover/sub:bg-navy-800 transition-colors">
                                   <sub.icon className="w-4 h-4" />
                                 </div>
                                 <div>
-                                  <div className="text-sm font-semibold text-navy-950 group-hover/sub:text-navy-700">
+                                  <div className="text-sm font-semibold text-navy-950 dark:text-white group-hover/sub:text-navy-700 dark:group-hover/sub:text-sky-300">
                                     {sub.name}
                                   </div>
-                                  <div className="text-xs text-slate-500 line-clamp-1 mt-0.5">
+                                  <div className="text-xs text-slate-500 dark:text-slate-400 line-clamp-1 mt-0.5">
                                     {sub.desc}
                                   </div>
                                 </div>
                               </Link>
                             ))}
-                            <div className="mt-2 pt-2 border-t border-slate-100 px-2 pb-1">
+                            <div className="mt-2 pt-2 border-t border-slate-100 dark:border-dark-border px-2 pb-1">
                               <Link
                                 href="/services"
-                                className="text-xs font-semibold text-navy-700 hover:text-navy-900 flex items-center justify-between"
+                                className="text-xs font-semibold text-navy-700 dark:text-sky-400 hover:text-navy-900 dark:hover:text-sky-300 flex items-center justify-between"
                               >
                                 <span>View All Capabilities</span>
                                 <ArrowRight className="w-3.5 h-3.5" />
@@ -244,8 +246,8 @@ export function Navbar() {
                           ? 'text-white bg-white/15'
                           : 'text-slate-200 hover:text-white hover:bg-white/10'
                         : isActive
-                        ? 'text-navy-900 bg-navy-50'
-                        : 'text-slate-700 hover:text-navy-900 hover:bg-slate-50'
+                        ? 'text-navy-900 dark:text-sky-300 bg-navy-50 dark:bg-dark-card'
+                        : 'text-slate-700 dark:text-slate-200 hover:text-navy-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-dark-card'
                     )}
                   >
                     {link.name}
@@ -254,13 +256,15 @@ export function Navbar() {
               })}
             </nav>
 
-            {/* Header Action Buttons */}
-            <div className="hidden sm:flex items-center gap-3">
+            {/* Header Action Buttons + Theme Toggle */}
+            <div className="hidden sm:flex items-center gap-2.5">
+              <ThemeToggle size="md" />
+
               <Button
                 href="/valuation"
                 variant={!isScrolled && isHomePage ? 'white' : 'secondary'}
                 size="sm"
-                className="hidden md:inline-flex"
+                className="hidden xl:inline-flex"
               >
                 Request Valuation
               </Button>
@@ -273,15 +277,16 @@ export function Navbar() {
               </Button>
             </div>
 
-            {/* Mobile Menu Button */}
+            {/* Mobile Menu Button + Mobile Theme Toggle */}
             <div className="flex lg:hidden items-center gap-2">
+              <ThemeToggle size="sm" />
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                 className={cn(
                   'p-2 rounded-lg transition-colors',
                   !isScrolled && isHomePage
                     ? 'text-white hover:bg-white/10'
-                    : 'text-navy-950 hover:bg-slate-100'
+                    : 'text-navy-950 dark:text-white hover:bg-slate-100 dark:hover:bg-dark-card'
                 )}
                 aria-label="Toggle mobile menu"
               >
@@ -300,13 +305,13 @@ export function Navbar() {
       {mobileMenuOpen && (
         <div className="fixed inset-0 z-50 lg:hidden">
           <div
-            className="fixed inset-0 bg-navy-950/70 backdrop-blur-sm"
+            className="fixed inset-0 bg-navy-950/70 dark:bg-black/80 backdrop-blur-sm"
             onClick={() => setMobileMenuOpen(false)}
           />
-          <div className="fixed top-0 right-0 bottom-0 w-5/6 max-w-sm bg-white shadow-2xl z-10 flex flex-col overflow-y-auto">
-            <div className="p-4 border-b border-slate-100 flex items-center justify-between bg-slate-50">
+          <div className="fixed top-0 right-0 bottom-0 w-5/6 max-w-sm bg-white dark:bg-dark-bg shadow-2xl z-10 flex flex-col overflow-y-auto border-l border-slate-200 dark:border-dark-border">
+            <div className="p-4 border-b border-slate-100 dark:border-dark-border flex items-center justify-between bg-slate-50 dark:bg-dark-surface">
               <div className="flex items-center gap-2.5">
-                <div className="relative w-8 h-8 rounded-lg overflow-hidden border border-slate-200">
+                <div className="relative w-8 h-8 rounded-lg overflow-hidden border border-slate-200 dark:border-dark-border bg-white p-0.5">
                   <Image
                     src="/logo.jpeg"
                     alt="Logo"
@@ -314,19 +319,24 @@ export function Navbar() {
                     className="object-contain"
                   />
                 </div>
-                <span className="font-extrabold text-base text-navy-950">
+                <span className="font-extrabold text-base text-navy-950 dark:text-white">
                   KALTADE
                 </span>
               </div>
               <button
                 onClick={() => setMobileMenuOpen(false)}
-                className="p-1.5 rounded-lg text-slate-500 hover:bg-slate-200"
+                className="p-1.5 rounded-lg text-slate-500 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-dark-elevated"
               >
                 <X className="w-5 h-5" />
               </button>
             </div>
 
             <div className="p-4 flex-1 space-y-1">
+              {/* Theme toggle row in mobile drawer */}
+              <div className="pb-3 mb-2 border-b border-slate-100 dark:border-dark-border">
+                <ThemeToggle variant="labeled" />
+              </div>
+
               {navLinks.map((link) => (
                 <div key={link.name}>
                   <Link
@@ -334,8 +344,8 @@ export function Navbar() {
                     className={cn(
                       'block px-3 py-2.5 rounded-lg font-semibold text-sm transition-colors',
                       pathname === link.href
-                        ? 'bg-navy-50 text-navy-900 font-bold'
-                        : 'text-slate-700 hover:bg-slate-50'
+                        ? 'bg-navy-50 dark:bg-dark-card text-navy-900 dark:text-sky-300 font-bold'
+                        : 'text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-dark-card'
                     )}
                   >
                     {link.name}
@@ -346,7 +356,7 @@ export function Navbar() {
                         <Link
                           key={sub.name}
                           href={sub.href}
-                          className="block px-3 py-2 rounded-md text-xs font-medium text-slate-600 hover:text-navy-900 hover:bg-slate-50"
+                          className="block px-3 py-2 rounded-md text-xs font-medium text-slate-600 dark:text-slate-400 hover:text-navy-900 dark:hover:text-sky-300 hover:bg-slate-50 dark:hover:bg-dark-card"
                         >
                           {sub.name}
                         </Link>
@@ -356,29 +366,29 @@ export function Navbar() {
                 </div>
               ))}
 
-              <div className="pt-4 border-t border-slate-200 space-y-2 mt-4">
+              <div className="pt-4 border-t border-slate-200 dark:border-dark-border space-y-2 mt-4">
                 <Link
                   href="/properties/find"
-                  className="block px-3 py-2 rounded-lg text-xs font-medium text-slate-600 hover:text-navy-900"
+                  className="block px-3 py-2 rounded-lg text-xs font-medium text-slate-600 dark:text-slate-400 hover:text-navy-900 dark:hover:text-white"
                 >
                   🔍 Tell Us What Property You Need
                 </Link>
                 <Link
                   href="/properties/list"
-                  className="block px-3 py-2 rounded-lg text-xs font-medium text-slate-600 hover:text-navy-900"
+                  className="block px-3 py-2 rounded-lg text-xs font-medium text-slate-600 dark:text-slate-400 hover:text-navy-900 dark:hover:text-white"
                 >
                   📝 List Your Property
                 </Link>
                 <Link
                   href="/admin"
-                  className="block px-3 py-2 rounded-lg text-xs font-semibold text-amber-700 hover:bg-amber-50"
+                  className="block px-3 py-2 rounded-lg text-xs font-semibold text-amber-700 dark:text-amber-400 hover:bg-amber-50 dark:hover:bg-dark-card"
                 >
                   ⚙️ Admin Portal & Leads
                 </Link>
               </div>
             </div>
 
-            <div className="p-4 border-t border-slate-100 bg-slate-50 space-y-2">
+            <div className="p-4 border-t border-slate-100 dark:border-dark-border bg-slate-50 dark:bg-dark-surface space-y-2">
               <Button href="/valuation" variant="secondary" className="w-full">
                 Request Property Valuation
               </Button>

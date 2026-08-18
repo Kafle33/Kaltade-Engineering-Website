@@ -30,21 +30,21 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     ref
   ) => {
     const baseStyles =
-      'inline-flex items-center justify-center font-medium rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-60 disabled:cursor-not-allowed select-none active:scale-[0.99]';
+      'inline-flex items-center justify-center font-semibold rounded-xl transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed select-none active:scale-[0.99] cursor-pointer';
 
     const variants = {
       primary:
-        'bg-navy-900 text-white hover:bg-navy-800 focus:ring-navy-900 shadow-sm hover:shadow-md border border-navy-800',
+        'bg-navy-900 dark:bg-navy-700 text-white hover:bg-navy-800 dark:hover:bg-navy-600 focus-visible:ring-navy-900 dark:focus-visible:ring-sky-400 shadow-sm hover:shadow-md border border-navy-800 dark:border-navy-600',
       secondary:
-        'bg-navy-50 text-navy-900 hover:bg-navy-100 focus:ring-navy-500 border border-navy-200/80',
+        'bg-navy-50 dark:bg-dark-card text-navy-900 dark:text-sky-300 hover:bg-navy-100 dark:hover:bg-dark-elevated focus-visible:ring-navy-500 border border-navy-200/80 dark:border-dark-border',
       accent:
-        'bg-amber-600 text-white hover:bg-amber-700 focus:ring-amber-500 shadow-sm hover:shadow-md',
+        'bg-amber-600 text-white hover:bg-amber-700 dark:bg-amber-500 dark:hover:bg-amber-600 focus-visible:ring-amber-500 shadow-sm hover:shadow-md border border-amber-600 dark:border-amber-500',
       outline:
-        'border border-slate-300 bg-white text-slate-800 hover:bg-slate-50 hover:border-slate-400 focus:ring-navy-900',
+        'border border-slate-300 dark:border-dark-border bg-white dark:bg-dark-card text-slate-800 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-dark-elevated hover:border-slate-400 dark:hover:border-slate-600 focus-visible:ring-navy-900',
       ghost:
-        'text-navy-900 hover:bg-navy-50 focus:ring-navy-500',
+        'text-navy-900 dark:text-slate-200 hover:bg-navy-50 dark:hover:bg-dark-card focus-visible:ring-navy-500',
       white:
-        'bg-white text-navy-950 hover:bg-slate-100 focus:ring-white shadow-md font-semibold',
+        'bg-white text-navy-950 hover:bg-slate-100 focus-visible:ring-white shadow-md font-semibold border border-slate-100',
     };
 
     const sizes = {

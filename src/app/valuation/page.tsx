@@ -100,44 +100,49 @@ export default function ValuationPage() {
       desc: 'Rental yield appraisal, capitalized income approach, tenant layout efficiency, and commercial corridor footfall value.',
     },
     {
-      title: 'Industrial & Warehouses',
+      title: 'Industrial Properties',
       icon: Warehouse,
-      types: ['Industrial Factory Sheds', 'Logistics Depots', 'Cold Storage Plants', 'Processing Mills'],
-      desc: 'Heavy structural steel appraisal, ceiling height clearance, three-phase power infrastructure, and transport logistics access.',
+      types: ['Manufacturing Units', 'Cold Storage Facilities', 'Warehouses', 'Factory Sheds'],
+      desc: 'Heavy structural frame analysis, boundary setbacks, high-voltage power substation access, and residual plant life assessment.',
     },
     {
-      title: 'Agricultural & Agro-Industrial',
+      title: 'Institutional & Agricultural',
       icon: Tractor,
-      types: ['Farming Land Parcels', 'Fishery Farms', 'Orchards', 'Agro-processing sites'],
-      desc: 'Soil fertility, road connectivity, irrigation canal proximity, and long-term land conversion potential.',
+      types: ['Schools & Colleges', 'Hospitals', 'Tea Estates', 'Farming Acreage'],
+      desc: 'Large tract land appraisal, institutional zoning compliance, agricultural productivity metrics, and expansion viability.',
     },
   ];
 
   const valuationApplications = [
     {
-      title: 'Bank Financing & Mortgage Credit',
+      title: 'Bank Financing & Mortgage Collateral',
       icon: Landmark,
-      desc: 'Mandatory collateral valuation accepted by Commercial Banks, Development Banks, and BFIs for loan sanctioning and credit limits.',
+      desc: 'Standardized valuation reports required by commercial banks and BFIs for loan appraisal and asset mortgaging.',
     },
     {
       title: 'Property Transactions (Buy / Sell)',
       icon: Coins,
-      desc: 'Objective third-party fair market valuation ensuring buyers do not overpay and sellers do not underestimate asset value.',
+      desc: 'Unbiased, market-tested valuations providing fair market pricing clarity for property buyers and sellers.',
     },
     {
       title: 'Corporate Balance Sheets & Audits',
       icon: FileText,
-      desc: 'Asset revaluation for corporate reporting, statutory financial audits, mergers, acquisitions, and asset transfer compliance.',
+      desc: 'Immovable asset revaluation reports conforming to Nepal Accounting Standards (NAS) for corporate accounting.',
     },
     {
-      title: 'Investment & Feasibility Appraisals',
-      icon: TrendingUp,
-      desc: 'Pre-acquisition financial assessment to benchmark expected return on investment (ROI) and development viability.',
-    },
-    {
-      title: 'Family Settlement & Partition',
+      title: 'Family Partition & Dispute Settlements',
       icon: Scale,
-      desc: 'Neutral, mathematically verified asset appraisal providing equitable division for family inheritances and legal settlements.',
+      desc: 'Impartial, mathematically verified valuations to facilitate equitable asset division and judicial proceedings.',
+    },
+    {
+      title: 'Investment Feasibility & Acquisition',
+      icon: TrendingUp,
+      desc: 'Strategic valuation audits evaluating development yield, rental capitalization, and capital appreciation potential.',
+    },
+    {
+      title: 'Insurance & Replacement Cost Appraisal',
+      icon: ShieldCheck,
+      desc: 'Accurate rebuilding cost analysis to determine appropriate insurance coverage against fire and seismic hazards.',
     },
   ];
 
@@ -191,14 +196,14 @@ export default function ValuationPage() {
   };
 
   return (
-    <main className="min-h-screen bg-slate-50 pt-28 sm:pt-32 pb-20">
-      {/* Hero Section */}
-      <section className="relative overflow-hidden bg-navy-950 text-white py-16 sm:py-24 mb-16">
+    <main className="min-h-screen bg-slate-50 dark:bg-dark-bg text-navy-950 dark:text-dark-text pt-28 sm:pt-32 pb-20 transition-colors">
+      {/* Hero Header */}
+      <section className="relative overflow-hidden bg-navy-950 dark:bg-dark-surface text-white py-16 sm:py-24 mb-16 border-b border-navy-800 dark:border-dark-border">
         <div className="absolute inset-0 bg-grid-pattern opacity-10 pointer-events-none" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="max-w-3xl">
             <div className="flex items-center gap-2 mb-4">
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md text-xs font-bold tracking-wider uppercase bg-white/10 text-blue-200 border border-white/15">
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md text-xs font-bold tracking-wider uppercase bg-white/10 dark:bg-dark-elevated text-blue-200 dark:text-sky-300 border border-white/15 dark:border-dark-border">
                 <Scale className="w-3.5 h-3.5 text-amber-400" />
                 FLAGSHIP DISCIPLINE
               </span>
@@ -208,16 +213,16 @@ export default function ValuationPage() {
             </div>
 
             <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight leading-tight">
-              Authoritative Property Valuation & Asset Assessment
+              Authoritative Property Valuation &amp; Asset Assessment
             </h1>
-            <p className="mt-4 text-base sm:text-lg text-slate-300 leading-relaxed font-normal">
+            <p className="mt-4 text-base sm:text-lg text-slate-300 dark:text-slate-400 leading-relaxed font-normal">
               Know what your property is truly worth. Standardized, bankable engineering valuations for land, residential, commercial, and industrial assets across Dhangadhi, Kailali, and throughout Nepal.
             </p>
 
             <div className="mt-8 flex flex-wrap items-center gap-4">
               <a
                 href="#request-valuation"
-                className="inline-flex items-center justify-center font-medium rounded-lg transition-all duration-200 bg-amber-600 text-white hover:bg-amber-700 text-base px-6 py-3.5 gap-2.5 shadow-sm hover:shadow-md"
+                className="inline-flex items-center justify-center font-medium rounded-lg transition-all duration-200 bg-amber-600 dark:bg-amber-500 text-white hover:bg-amber-700 dark:hover:bg-amber-600 text-base px-6 py-3.5 gap-2.5 shadow-xs hover:shadow-md"
               >
                 Submit Valuation Request
               </a>
@@ -245,28 +250,28 @@ export default function ValuationPage() {
               return (
                 <div
                   key={st.step}
-                  className="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm hover:shadow-md hover:border-navy-900/40 transition-all flex flex-col justify-between group"
+                  className="relative p-6 rounded-2xl bg-white dark:bg-dark-card border border-slate-200 dark:border-dark-border shadow-xs dark:shadow-card-dark hover:shadow-md hover:border-navy-900/40 dark:hover:border-sky-500/40 transition-all flex flex-col justify-between group"
                 >
                   <div>
                     <div className="flex items-center justify-between mb-4">
-                      <span className="text-2xl font-black font-mono text-navy-300 group-hover:text-navy-900 transition-colors">
+                      <span className="text-2xl font-black font-mono text-navy-300 dark:text-navy-700 group-hover:text-navy-900 dark:group-hover:text-sky-300 transition-colors">
                         {st.step}
                       </span>
-                      <div className="p-2.5 rounded-xl bg-navy-50 text-navy-900 border border-navy-100 group-hover:bg-navy-900 group-hover:text-white transition-colors">
+                      <div className="p-2.5 rounded-xl bg-navy-50 dark:bg-dark-elevated text-navy-900 dark:text-sky-300 border border-navy-100 dark:border-dark-border group-hover:bg-navy-900 dark:group-hover:bg-navy-700 group-hover:text-white transition-colors">
                         <Icon className="w-4 h-4" />
                       </div>
                     </div>
 
-                    <h3 className="text-base font-bold text-navy-950 mb-2 leading-snug">
+                    <h3 className="text-base font-bold text-navy-950 dark:text-white mb-2 leading-snug">
                       {st.title}
                     </h3>
-                    <p className="text-xs text-slate-600 leading-relaxed font-normal">
+                    <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed font-normal">
                       {st.desc}
                     </p>
                   </div>
 
                   {idx < methodologySteps.length - 1 && (
-                    <div className="hidden lg:block absolute -right-2.5 top-1/2 -translate-y-1/2 z-10 w-5 h-5 rounded-full bg-navy-900 text-white flex items-center justify-center text-[10px] font-bold">
+                    <div className="hidden lg:flex absolute -right-2.5 top-1/2 -translate-y-1/2 z-10 w-5 h-5 rounded-full bg-navy-900 dark:bg-navy-700 text-white items-center justify-center text-[10px] font-bold shadow-xs">
                       →
                     </div>
                   )}
@@ -291,26 +296,26 @@ export default function ValuationPage() {
               return (
                 <div
                   key={idx}
-                  className="p-7 rounded-2xl bg-white border border-slate-200 shadow-sm hover:shadow-lg transition-all flex flex-col justify-between"
+                  className="p-7 rounded-2xl bg-white dark:bg-dark-card border border-slate-200 dark:border-dark-border shadow-xs dark:shadow-card-dark hover:shadow-lg dark:hover:shadow-card-dark-hover transition-all flex flex-col justify-between"
                 >
                   <div className="space-y-3">
-                    <div className="w-12 h-12 rounded-xl bg-navy-50 text-navy-900 border border-navy-100 flex items-center justify-center">
-                      <Icon className="w-6 h-6 text-amber-600" />
+                    <div className="w-12 h-12 rounded-xl bg-navy-50 dark:bg-dark-elevated text-navy-900 dark:text-sky-300 border border-navy-100 dark:border-dark-border flex items-center justify-center">
+                      <Icon className="w-6 h-6 text-amber-600 dark:text-amber-400" />
                     </div>
 
-                    <h3 className="text-lg font-bold text-navy-950">
+                    <h3 className="text-lg font-bold text-navy-950 dark:text-white">
                       {pt.title}
                     </h3>
 
-                    <p className="text-xs text-slate-600 leading-relaxed">
+                    <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
                       {pt.desc}
                     </p>
 
-                    <div className="pt-3 border-t border-slate-100 flex flex-wrap gap-1.5">
+                    <div className="pt-3 border-t border-slate-100 dark:border-dark-border flex flex-wrap gap-1.5">
                       {pt.types.map((sub, sIdx) => (
                         <span
                           key={sIdx}
-                          className="px-2.5 py-1 rounded-md bg-slate-100 text-slate-700 text-[11px] font-medium"
+                          className="px-2.5 py-1 rounded-md bg-slate-100 dark:bg-dark-elevated text-slate-700 dark:text-slate-300 text-[11px] font-medium"
                         >
                           {sub}
                         </span>
@@ -324,18 +329,18 @@ export default function ValuationPage() {
         </section>
 
         {/* Valuation Applications */}
-        <section className="bg-navy-950 text-white rounded-3xl p-8 sm:p-12 border border-navy-800">
+        <section className="bg-navy-950 dark:bg-dark-surface text-white rounded-3xl p-8 sm:p-12 border border-navy-800 dark:border-dark-border shadow-xl dark:shadow-card-dark">
           <div className="flex items-center gap-2 mb-3">
             <Landmark className="w-5 h-5 text-amber-400" />
             <span className="text-xs font-bold uppercase tracking-wider text-amber-400">
-              PURPOSES & APPLICATIONS
+              PURPOSES &amp; APPLICATIONS
             </span>
           </div>
 
           <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight mb-4">
             Institutional Applications of Kaltade Valuations
           </h2>
-          <p className="text-sm sm:text-base text-slate-300 max-w-3xl leading-relaxed mb-10">
+          <p className="text-sm sm:text-base text-slate-300 dark:text-slate-400 max-w-3xl leading-relaxed mb-10">
             Our valuation dossiers are meticulously structured to satisfy the credit review boards of Nepal’s commercial banks, corporate audit standards, and court proceedings.
           </p>
 
@@ -345,15 +350,15 @@ export default function ValuationPage() {
               return (
                 <div
                   key={idx}
-                  className="p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-amber-400/40 transition-colors"
+                  className="p-6 rounded-2xl bg-white/5 dark:bg-dark-elevated/60 border border-white/10 dark:border-dark-border hover:border-amber-400/40 transition-colors"
                 >
-                  <div className="w-10 h-10 rounded-lg bg-white/10 text-amber-400 flex items-center justify-center mb-4">
+                  <div className="w-10 h-10 rounded-lg bg-white/10 dark:bg-dark-surface text-amber-400 flex items-center justify-center mb-4">
                     <Icon className="w-5 h-5" />
                   </div>
                   <h4 className="text-base font-bold text-white mb-2">
                     {app.title}
                   </h4>
-                  <p className="text-xs text-slate-300 leading-relaxed font-normal">
+                  <p className="text-xs text-slate-300 dark:text-slate-400 leading-relaxed font-normal">
                     {app.desc}
                   </p>
                 </div>
@@ -375,38 +380,38 @@ export default function ValuationPage() {
               />
 
               <div className="space-y-4">
-                <div className="p-5 rounded-2xl bg-white border border-slate-200 space-y-3">
-                  <h4 className="text-sm font-bold text-navy-950 flex items-center gap-2">
-                    <FileCheck2 className="w-4 h-4 text-emerald-600" />
+                <div className="p-5 rounded-2xl bg-white dark:bg-dark-card border border-slate-200 dark:border-dark-border shadow-xs dark:shadow-card-dark space-y-3">
+                  <h4 className="text-sm font-bold text-navy-950 dark:text-white flex items-center gap-2">
+                    <FileCheck2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
                     <span>Documents to Keep Ready:</span>
                   </h4>
-                  <ul className="space-y-2 text-xs text-slate-600">
+                  <ul className="space-y-2 text-xs text-slate-600 dark:text-slate-300">
                     <li className="flex items-start gap-2">
-                      <span className="w-1.5 h-1.5 rounded-full bg-navy-900 mt-1.5 shrink-0" />
+                      <span className="w-1.5 h-1.5 rounded-full bg-navy-900 dark:bg-sky-400 mt-1.5 shrink-0" />
                       <span>Land Ownership Certificate (Lalpurja) photocopy</span>
                     </li>
                     <li className="flex items-start gap-2">
-                      <span className="w-1.5 h-1.5 rounded-full bg-navy-900 mt-1.5 shrink-0" />
+                      <span className="w-1.5 h-1.5 rounded-full bg-navy-900 dark:bg-sky-400 mt-1.5 shrink-0" />
                       <span>Cadastral Blueprint Map (Napi Trace / Naksha)</span>
                     </li>
                     <li className="flex items-start gap-2">
-                      <span className="w-1.5 h-1.5 rounded-full bg-navy-900 mt-1.5 shrink-0" />
-                      <span>Municipal Building Permit & Approved Drawing (if built)</span>
+                      <span className="w-1.5 h-1.5 rounded-full bg-navy-900 dark:bg-sky-400 mt-1.5 shrink-0" />
+                      <span>Municipal Building Permit &amp; Approved Drawing (if built)</span>
                     </li>
                     <li className="flex items-start gap-2">
-                      <span className="w-1.5 h-1.5 rounded-full bg-navy-900 mt-1.5 shrink-0" />
+                      <span className="w-1.5 h-1.5 rounded-full bg-navy-900 dark:bg-sky-400 mt-1.5 shrink-0" />
                       <span>Latest Land Tax / Property Tax Receipt (Tiro Tireko Rasid)</span>
                     </li>
                   </ul>
                 </div>
 
                 {/* Important Legal Note */}
-                <div className="p-5 rounded-2xl bg-amber-50/80 border border-amber-200 text-xs text-amber-950 space-y-2">
-                  <div className="flex items-center gap-2 font-bold text-amber-900">
-                    <ShieldCheck className="w-4 h-4 text-amber-700 shrink-0" />
+                <div className="p-5 rounded-2xl bg-amber-50/80 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-800/60 text-xs text-amber-950 dark:text-amber-300 space-y-2">
+                  <div className="flex items-center gap-2 font-bold text-amber-900 dark:text-amber-300">
+                    <ShieldCheck className="w-4 h-4 text-amber-700 dark:text-amber-400 shrink-0" />
                     <span>Professional Engineering Assessment Notice</span>
                   </div>
-                  <p className="leading-relaxed text-amber-900/90">
+                  <p className="leading-relaxed text-amber-900/90 dark:text-amber-300/90">
                     Property valuations issued by Kaltade Engineering Services Pvt. Ltd. represent independent professional engineering evaluations based on physical inspection, structural depreciation formulas, municipal records, and empirical market transactions at the date of inspection. Valuations do not constitute a commercial guarantee of future liquidation prices or legal title ownership guarantee.
                   </p>
                 </div>
@@ -414,20 +419,20 @@ export default function ValuationPage() {
             </div>
 
             {/* Right Side: The Full Valuation Request Form */}
-            <div className="lg:col-span-7 bg-white rounded-3xl p-6 sm:p-10 border border-slate-200 shadow-md">
+            <div className="lg:col-span-7 bg-white dark:bg-dark-card rounded-3xl p-6 sm:p-10 border border-slate-200 dark:border-dark-border shadow-md dark:shadow-card-dark">
               {isSubmitted ? (
                 <div className="py-12 text-center space-y-4">
-                  <div className="w-16 h-16 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto shadow-sm">
+                  <div className="w-16 h-16 rounded-full bg-emerald-100 dark:bg-emerald-950/80 text-emerald-600 dark:text-emerald-400 flex items-center justify-center mx-auto shadow-xs">
                     <Check className="w-8 h-8" />
                   </div>
                   <div className="space-y-2">
-                    <span className="inline-block px-3 py-1 rounded-md bg-navy-50 text-navy-900 font-mono text-xs font-bold border border-navy-100">
+                    <span className="inline-block px-3 py-1 rounded-md bg-navy-50 dark:bg-dark-surface text-navy-900 dark:text-sky-300 font-mono text-xs font-bold border border-navy-100 dark:border-dark-border">
                       Tracking ID: {createdLeadId}
                     </span>
-                    <h3 className="text-2xl font-bold text-navy-950">
+                    <h3 className="text-2xl font-bold text-navy-950 dark:text-white">
                       Valuation Request Logged Successfully!
                     </h3>
-                    <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-3.5 max-w-md mx-auto text-xs text-emerald-800 text-center">
+                    <div className="bg-emerald-50 dark:bg-emerald-950/50 border border-emerald-200 dark:border-emerald-800/60 rounded-xl p-3.5 max-w-md mx-auto text-xs text-emerald-800 dark:text-emerald-300 text-center">
                       ✉️ Notification sent to <strong>kaltadeengineeringservices@gmail.com</strong> &amp; <strong>ai.antigravity11@gmail.com</strong>
                     </div>
                   </div>
@@ -460,17 +465,17 @@ export default function ValuationPage() {
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-5 text-xs sm:text-sm">
-                  <div className="flex items-center justify-between pb-3 border-b border-slate-100">
-                    <h3 className="text-lg font-bold text-navy-950 flex items-center gap-2">
-                      <Scale className="w-5 h-5 text-amber-600" />
+                  <div className="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-dark-border">
+                    <h3 className="text-lg font-bold text-navy-950 dark:text-white flex items-center gap-2">
+                      <Scale className="w-5 h-5 text-amber-600 dark:text-amber-400" />
                       <span>Property Valuation Application Form</span>
                     </h3>
-                    <span className="text-xs text-slate-500 font-medium">* Required</span>
+                    <span className="text-xs text-slate-500 dark:text-slate-400 font-medium">* Required</span>
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block font-semibold text-slate-700 mb-1">
+                      <label className="block font-semibold text-slate-700 dark:text-slate-300 mb-1">
                         Full Name / Applicant Name *
                       </label>
                       <input
@@ -481,12 +486,12 @@ export default function ValuationPage() {
                           setFormData({ ...formData, fullName: e.target.value })
                         }
                         placeholder="e.g. Shyam Sundar Chaudhary"
-                        className="w-full px-3.5 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-navy-900 focus:outline-none"
+                        className="w-full px-3.5 py-2.5 border border-slate-300 dark:border-dark-border rounded-lg focus:ring-2 focus:ring-navy-900 dark:focus:ring-sky-400 focus:outline-none bg-white dark:bg-dark-surface text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500"
                       />
                     </div>
 
                     <div>
-                      <label className="block font-semibold text-slate-700 mb-1">
+                      <label className="block font-semibold text-slate-700 dark:text-slate-300 mb-1">
                         Phone Number (Mobile / WhatsApp) *
                       </label>
                       <input
@@ -497,14 +502,14 @@ export default function ValuationPage() {
                           setFormData({ ...formData, phone: e.target.value })
                         }
                         placeholder="e.g. +977 98584XXXXX"
-                        className="w-full px-3.5 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-navy-900 focus:outline-none"
+                        className="w-full px-3.5 py-2.5 border border-slate-300 dark:border-dark-border rounded-lg focus:ring-2 focus:ring-navy-900 dark:focus:ring-sky-400 focus:outline-none bg-white dark:bg-dark-surface text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500"
                       />
                     </div>
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block font-semibold text-slate-700 mb-1">
+                      <label className="block font-semibold text-slate-700 dark:text-slate-300 mb-1">
                         Email Address
                       </label>
                       <input
@@ -514,12 +519,12 @@ export default function ValuationPage() {
                           setFormData({ ...formData, email: e.target.value })
                         }
                         placeholder="e.g. shyam@example.com"
-                        className="w-full px-3.5 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-navy-900 focus:outline-none"
+                        className="w-full px-3.5 py-2.5 border border-slate-300 dark:border-dark-border rounded-lg focus:ring-2 focus:ring-navy-900 dark:focus:ring-sky-400 focus:outline-none bg-white dark:bg-dark-surface text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500"
                       />
                     </div>
 
                     <div>
-                      <label className="block font-semibold text-slate-700 mb-1">
+                      <label className="block font-semibold text-slate-700 dark:text-slate-300 mb-1">
                         Property Type *
                       </label>
                       <select
@@ -527,13 +532,13 @@ export default function ValuationPage() {
                         onChange={(e) =>
                           setFormData({ ...formData, propertyType: e.target.value })
                         }
-                        className="w-full px-3.5 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-navy-900 focus:outline-none bg-white"
+                        className="w-full px-3.5 py-2.5 border border-slate-300 dark:border-dark-border rounded-lg focus:ring-2 focus:ring-navy-900 dark:focus:ring-sky-400 focus:outline-none bg-white dark:bg-dark-surface text-slate-900 dark:text-white"
                       >
-                        <option value="Residential Land & Building">Residential Land & Building</option>
+                        <option value="Residential Land & Building">Residential Land &amp; Building</option>
                         <option value="Commercial Complex / Building">Commercial Complex / Building</option>
                         <option value="Vacant Residential Land">Vacant Residential Land</option>
                         <option value="Vacant Commercial Land">Vacant Commercial Land</option>
-                        <option value="Industrial Land & Factory Shed">Industrial Land & Factory Shed</option>
+                        <option value="Industrial Land & Factory Shed">Industrial Land &amp; Factory Shed</option>
                         <option value="Agricultural Land Acreage">Agricultural Land Acreage</option>
                         <option value="Hospital / School / Institution">Hospital / School / Institution</option>
                         <option value="Other Immovable Property">Other Immovable Property</option>
@@ -543,7 +548,7 @@ export default function ValuationPage() {
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block font-semibold text-slate-700 mb-1">
+                      <label className="block font-semibold text-slate-700 dark:text-slate-300 mb-1">
                         Property Location (Municipality, Ward, Landmark) *
                       </label>
                       <input
@@ -554,12 +559,12 @@ export default function ValuationPage() {
                           setFormData({ ...formData, location: e.target.value })
                         }
                         placeholder="e.g. Dhangadhi Ward-1, Main Highway Road"
-                        className="w-full px-3.5 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-navy-900 focus:outline-none"
+                        className="w-full px-3.5 py-2.5 border border-slate-300 dark:border-dark-border rounded-lg focus:ring-2 focus:ring-navy-900 dark:focus:ring-sky-400 focus:outline-none bg-white dark:bg-dark-surface text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500"
                       />
                     </div>
 
                     <div>
-                      <label className="block font-semibold text-slate-700 mb-1">
+                      <label className="block font-semibold text-slate-700 dark:text-slate-300 mb-1">
                         Land Area / Built-up Area
                       </label>
                       <input
@@ -569,13 +574,13 @@ export default function ValuationPage() {
                           setFormData({ ...formData, approxArea: e.target.value })
                         }
                         placeholder="e.g. 2 Katha 5 Dhur / 3,500 sq.ft. RCC"
-                        className="w-full px-3.5 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-navy-900 focus:outline-none"
+                        className="w-full px-3.5 py-2.5 border border-slate-300 dark:border-dark-border rounded-lg focus:ring-2 focus:ring-navy-900 dark:focus:ring-sky-400 focus:outline-none bg-white dark:bg-dark-surface text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500"
                       />
                     </div>
                   </div>
 
                   <div>
-                    <label className="block font-semibold text-slate-700 mb-1">
+                    <label className="block font-semibold text-slate-700 dark:text-slate-300 mb-1">
                       Valuation Purpose *
                     </label>
                     <select
@@ -583,7 +588,7 @@ export default function ValuationPage() {
                       onChange={(e) =>
                         setFormData({ ...formData, purpose: e.target.value })
                       }
-                      className="w-full px-3.5 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-navy-900 focus:outline-none bg-white"
+                      className="w-full px-3.5 py-2.5 border border-slate-300 dark:border-dark-border rounded-lg focus:ring-2 focus:ring-navy-900 dark:focus:ring-sky-400 focus:outline-none bg-white dark:bg-dark-surface text-slate-900 dark:text-white"
                     >
                       <option value="Bank Financing / Mortgage Credit">Bank Financing / Mortgage Credit</option>
                       <option value="Property Buying / Transaction Verification">Property Buying / Transaction Verification</option>
@@ -596,7 +601,7 @@ export default function ValuationPage() {
                   </div>
 
                   <div>
-                    <label className="block font-semibold text-slate-700 mb-1">
+                    <label className="block font-semibold text-slate-700 dark:text-slate-300 mb-1">
                       Additional Details / Urgency / Bank Name
                     </label>
                     <textarea
@@ -606,7 +611,7 @@ export default function ValuationPage() {
                         setFormData({ ...formData, message: e.target.value })
                       }
                       placeholder="Specify if a specific bank has requested the report, deadline urgency, road width, or current document status..."
-                      className="w-full px-3.5 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-navy-900 focus:outline-none"
+                      className="w-full px-3.5 py-2.5 border border-slate-300 dark:border-dark-border rounded-lg focus:ring-2 focus:ring-navy-900 dark:focus:ring-sky-400 focus:outline-none bg-white dark:bg-dark-surface text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500"
                     />
                   </div>
 
@@ -614,7 +619,7 @@ export default function ValuationPage() {
                     <Button type="submit" variant="primary" className="w-full" size="lg">
                       Submit Valuation Request
                     </Button>
-                    <p className="text-[11px] text-slate-500 text-center mt-2">
+                    <p className="text-[11px] text-slate-500 dark:text-slate-400 text-center mt-2">
                       All submitted property details are handled strictly under client confidentiality.
                     </p>
                   </div>
