@@ -532,75 +532,19 @@ export default function ContactPage() {
               </div>
             </div>
 
-            {/* Map Visual Container */}
-            <div className="relative w-full h-80 sm:h-96 bg-slate-100 dark:bg-dark-surface overflow-hidden">
-              {/* Map background styling representation */}
-              <div className="absolute inset-0 bg-[#e5e3df] dark:bg-[#131d2e] flex items-center justify-center overflow-hidden">
-                {/* SVG Map Grid Aesthetic */}
-                <svg
-                  className="absolute inset-0 w-full h-full opacity-30 dark:opacity-20"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="100%"
-                  height="100%"
-                >
-                  <defs>
-                    <pattern id="map-grid" width="60" height="60" patternUnits="userSpaceOnUse">
-                      <path d="M 60 0 L 0 0 0 60" fill="none" stroke="#94a3b8" strokeWidth="0.75" />
-                    </pattern>
-                  </defs>
-                  <rect width="100%" height="100%" fill="url(#map-grid)" />
-                  {/* Highway Line representation */}
-                  <path
-                    d="M-50,180 Q300,160 600,220 T1400,190"
-                    fill="none"
-                    stroke="#fbbf24"
-                    strokeWidth="12"
-                    strokeLinecap="round"
-                  />
-                  <path
-                    d="M-50,180 Q300,160 600,220 T1400,190"
-                    fill="none"
-                    stroke="#ffffff"
-                    strokeWidth="4"
-                    strokeDasharray="10,10"
-                  />
-                  <path
-                    d="M380,-50 L420,450"
-                    fill="none"
-                    stroke="#cbd5e1"
-                    strokeWidth="8"
-                  />
-                  <path
-                    d="M720,-50 L680,450"
-                    fill="none"
-                    stroke="#cbd5e1"
-                    strokeWidth="8"
-                  />
-                </svg>
-
-                {/* Landmarks in map graphic */}
-                <div className="absolute top-12 left-1/4 bg-white/90 dark:bg-dark-card/90 backdrop-blur-xs px-3 py-1.5 rounded-lg border border-slate-300 dark:border-dark-border text-[11px] font-bold text-slate-700 dark:text-slate-200 shadow-xs hidden sm:block">
-                  🏛️ Sub-Metropolitan City Office Corridor
-                </div>
-                <div className="absolute bottom-12 right-1/4 bg-white/90 dark:bg-dark-card/90 backdrop-blur-xs px-3 py-1.5 rounded-lg border border-slate-300 dark:border-dark-border text-[11px] font-bold text-slate-700 dark:text-slate-200 shadow-xs hidden sm:block">
-                  🏦 Dhangadhi Commercial Banking Hub
-                </div>
-
-                {/* Central Office Marker Pin */}
-                <div className="relative z-10 flex flex-col items-center">
-                  <div className="bg-navy-950 dark:bg-dark-surface text-white px-4 py-2 rounded-xl shadow-2xl border border-amber-500/40 text-center animate-bounce">
-                    <div className="text-xs font-black tracking-tight text-white flex items-center gap-1.5 justify-center">
-                      <span className="w-2 h-2 rounded-full bg-amber-400 animate-ping" />
-                      KALTADE ENGINEERING SERVICES
-                    </div>
-                    <div className="text-[10px] text-blue-200 dark:text-sky-300 mt-0.5">
-                      LN. Chowk, Dhangadhi, Kailali
-                    </div>
-                  </div>
-                  <div className="w-5 h-5 bg-navy-950 dark:bg-dark-surface rotate-45 -mt-2.5 border-r border-b border-amber-500/40" />
-                  <div className="w-4 h-4 bg-amber-500 rounded-full border-2 border-white shadow-lg mt-1" />
-                </div>
-              </div>
+            {/* Real Interactive Google Maps Embed */}
+            <div className="relative w-full h-80 sm:h-96 overflow-hidden">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3499.487637410034!2d80.5809601!3d28.7049695!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39a1ed007dee3d65%3A0x3601f8f5c2d3fcd4!2sKaltade%20Engineering%20Services%20Pvt.%20Ltd.!5e0!3m2!1sen!2snp!4v1724000000000!5m2!1sen!2snp"
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title="Kaltade Engineering Services Office Location — LN Chowk, Dhangadhi, Kailali"
+                className="absolute inset-0 w-full h-full"
+              />
 
               {/* Map Footer Overlay Box */}
               <div className="absolute bottom-4 left-4 right-4 sm:left-6 sm:right-auto sm:max-w-md bg-white/95 dark:bg-dark-surface/95 backdrop-blur-md p-4 rounded-xl border border-slate-200 dark:border-dark-border shadow-lg text-xs space-y-1.5 z-20">

@@ -94,31 +94,3 @@ export function sqFtToHillyUnits(sqFt: number): { ropani: number; aana: number; 
   };
 }
 
-export interface EmailPayload {
-  leadId?: string;
-  type: string;
-  fullName: string;
-  phone: string;
-  email?: string;
-  serviceInterest?: string;
-  location?: string;
-  propertyType?: string;
-  budgetOrArea?: string;
-  message?: string;
-  urgency?: string;
-}
-
-export function generateWhatsAppUrl(lead: EmailPayload): string {
-  const text = `*New Inquiry for Kaltade Engineering Services*
----------------------------------------
-👤 *Name:* ${lead.fullName}
-📞 *Phone:* ${lead.phone}
-${lead.email ? `✉️ *Email:* ${lead.email}\n` : ''}🏛️ *Service:* ${lead.serviceInterest || lead.type}
-${lead.location ? `📍 *Location:* ${lead.location}\n` : ''}${lead.propertyType ? `🏢 *Property Type:* ${lead.propertyType}\n` : ''}${lead.budgetOrArea ? `📐 *Budget / Area:* ${lead.budgetOrArea}\n` : ''}
-💬 *Message:*
-${lead.message || 'I would like to inquire about this service.'}
----------------------------------------
-_Sent via Kaltade Engineering Services Website_`;
-
-  return `https://wa.me/9779858425256?text=${encodeURIComponent(text)}`;
-}
