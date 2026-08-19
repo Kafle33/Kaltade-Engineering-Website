@@ -505,7 +505,7 @@ ${description || 'No additional remarks provided.'}`;
                   isLoading={isSubmitting}
                   leftIcon={<PlusCircle className="w-4 h-4" />}
                 >
-                  Submit Property for Review
+                  Submit via WhatsApp
                 </Button>
               </div>
             </form>
