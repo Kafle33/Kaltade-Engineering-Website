@@ -252,14 +252,6 @@ export function Footer() {
                   Request DPR Consultation
                 </Link>
               </li>
-              <li className="pt-3 border-t border-navy-800 dark:border-dark-border">
-                <Link
-                  href="/admin"
-                  className="text-xs text-slate-400 hover:text-white flex items-center gap-1"
-                >
-                  <span>Internal Admin Portal</span>
-                </Link>
-              </li>
             </ul>
           </div>
         </div>

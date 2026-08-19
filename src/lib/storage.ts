@@ -106,8 +106,23 @@ export function getLeads(): Lead[] {
 export function saveLead(leadData: Omit<Lead, 'id' | 'date' | 'status'> & Partial<Pick<Lead, 'status'>>): Lead {
   const currentLeads = getLeads();
   const nextNum = currentLeads.length + 43;
+  
+  // Security Fix: Truncate inputs to prevent storage exhaustion & massive payloads
+  const sanitize = (str?: string, max = 500) => str ? str.substring(0, max) : str;
+  
   const newLead: Lead = {
     ...leadData,
+    fullName: sanitize(leadData.fullName, 100)!,
+    phone: sanitize(leadData.phone, 20)!,
+    email: sanitize(leadData.email, 100),
+    type: sanitize(leadData.type, 100) as any,
+    serviceInterest: sanitize(leadData.serviceInterest, 200),
+    propertyType: sanitize(leadData.propertyType, 100),
+    location: sanitize(leadData.location, 200),
+    budget: sanitize(leadData.budget, 100),
+    message: sanitize(leadData.message, 2000), // Max 2000 chars for message
+    urgency: sanitize(leadData.urgency, 50),
+    internalRemarks: sanitize(leadData.internalRemarks, 1000),
     id: `KAL-LD-${String(nextNum).padStart(4, '0')}`,
     date: new Date().toISOString().split('T')[0],
     status: leadData.status || 'New',
