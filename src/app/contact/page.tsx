@@ -520,7 +520,7 @@ export default function ContactPage() {
 
               <div className="flex items-center gap-3">
                 <a
-                  href="https://maps.google.com/?q=Dhangadhi+Kailali+Nepal"
+                  href="https://maps.app.goo.gl/WPNmqQy5RcBoZFTj8"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-navy-900 dark:bg-navy-700 text-white text-xs font-bold hover:bg-navy-800 dark:hover:bg-navy-600 transition-colors shadow-xs"
@@ -612,7 +612,7 @@ export default function ContactPage() {
                   Our office is located at LN. Chowk, Dhangadhi. Contact us at <strong>+977-9858425256</strong> for directions or to confirm your visit.
                 </p>
                 <a
-                  href="https://maps.google.com/?q=LN+Chowk+Dhangadhi+Kailali+Nepal"
+                  href="https://maps.app.goo.gl/WPNmqQy5RcBoZFTj8"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-1 text-navy-700 dark:text-sky-400 font-bold hover:underline"
