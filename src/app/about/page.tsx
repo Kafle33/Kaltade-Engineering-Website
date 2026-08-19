@@ -37,6 +37,7 @@ import { sendInquiryNotification, generateWhatsAppUrl } from '@/lib/email';
 export default function AboutPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [submittedLeadId, setSubmittedLeadId] = useState<string | null>(null);
 
   const [formData, setFormData] = useState({
     fullName: '',
@@ -245,19 +246,8 @@ export default function AboutPage() {
       serviceInterest: newLead.serviceInterest,
       message: newLead.message,
     });
-
+    setSubmittedLeadId(newLead.id);
     setIsSubmitted(true);
-    setTimeout(() => {
-      setIsSubmitted(false);
-      setIsModalOpen(false);
-      setFormData({
-        fullName: '',
-        phone: '',
-        email: '',
-        serviceInterest: 'General Inquiry',
-        message: '',
-      });
-    }, 2500);
   };
 
   return (
@@ -768,15 +758,33 @@ export default function AboutPage() {
       >
         {isSubmitted ? (
           <div className="py-8 text-center space-y-3">
-            <div className="w-14 h-14 rounded-full bg-emerald-100 dark:bg-emerald-950/80 text-emerald-600 dark:text-emerald-400 flex items-center justify-center mx-auto">
-              <Check className="w-8 h-8" />
-            </div>
             <h4 className="text-xl font-bold text-navy-950 dark:text-white">
-              Message Received!
+              Redirecting to WhatsApp...
             </h4>
             <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 max-w-md mx-auto">
-              Thank you for contacting Kaltade Engineering Services. A member of our technical advisory team will get in touch with you shortly.
+              If your WhatsApp did not open automatically, please click the button below to send your details.
             </p>
+            <div className="pt-4 flex justify-center">
+              <a
+                href={generateWhatsAppUrl({
+                  leadId: submittedLeadId || 'ABOUT-REQ',
+                  type: 'Consultation Request',
+                  fullName: formData.fullName,
+                  phone: formData.phone,
+                  email: formData.email,
+                  location: 'Not provided',
+                  propertyType: 'N/A',
+                  budgetOrArea: formData.serviceInterest,
+                  message: formData.message || 'No additional message',
+                })}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm shadow-md transition-all"
+              >
+                <MessageSquare className="w-4 h-4" />
+                <span>Continue to WhatsApp</span>
+              </a>
+            </div>
           </div>
         ) : (
           <form onSubmit={handleSubmit} className="space-y-4 text-xs sm:text-sm">
@@ -868,11 +876,9 @@ export default function AboutPage() {
               />
             </div>
 
-            <div className="pt-2">
-              <Button type="submit" variant="primary" className="w-full" size="md">
-                Send Message
-              </Button>
-            </div>
+            <Button type="submit" variant="primary" className="w-full" size="md">
+              Submit via WhatsApp
+            </Button>
           </form>
         )}
       </Modal>
