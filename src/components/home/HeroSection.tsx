@@ -3,6 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { motion, useReducedMotion, Variants } from 'framer-motion';
 import {
   ArrowRight,
   ShieldCheck,
@@ -15,6 +16,57 @@ import {
 import { Button } from '@/ui/Button';
 
 export function HeroSection() {
+  const shouldReduceMotion = useReducedMotion();
+
+  const containerVariants: Variants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.05,
+      },
+    },
+  };
+
+  const itemVariants: Variants = {
+    hidden: { opacity: 0, y: shouldReduceMotion ? 0 : 16 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.5,
+        ease: [0.21, 0.47, 0.32, 0.98],
+      },
+    },
+  };
+
+  const visualVariants: Variants = {
+    hidden: { opacity: 0, y: shouldReduceMotion ? 0 : 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.65,
+        delay: 0.2,
+        ease: [0.21, 0.47, 0.32, 0.98],
+      },
+    },
+  };
+
+  const floatCardVariants: Variants = {
+    hidden: { opacity: 0, scale: shouldReduceMotion ? 1 : 0.96 },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      transition: {
+        duration: 0.5,
+        delay: 0.45,
+        ease: [0.21, 0.47, 0.32, 0.98],
+      },
+    },
+  };
+
   return (
     <section className="relative min-h-[90vh] lg:min-h-screen bg-navy-950 dark:bg-dark-bg text-white flex items-center pt-24 pb-16 lg:py-28 overflow-hidden transition-colors">
       {/* Background Architectural Blueprint Grid & Precision Linework */}
@@ -27,32 +79,48 @@ export function HeroSection() {
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
           {/* Left Column: Core Positioning & Actions (Col 7) */}
-          <div className="lg:col-span-7 space-y-6 sm:space-y-8">
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+            className="lg:col-span-7 space-y-6 sm:space-y-8"
+          >
             {/* Eyebrow */}
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 dark:bg-dark-card/60 border border-white/15 dark:border-dark-border text-blue-200 dark:text-sky-300 text-xs font-bold tracking-wider uppercase backdrop-blur-md">
-              <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
-              <span>ENGINEERING • PROPERTY VALUATION • REAL ESTATE</span>
-            </div>
+            <motion.div variants={itemVariants}>
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 dark:bg-dark-card/60 border border-white/15 dark:border-dark-border text-blue-200 dark:text-sky-300 text-xs font-bold tracking-wider uppercase backdrop-blur-md">
+                <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
+                <span>ENGINEERING • PROPERTY VALUATION • REAL ESTATE</span>
+              </div>
+            </motion.div>
 
             {/* Main Headline */}
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-[1.12] text-balance">
+            <motion.h1
+              variants={itemVariants}
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-[1.12] text-balance"
+            >
               Engineering Expertise.{' '}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-200 via-sky-100 to-blue-300 dark:from-sky-300 dark:via-blue-200 dark:to-indigo-300">
                 Property Intelligence.
               </span>{' '}
               Real Estate Solutions.
-            </h1>
+            </motion.h1>
 
             {/* Supporting Copy */}
-            <p className="text-base sm:text-lg text-slate-300 leading-relaxed max-w-2xl font-normal">
+            <motion.p
+              variants={itemVariants}
+              className="text-base sm:text-lg text-slate-300 leading-relaxed max-w-2xl font-normal"
+            >
               Kaltade Engineering Services Pvt. Ltd. integrates civil &amp; structural
               engineering, institutional property valuation, Detailed Project Reports
               (DPR), and professional property advisory into one trusted corporate
               consultancy based in Dhangadhi, Kailali, Nepal.
-            </p>
+            </motion.p>
 
             {/* Action CTAs */}
-            <div className="flex flex-wrap items-center gap-3.5 pt-2">
+            <motion.div
+              variants={itemVariants}
+              className="flex flex-wrap items-center gap-3.5 pt-2"
+            >
               <Button
                 href="/services"
                 variant="white"
@@ -77,10 +145,13 @@ export function HeroSection() {
               >
                 Find a Property
               </Button>
-            </div>
+            </motion.div>
 
             {/* Core Verification & Credential Highlights */}
-            <div className="pt-6 border-t border-white/10 grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs text-slate-300">
+            <motion.div
+              variants={itemVariants}
+              className="pt-6 border-t border-white/10 grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs text-slate-300"
+            >
               <div className="flex items-start gap-2.5">
                 <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
                 <div>
@@ -102,19 +173,24 @@ export function HeroSection() {
                   <span>Verified cadastral and site boundaries</span>
                 </div>
               </div>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
 
           {/* Right Column: Architectural & Technical Visual Composition (Col 5) */}
-          <div className="lg:col-span-5 relative">
+          <motion.div
+            variants={visualVariants}
+            initial="hidden"
+            animate="visible"
+            className="lg:col-span-5 relative"
+          >
             <div className="relative mx-auto max-w-md lg:max-w-none">
               {/* Main Visual Card */}
-              <div className="relative rounded-2xl overflow-hidden border border-white/15 dark:border-dark-border shadow-2xl bg-navy-900 dark:bg-dark-card aspect-[4/3] sm:aspect-[16/11]">
+              <div className="relative rounded-2xl overflow-hidden border border-white/15 dark:border-dark-border shadow-2xl bg-navy-900 dark:bg-dark-card aspect-[4/3] sm:aspect-[16/11] group">
                 <Image
                   src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=80"
                   alt="Modern Architectural Engineering & Property Valuation"
                   fill
-                  className="object-cover opacity-85"
+                  className="object-cover opacity-85 transition-transform duration-700 ease-out group-hover:scale-[1.03]"
                   priority
                 />
                 
@@ -148,7 +224,10 @@ export function HeroSection() {
               </div>
 
               {/* Floating Stat Cards */}
-              <div className="absolute -bottom-6 -left-6 hidden sm:flex items-center gap-3 p-3.5 rounded-xl bg-white dark:bg-dark-surface text-navy-950 dark:text-white shadow-xl dark:shadow-card-dark border border-slate-200 dark:border-dark-border">
+              <motion.div
+                variants={floatCardVariants}
+                className="absolute -bottom-6 -left-6 hidden sm:flex items-center gap-3 p-3.5 rounded-xl bg-white dark:bg-dark-surface text-navy-950 dark:text-white shadow-xl dark:shadow-card-dark border border-slate-200 dark:border-dark-border transition-transform duration-300 hover:-translate-y-1"
+              >
                 <div className="p-2.5 rounded-lg bg-navy-50 dark:bg-dark-elevated text-navy-900 dark:text-sky-300">
                   <Scale className="w-5 h-5" />
                 </div>
@@ -160,9 +239,12 @@ export function HeroSection() {
                     Certified Valuation
                   </div>
                 </div>
-              </div>
+              </motion.div>
 
-              <div className="absolute -top-6 -right-6 hidden sm:flex items-center gap-3 p-3.5 rounded-xl bg-white dark:bg-dark-surface text-navy-950 dark:text-white shadow-xl dark:shadow-card-dark border border-slate-200 dark:border-dark-border">
+              <motion.div
+                variants={floatCardVariants}
+                className="absolute -top-6 -right-6 hidden sm:flex items-center gap-3 p-3.5 rounded-xl bg-white dark:bg-dark-surface text-navy-950 dark:text-white shadow-xl dark:shadow-card-dark border border-slate-200 dark:border-dark-border transition-transform duration-300 hover:-translate-y-1"
+              >
                 <div className="p-2.5 rounded-lg bg-blue-50 dark:bg-dark-elevated text-blue-900 dark:text-sky-300">
                   <Compass className="w-5 h-5" />
                 </div>
@@ -174,9 +256,9 @@ export function HeroSection() {
                     Structural Design
                   </div>
                 </div>
-              </div>
+              </motion.div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

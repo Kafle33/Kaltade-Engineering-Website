@@ -1,10 +1,13 @@
 'use client';
 
 import React, { useState } from 'react';
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { SectionHeader } from '@/ui/SectionHeader';
+import { MotionReveal } from '@/components/ui/MotionReveal';
 import { sqFtToTeraiUnits, sqFtToHillyUnits } from '@/lib/utils';
 
 export function LandConverterWidget() {
+  const shouldReduceMotion = useReducedMotion();
   const [activeSystem, setActiveSystem] = useState<'terai' | 'hilly' | 'sqft'>('terai');
 
   // Terai inputs
@@ -46,161 +49,174 @@ export function LandConverterWidget() {
   return (
     <section className="py-20 bg-slate-50 dark:bg-dark-bg border-b border-slate-200/80 dark:border-dark-border relative transition-colors">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <SectionHeader
-          eyebrow="INTERACTIVE PROPERTY TOOL"
-          title="Nepal Land Area Measurement Converter"
-          subtitle="Instantly convert between the Terai System (Bigha-Katha-Dhur), the Hilly System (Ropani-Aana-Paisa-Daam), and Square Feet / Square Meters."
-          align="center"
-        />
+        <MotionReveal>
+          <SectionHeader
+            eyebrow="INTERACTIVE PROPERTY TOOL"
+            title="Nepal Land Area Measurement Converter"
+            subtitle="Instantly convert between the Terai System (Bigha-Katha-Dhur), the Hilly System (Ropani-Aana-Paisa-Daam), and Square Feet / Square Meters."
+            align="center"
+          />
+        </MotionReveal>
 
-        <div className="max-w-4xl mx-auto bg-white dark:bg-dark-card rounded-3xl p-6 sm:p-10 border border-slate-200 dark:border-dark-border shadow-xl dark:shadow-card-dark">
-          {/* Mode Switcher Tabs */}
-          <div className="flex items-center justify-center gap-2 mb-8 p-1.5 bg-slate-100 dark:bg-dark-elevated rounded-2xl max-w-md mx-auto">
-            <button
-              onClick={() => setActiveSystem('terai')}
-              className={`flex-1 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer ${
-                activeSystem === 'terai'
-                  ? 'bg-navy-900 dark:bg-navy-700 text-white shadow-xs'
-                  : 'text-slate-600 dark:text-slate-300 hover:text-navy-900 dark:hover:text-white'
-              }`}
-            >
-              Terai (Bigha-Katha)
-            </button>
-            <button
-              onClick={() => setActiveSystem('hilly')}
-              className={`flex-1 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer ${
-                activeSystem === 'hilly'
-                  ? 'bg-navy-900 dark:bg-navy-700 text-white shadow-xs'
-                  : 'text-slate-600 dark:text-slate-300 hover:text-navy-900 dark:hover:text-white'
-              }`}
-            >
-              Hilly (Ropani-Aana)
-            </button>
-            <button
-              onClick={() => setActiveSystem('sqft')}
-              className={`flex-1 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer ${
-                activeSystem === 'sqft'
-                  ? 'bg-navy-900 dark:bg-navy-700 text-white shadow-xs'
-                  : 'text-slate-600 dark:text-slate-300 hover:text-navy-900 dark:hover:text-white'
-              }`}
-            >
-              Sq. Feet / Meters
-            </button>
-          </div>
+        <MotionReveal delay={0.1} yOffset={20}>
+          <div className="max-w-4xl mx-auto bg-white dark:bg-dark-card rounded-3xl p-6 sm:p-10 border border-slate-200 dark:border-dark-border shadow-xl dark:shadow-card-dark">
+            {/* Mode Switcher Tabs */}
+            <div className="flex items-center justify-center gap-2 mb-8 p-1.5 bg-slate-100 dark:bg-dark-elevated rounded-2xl max-w-md mx-auto">
+              <button
+                onClick={() => setActiveSystem('terai')}
+                className={`flex-1 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all duration-200 cursor-pointer ${
+                  activeSystem === 'terai'
+                    ? 'bg-navy-900 dark:bg-navy-700 text-white shadow-xs'
+                    : 'text-slate-600 dark:text-slate-300 hover:text-navy-900 dark:hover:text-white'
+                }`}
+              >
+                Terai (Bigha-Katha)
+              </button>
+              <button
+                onClick={() => setActiveSystem('hilly')}
+                className={`flex-1 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all duration-200 cursor-pointer ${
+                  activeSystem === 'hilly'
+                    ? 'bg-navy-900 dark:bg-navy-700 text-white shadow-xs'
+                    : 'text-slate-600 dark:text-slate-300 hover:text-navy-900 dark:hover:text-white'
+                }`}
+              >
+                Hilly (Ropani-Aana)
+              </button>
+              <button
+                onClick={() => setActiveSystem('sqft')}
+                className={`flex-1 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all duration-200 cursor-pointer ${
+                  activeSystem === 'sqft'
+                    ? 'bg-navy-900 dark:bg-navy-700 text-white shadow-xs'
+                    : 'text-slate-600 dark:text-slate-300 hover:text-navy-900 dark:hover:text-white'
+                }`}
+              >
+                Sq. Feet / Meters
+              </button>
+            </div>
 
-          {/* Dynamic Inputs Area */}
-          <div className="mb-8">
-            {activeSystem === 'terai' && (
-              <div className="grid grid-cols-3 gap-4">
-                <div>
-                  <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1">
-                    Bigha (1 = 20 Katha)
-                  </label>
-                  <input
-                    type="number"
-                    min="0"
-                    value={bigha}
-                    onChange={(e) => setBigha(e.target.value)}
-                    className="w-full px-4 py-3 text-lg font-bold border border-slate-300 dark:border-dark-border rounded-xl focus:ring-2 focus:ring-navy-900 dark:focus:ring-sky-400 focus:outline-none bg-slate-50 dark:bg-dark-surface text-slate-900 dark:text-white"
-                  />
-                </div>
-                <div>
-                  <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1">
-                    Katha (1 = 20 Dhur)
-                  </label>
-                  <input
-                    type="number"
-                    min="0"
-                    value={katha}
-                    onChange={(e) => setKatha(e.target.value)}
-                    className="w-full px-4 py-3 text-lg font-bold border border-slate-300 dark:border-dark-border rounded-xl focus:ring-2 focus:ring-navy-900 dark:focus:ring-sky-400 focus:outline-none bg-slate-50 dark:bg-dark-surface text-slate-900 dark:text-white"
-                  />
-                </div>
-                <div>
-                  <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1">
-                    Dhur
-                  </label>
-                  <input
-                    type="number"
-                    min="0"
-                    step="0.1"
-                    value={dhur}
-                    onChange={(e) => setDhur(e.target.value)}
-                    className="w-full px-4 py-3 text-lg font-bold border border-slate-300 dark:border-dark-border rounded-xl focus:ring-2 focus:ring-navy-900 dark:focus:ring-sky-400 focus:outline-none bg-slate-50 dark:bg-dark-surface text-slate-900 dark:text-white"
-                  />
-                </div>
-              </div>
-            )}
+            {/* Dynamic Inputs Area */}
+            <div className="mb-8 min-h-[90px]">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={activeSystem}
+                  initial={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: 6 }}
+                  animate={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
+                  exit={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: -4 }}
+                  transition={{ duration: 0.18, ease: [0.21, 0.47, 0.32, 0.98] }}
+                >
+                  {activeSystem === 'terai' && (
+                    <div className="grid grid-cols-3 gap-4">
+                      <div>
+                        <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1">
+                          Bigha (1 = 20 Katha)
+                        </label>
+                        <input
+                          type="number"
+                          min="0"
+                          value={bigha}
+                          onChange={(e) => setBigha(e.target.value)}
+                          className="w-full px-4 py-3 text-lg font-bold border border-slate-300 dark:border-dark-border rounded-xl focus:ring-2 focus:ring-navy-900 dark:focus:ring-sky-400 focus:outline-none bg-slate-50 dark:bg-dark-surface text-slate-900 dark:text-white"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1">
+                          Katha (1 = 20 Dhur)
+                        </label>
+                        <input
+                          type="number"
+                          min="0"
+                          value={katha}
+                          onChange={(e) => setKatha(e.target.value)}
+                          className="w-full px-4 py-3 text-lg font-bold border border-slate-300 dark:border-dark-border rounded-xl focus:ring-2 focus:ring-navy-900 dark:focus:ring-sky-400 focus:outline-none bg-slate-50 dark:bg-dark-surface text-slate-900 dark:text-white"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1">
+                          Dhur
+                        </label>
+                        <input
+                          type="number"
+                          min="0"
+                          step="0.1"
+                          value={dhur}
+                          onChange={(e) => setDhur(e.target.value)}
+                          className="w-full px-4 py-3 text-lg font-bold border border-slate-300 dark:border-dark-border rounded-xl focus:ring-2 focus:ring-navy-900 dark:focus:ring-sky-400 focus:outline-none bg-slate-50 dark:bg-dark-surface text-slate-900 dark:text-white"
+                        />
+                      </div>
+                    </div>
+                  )}
 
-            {activeSystem === 'hilly' && (
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-                <div>
-                  <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1">
-                    Ropani (1 = 16 Aana)
-                  </label>
-                  <input
-                    type="number"
-                    min="0"
-                    value={ropani}
-                    onChange={(e) => setRopani(e.target.value)}
-                    className="w-full px-4 py-3 text-lg font-bold border border-slate-300 dark:border-dark-border rounded-xl focus:ring-2 focus:ring-navy-900 dark:focus:ring-sky-400 focus:outline-none bg-slate-50 dark:bg-dark-surface text-slate-900 dark:text-white"
-                  />
-                </div>
-                <div>
-                  <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1">
-                    Aana (1 = 4 Paisa)
-                  </label>
-                  <input
-                    type="number"
-                    min="0"
-                    value={aana}
-                    onChange={(e) => setAana(e.target.value)}
-                    className="w-full px-4 py-3 text-lg font-bold border border-slate-300 dark:border-dark-border rounded-xl focus:ring-2 focus:ring-navy-900 dark:focus:ring-sky-400 focus:outline-none bg-slate-50 dark:bg-dark-surface text-slate-900 dark:text-white"
-                  />
-                </div>
-                <div>
-                  <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1">
-                    Paisa (1 = 4 Daam)
-                  </label>
-                  <input
-                    type="number"
-                    min="0"
-                    value={paisa}
-                    onChange={(e) => setPaisa(e.target.value)}
-                    className="w-full px-4 py-3 text-lg font-bold border border-slate-300 dark:border-dark-border rounded-xl focus:ring-2 focus:ring-navy-900 dark:focus:ring-sky-400 focus:outline-none bg-slate-50 dark:bg-dark-surface text-slate-900 dark:text-white"
-                  />
-                </div>
-                <div>
-                  <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1">
-                    Daam
-                  </label>
-                  <input
-                    type="number"
-                    min="0"
-                    step="0.1"
-                    value={daam}
-                    onChange={(e) => setDaam(e.target.value)}
-                    className="w-full px-4 py-3 text-lg font-bold border border-slate-300 dark:border-dark-border rounded-xl focus:ring-2 focus:ring-navy-900 dark:focus:ring-sky-400 focus:outline-none bg-slate-50 dark:bg-dark-surface text-slate-900 dark:text-white"
-                  />
-                </div>
-              </div>
-            )}
+                  {activeSystem === 'hilly' && (
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                      <div>
+                        <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1">
+                          Ropani (1 = 16 Aana)
+                        </label>
+                        <input
+                          type="number"
+                          min="0"
+                          value={ropani}
+                          onChange={(e) => setRopani(e.target.value)}
+                          className="w-full px-4 py-3 text-lg font-bold border border-slate-300 dark:border-dark-border rounded-xl focus:ring-2 focus:ring-navy-900 dark:focus:ring-sky-400 focus:outline-none bg-slate-50 dark:bg-dark-surface text-slate-900 dark:text-white"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1">
+                          Aana (1 = 4 Paisa)
+                        </label>
+                        <input
+                          type="number"
+                          min="0"
+                          value={aana}
+                          onChange={(e) => setAana(e.target.value)}
+                          className="w-full px-4 py-3 text-lg font-bold border border-slate-300 dark:border-dark-border rounded-xl focus:ring-2 focus:ring-navy-900 dark:focus:ring-sky-400 focus:outline-none bg-slate-50 dark:bg-dark-surface text-slate-900 dark:text-white"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1">
+                          Paisa (1 = 4 Daam)
+                        </label>
+                        <input
+                          type="number"
+                          min="0"
+                          value={paisa}
+                          onChange={(e) => setPaisa(e.target.value)}
+                          className="w-full px-4 py-3 text-lg font-bold border border-slate-300 dark:border-dark-border rounded-xl focus:ring-2 focus:ring-navy-900 dark:focus:ring-sky-400 focus:outline-none bg-slate-50 dark:bg-dark-surface text-slate-900 dark:text-white"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1">
+                          Daam
+                        </label>
+                        <input
+                          type="number"
+                          min="0"
+                          step="0.1"
+                          value={daam}
+                          onChange={(e) => setDaam(e.target.value)}
+                          className="w-full px-4 py-3 text-lg font-bold border border-slate-300 dark:border-dark-border rounded-xl focus:ring-2 focus:ring-navy-900 dark:focus:ring-sky-400 focus:outline-none bg-slate-50 dark:bg-dark-surface text-slate-900 dark:text-white"
+                        />
+                      </div>
+                    </div>
+                  )}
 
-            {activeSystem === 'sqft' && (
-              <div className="max-w-md mx-auto">
-                <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1">
-                  Total Area in Square Feet (sq.ft.)
-                </label>
-                <input
-                  type="number"
-                  min="0"
-                  value={directSqFt}
-                  onChange={(e) => setDirectSqFt(e.target.value)}
-                  className="w-full px-4 py-3 text-xl font-bold border border-slate-300 dark:border-dark-border rounded-xl focus:ring-2 focus:ring-navy-900 dark:focus:ring-sky-400 focus:outline-none bg-slate-50 dark:bg-dark-surface text-slate-900 dark:text-white"
-                />
-              </div>
-            )}
-          </div>
+                  {activeSystem === 'sqft' && (
+                    <div className="max-w-md mx-auto">
+                      <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1">
+                        Total Area in Square Feet (sq.ft.)
+                      </label>
+                      <input
+                        type="number"
+                        min="0"
+                        value={directSqFt}
+                        onChange={(e) => setDirectSqFt(e.target.value)}
+                        className="w-full px-4 py-3 text-xl font-bold border border-slate-300 dark:border-dark-border rounded-xl focus:ring-2 focus:ring-navy-900 dark:focus:ring-sky-400 focus:outline-none bg-slate-50 dark:bg-dark-surface text-slate-900 dark:text-white"
+                      />
+                    </div>
+                  )}
+                </motion.div>
+              </AnimatePresence>
+            </div>
 
           {/* Results Display Card */}
           <div className="p-6 sm:p-8 rounded-2xl bg-navy-950 dark:bg-dark-surface text-white border border-navy-800 dark:border-dark-border space-y-6">
@@ -260,6 +276,7 @@ export function LandConverterWidget() {
             </div>
           </div>
         </div>
+        </MotionReveal>
       </div>
     </section>
   );

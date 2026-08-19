@@ -11,6 +11,7 @@ import {
 } from 'lucide-react';
 import { SectionHeader } from '@/ui/SectionHeader';
 import { Button } from '@/ui/Button';
+import { MotionReveal } from '@/components/ui/MotionReveal';
 
 export function EngineeringDprSection() {
   const dprWorkflow = [
@@ -27,15 +28,17 @@ export function EngineeringDprSection() {
   return (
     <section className="py-20 sm:py-28 bg-slate-50 dark:bg-dark-bg border-b border-slate-200/80 dark:border-dark-border relative transition-colors">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <SectionHeader
-          eyebrow="ENGINEERING & PROJECT CONSULTANCY"
-          title="From concept to technical documentation."
-          subtitle="Engineering rigor and commercial acumen to transform bold ideas into viable, bankable infrastructure and building projects."
-          align="center"
-        />
+        <MotionReveal>
+          <SectionHeader
+            eyebrow="ENGINEERING & PROJECT CONSULTANCY"
+            title="From concept to technical documentation."
+            subtitle="Engineering rigor and commercial acumen to transform bold ideas into viable, bankable infrastructure and building projects."
+            align="center"
+          />
+        </MotionReveal>
 
         {/* Top Grid: Engineering Capabilities */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center mb-16">
+        <MotionReveal delay={0.1} yOffset={20} className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center mb-16">
           <div className="lg:col-span-6 space-y-6">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-navy-100 dark:bg-dark-elevated text-navy-900 dark:text-sky-300 text-xs font-bold uppercase tracking-wider">
               <Compass className="w-4 h-4 text-navy-800 dark:text-sky-400" />
@@ -102,67 +105,69 @@ export function EngineeringDprSection() {
               </div>
             </div>
           </div>
-        </div>
+        </MotionReveal>
 
         {/* Bottom Banner: DPR Dedicated Section */}
-        <div className="p-8 sm:p-12 rounded-3xl bg-navy-900 dark:bg-dark-surface text-white border border-navy-800 dark:border-dark-border shadow-2xl dark:shadow-card-dark relative overflow-hidden">
-          <div className="absolute inset-0 bg-grid-navy opacity-20 pointer-events-none" />
+        <MotionReveal delay={0.15} yOffset={20}>
+          <div className="p-8 sm:p-12 rounded-3xl bg-navy-900 dark:bg-dark-surface text-white border border-navy-800 dark:border-dark-border shadow-2xl dark:shadow-card-dark relative overflow-hidden">
+            <div className="absolute inset-0 bg-grid-navy opacity-20 pointer-events-none" />
 
-          <div className="relative z-10 space-y-8">
-            <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 border-b border-white/10 dark:border-dark-border">
-              <div className="max-w-2xl space-y-2">
-                <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-amber-400">
-                  <FileSpreadsheet className="w-4 h-4" />
-                  <span>Detailed Project Report (DPR) Formulation</span>
-                </div>
-                <h3 className="text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight">
-                  Turn an idea into a viable, bankable project.
-                </h3>
-                <p className="text-sm text-slate-300 dark:text-slate-400">
-                  We formulate comprehensive DPRs required by commercial banking consortia, development finance institutions, and private investors for capital loans.
-                </p>
-              </div>
-
-              <div className="shrink-0">
-                <Button
-                  href="/services/dpr"
-                  variant="accent"
-                  size="md"
-                  rightIcon={<ArrowRight className="w-4 h-4" />}
-                >
-                  Request DPR Consultation
-                </Button>
-              </div>
-            </div>
-
-            {/* 8-Step DPR Workflow Grid */}
-            <div>
-              <div className="text-xs font-mono uppercase tracking-wider text-blue-300 dark:text-sky-300 mb-4">
-                Structured DPR Formulation Workflow:
-              </div>
-              <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-3">
-                {dprWorkflow.map((item) => (
-                  <div
-                    key={item.step}
-                    className="p-3.5 rounded-xl bg-white/5 dark:bg-dark-elevated/60 border border-white/10 dark:border-dark-border flex flex-col justify-between hover:bg-white/10 dark:hover:bg-dark-elevated transition-colors"
-                  >
-                    <div>
-                      <span className="text-xs font-mono font-bold text-amber-400 block mb-1">
-                        {item.step}
-                      </span>
-                      <h5 className="text-xs font-bold text-white mb-1 leading-snug">
-                        {item.title}
-                      </h5>
-                    </div>
-                    <p className="text-[10px] text-slate-400 leading-tight">
-                      {item.desc}
-                    </p>
+            <div className="relative z-10 space-y-8">
+              <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 border-b border-white/10 dark:border-dark-border">
+                <div className="max-w-2xl space-y-2">
+                  <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-amber-400">
+                    <FileSpreadsheet className="w-4 h-4" />
+                    <span>Detailed Project Report (DPR) Formulation</span>
                   </div>
-                ))}
+                  <h3 className="text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight">
+                    Turn an idea into a viable, bankable project.
+                  </h3>
+                  <p className="text-sm text-slate-300 dark:text-slate-400">
+                    We formulate comprehensive DPRs required by commercial banking consortia, development finance institutions, and private investors for capital loans.
+                  </p>
+                </div>
+
+                <div className="shrink-0">
+                  <Button
+                    href="/services/dpr"
+                    variant="accent"
+                    size="md"
+                    rightIcon={<ArrowRight className="w-4 h-4" />}
+                  >
+                    Request DPR Consultation
+                  </Button>
+                </div>
+              </div>
+
+              {/* 8-Step DPR Workflow Grid */}
+              <div>
+                <div className="text-xs font-mono uppercase tracking-wider text-blue-300 dark:text-sky-300 mb-4">
+                  Structured DPR Formulation Workflow:
+                </div>
+                <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-3">
+                  {dprWorkflow.map((item) => (
+                    <div
+                      key={item.step}
+                      className="p-3.5 rounded-xl bg-white/5 dark:bg-dark-elevated/60 border border-white/10 dark:border-dark-border flex flex-col justify-between hover:bg-white/10 dark:hover:bg-dark-elevated transition-colors"
+                    >
+                      <div>
+                        <span className="text-xs font-mono font-bold text-amber-400 block mb-1">
+                          {item.step}
+                        </span>
+                        <h5 className="text-xs font-bold text-white mb-1 leading-snug">
+                          {item.title}
+                        </h5>
+                      </div>
+                      <p className="text-[10px] text-slate-400 leading-tight">
+                        {item.desc}
+                      </p>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        </MotionReveal>
       </div>
     </section>
   );

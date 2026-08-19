@@ -20,6 +20,7 @@ import {
 import { SectionHeader } from '@/ui/SectionHeader';
 import { Button } from '@/ui/Button';
 import { Modal } from '@/ui/Modal';
+import { MotionReveal, MotionItem } from '@/components/ui/MotionReveal';
 import { saveLead } from '@/lib/storage';
 import { sendInquiryNotification, generateWhatsAppUrl } from '@/lib/email';
 
@@ -115,56 +116,59 @@ export function ValuationFlagship() {
   return (
     <section className="py-20 sm:py-28 bg-white dark:bg-dark-bg relative transition-colors">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <SectionHeader
-          eyebrow="FLAGSHIP DISCIPLINE"
-          title="Institutional Property Valuation Methodology"
-          subtitle="Accredited engineering assessments bridging technical asset condition, cadastral alignment, and verifiable market data."
-          align="center"
-        />
+        <MotionReveal>
+          <SectionHeader
+            eyebrow="FLAGSHIP DISCIPLINE"
+            title="Institutional Property Valuation Methodology"
+            subtitle="Accredited engineering assessments bridging technical asset condition, cadastral alignment, and verifiable market data."
+            align="center"
+          />
+        </MotionReveal>
 
         {/* 5-Step Process Cards */}
         <div className="mb-20">
-          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4">
+          <MotionReveal staggerChildren={0.06} delay={0.1} className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4">
             {steps.map((st, idx) => {
               const Icon = st.icon;
               return (
-                <div
-                  key={st.num}
-                  className="relative p-6 rounded-2xl bg-slate-50 dark:bg-dark-card border border-slate-200/90 dark:border-dark-border flex flex-col justify-between hover:shadow-md dark:hover:shadow-card-dark hover:border-navy-900/30 dark:hover:border-sky-500/30 transition-all group"
-                >
-                  {/* Step number badge */}
-                  <div>
-                    <div className="flex items-center justify-between mb-4">
-                      <span className="text-2xl font-black font-mono text-navy-300 dark:text-navy-700 group-hover:text-navy-900 dark:group-hover:text-sky-300 transition-colors">
-                        {st.num}
-                      </span>
-                      <div className="p-2 rounded-lg bg-white dark:bg-dark-elevated border border-slate-200 dark:border-dark-border text-navy-900 dark:text-sky-300 group-hover:bg-navy-900 dark:group-hover:bg-navy-800 group-hover:text-white transition-colors">
-                        <Icon className="w-4 h-4" />
+                <MotionItem key={st.num} className="h-full">
+                  <div
+                    className="relative p-6 rounded-2xl bg-slate-50 dark:bg-dark-card border border-slate-200/90 dark:border-dark-border flex flex-col justify-between hover:shadow-md dark:hover:shadow-card-dark hover:border-navy-900/30 dark:hover:border-sky-500/30 hover:-translate-y-1 transition-all duration-300 group h-full"
+                  >
+                    {/* Step number badge */}
+                    <div>
+                      <div className="flex items-center justify-between mb-4">
+                        <span className="text-2xl font-black font-mono text-navy-300 dark:text-navy-700 group-hover:text-navy-900 dark:group-hover:text-sky-300 transition-colors">
+                          {st.num}
+                        </span>
+                        <div className="p-2 rounded-lg bg-white dark:bg-dark-elevated border border-slate-200 dark:border-dark-border text-navy-900 dark:text-sky-300 group-hover:bg-navy-900 dark:group-hover:bg-navy-800 group-hover:text-white transition-colors">
+                          <Icon className="w-4 h-4" />
+                        </div>
                       </div>
+
+                      <h4 className="text-base font-bold text-navy-950 dark:text-white mb-2 leading-snug">
+                        {st.title}
+                      </h4>
+
+                      <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+                        {st.desc}
+                      </p>
                     </div>
 
-                    <h4 className="text-base font-bold text-navy-950 dark:text-white mb-2 leading-snug">
-                      {st.title}
-                    </h4>
-
-                    <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-                      {st.desc}
-                    </p>
+                    {idx < steps.length - 1 && (
+                      <div className="hidden lg:block absolute -right-2.5 top-1/2 -translate-y-1/2 z-10 w-5 h-5 rounded-full bg-navy-900 dark:bg-navy-700 text-white flex items-center justify-center text-[10px]">
+                        →
+                      </div>
+                    )}
                   </div>
-
-                  {idx < steps.length - 1 && (
-                    <div className="hidden lg:block absolute -right-2.5 top-1/2 -translate-y-1/2 z-10 w-5 h-5 rounded-full bg-navy-900 dark:bg-navy-700 text-white flex items-center justify-center text-[10px]">
-                      →
-                    </div>
-                  )}
-                </div>
+                </MotionItem>
               );
             })}
-          </div>
+          </MotionReveal>
         </div>
 
         {/* Valuation Applications & Direct CTA Banner */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center p-8 sm:p-12 rounded-3xl bg-navy-950 dark:bg-dark-surface text-white border border-navy-800 dark:border-dark-border">
+        <MotionReveal delay={0.15} yOffset={20} className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center p-8 sm:p-12 rounded-3xl bg-navy-950 dark:bg-dark-surface text-white border border-navy-800 dark:border-dark-border shadow-xl dark:shadow-card-dark">
           <div className="lg:col-span-7 space-y-6">
             <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-amber-400">
               <Landmark className="w-4 h-4" />
@@ -223,7 +227,7 @@ export function ValuationFlagship() {
               </Button>
             </div>
           </div>
-        </div>
+        </MotionReveal>
       </div>
 
       {/* Valuation Request Modal */}

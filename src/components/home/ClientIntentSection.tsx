@@ -12,6 +12,7 @@ import {
   ArrowRight,
 } from 'lucide-react';
 import { SectionHeader } from '@/ui/SectionHeader';
+import { MotionReveal, MotionItem } from '@/components/ui/MotionReveal';
 
 export function ClientIntentSection() {
   const intentCards = [
@@ -74,54 +75,57 @@ export function ClientIntentSection() {
   return (
     <section className="py-20 sm:py-24 bg-slate-50 dark:bg-dark-bg border-b border-slate-200/80 dark:border-dark-border relative transition-colors">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <SectionHeader
-          eyebrow="CLIENT INTENT NAVIGATOR"
-          title="What can we help you with?"
-          subtitle="Select your specific requirement to explore how our integrated engineering and property capabilities serve your goals."
-          align="center"
-        />
+        <MotionReveal>
+          <SectionHeader
+            eyebrow="CLIENT INTENT NAVIGATOR"
+            title="What can we help you with?"
+            subtitle="Select your specific requirement to explore how our integrated engineering and property capabilities serve your goals."
+            align="center"
+          />
+        </MotionReveal>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <MotionReveal staggerChildren={0.07} delay={0.1} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {intentCards.map((card) => {
             const Icon = card.icon;
             return (
-              <Link
-                key={card.action}
-                href={card.href}
-                className="group relative bg-white dark:bg-dark-card p-7 rounded-2xl border border-slate-200 dark:border-dark-border shadow-xs dark:shadow-card-dark hover:shadow-xl dark:hover:shadow-card-dark-hover hover:border-navy-900/40 dark:hover:border-sky-500/40 transition-all duration-300 flex flex-col justify-between overflow-hidden"
-              >
-                {/* Subtle top accent bar on hover */}
-                <div className="absolute top-0 left-0 right-0 h-1 bg-navy-900 dark:bg-sky-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <MotionItem key={card.action}>
+                <Link
+                  href={card.href}
+                  className="group relative bg-white dark:bg-dark-card p-7 rounded-2xl border border-slate-200 dark:border-dark-border shadow-xs dark:shadow-card-dark hover:shadow-xl dark:hover:shadow-card-dark-hover hover:border-navy-900/40 dark:hover:border-sky-500/40 hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between overflow-hidden h-full"
+                >
+                  {/* Subtle top accent bar on hover */}
+                  <div className="absolute top-0 left-0 right-0 h-1 bg-navy-900 dark:bg-sky-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
-                <div>
-                  <div className="flex items-center justify-between mb-5">
-                    <div className="p-3 rounded-xl bg-navy-50 dark:bg-dark-elevated text-navy-900 dark:text-sky-300 group-hover:bg-navy-900 group-hover:text-white dark:group-hover:bg-navy-800 transition-colors duration-300">
-                      <Icon className="w-6 h-6" />
+                  <div>
+                    <div className="flex items-center justify-between mb-5">
+                      <div className="p-3 rounded-xl bg-navy-50 dark:bg-dark-elevated text-navy-900 dark:text-sky-300 group-hover:bg-navy-900 group-hover:text-white dark:group-hover:bg-navy-800 transition-colors duration-300">
+                        <Icon className="w-6 h-6" />
+                      </div>
+                      <span
+                        className={`text-[11px] font-bold tracking-wider uppercase px-2.5 py-0.5 rounded-full border ${card.badgeColor}`}
+                      >
+                        {card.action}
+                      </span>
                     </div>
-                    <span
-                      className={`text-[11px] font-bold tracking-wider uppercase px-2.5 py-0.5 rounded-full border ${card.badgeColor}`}
-                    >
-                      {card.action}
-                    </span>
+
+                    <h3 className="text-xl font-bold text-navy-950 dark:text-white group-hover:text-navy-700 dark:group-hover:text-sky-300 transition-colors leading-snug mb-2.5">
+                      {card.title}
+                    </h3>
+
+                    <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed font-normal">
+                      {card.desc}
+                    </p>
                   </div>
 
-                  <h3 className="text-xl font-bold text-navy-950 dark:text-white group-hover:text-navy-700 dark:group-hover:text-sky-300 transition-colors leading-snug mb-2.5">
-                    {card.title}
-                  </h3>
-
-                  <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed font-normal">
-                    {card.desc}
-                  </p>
-                </div>
-
-                <div className="mt-6 pt-4 border-t border-slate-100 dark:border-dark-border flex items-center justify-between text-sm font-semibold text-navy-900 dark:text-sky-400 group-hover:text-navy-700 dark:group-hover:text-sky-300">
-                  <span>Get Started</span>
-                  <ArrowRight className="w-4 h-4 transform group-hover:translate-x-1.5 transition-transform duration-200" />
-                </div>
-              </Link>
+                  <div className="mt-6 pt-4 border-t border-slate-100 dark:border-dark-border flex items-center justify-between text-sm font-semibold text-navy-900 dark:text-sky-400 group-hover:text-navy-700 dark:group-hover:text-sky-300">
+                    <span>Get Started</span>
+                    <ArrowRight className="w-4 h-4 transform group-hover:translate-x-1.5 transition-transform duration-200" />
+                  </div>
+                </Link>
+              </MotionItem>
             );
           })}
-        </div>
+        </MotionReveal>
       </div>
     </section>
   );

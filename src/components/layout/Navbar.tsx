@@ -17,9 +17,11 @@ import {
 } from 'lucide-react';
 import { Button } from '@/ui/Button';
 import { ThemeToggle } from '@/components/theme/ThemeToggle';
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { cn } from '@/lib/utils';
 
 export function Navbar() {
+  const shouldReduceMotion = useReducedMotion();
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [servicesDropdownOpen, setServicesDropdownOpen] = useState(false);
@@ -190,40 +192,48 @@ export function Navbar() {
                       </button>
 
                       {/* Dropdown Menu */}
-                      {servicesDropdownOpen && (
-                        <div className="absolute top-full left-0 w-80 pt-2 z-50">
-                          <div className="bg-white dark:bg-dark-surface rounded-xl shadow-xl dark:shadow-card-dark border border-slate-200 dark:border-dark-border p-2 text-slate-800 dark:text-slate-200">
-                            {link.subItems?.map((sub) => (
-                              <Link
-                                key={sub.name}
-                                href={sub.href}
-                                className="flex items-start gap-3 p-2.5 rounded-lg hover:bg-slate-50 dark:hover:bg-dark-card transition-colors group/sub"
-                              >
-                                <div className="p-2 rounded-lg bg-navy-50 dark:bg-navy-900/60 text-navy-800 dark:text-sky-400 group-hover/sub:bg-navy-900 group-hover/sub:text-white dark:group-hover/sub:bg-navy-800 transition-colors">
-                                  <sub.icon className="w-4 h-4" />
-                                </div>
-                                <div>
-                                  <div className="text-sm font-semibold text-navy-950 dark:text-white group-hover/sub:text-navy-700 dark:group-hover/sub:text-sky-300">
-                                    {sub.name}
+                      <AnimatePresence>
+                        {servicesDropdownOpen && (
+                          <motion.div
+                            initial={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: 6, scale: 0.99 }}
+                            animate={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0, scale: 1 }}
+                            exit={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: 4, scale: 0.99 }}
+                            transition={{ duration: 0.18, ease: [0.21, 0.47, 0.32, 0.98] }}
+                            className="absolute top-full left-0 w-80 pt-2 z-50"
+                          >
+                            <div className="bg-white dark:bg-dark-surface rounded-xl shadow-xl dark:shadow-card-dark border border-slate-200 dark:border-dark-border p-2 text-slate-800 dark:text-slate-200">
+                              {link.subItems?.map((sub) => (
+                                <Link
+                                  key={sub.name}
+                                  href={sub.href}
+                                  className="flex items-start gap-3 p-2.5 rounded-lg hover:bg-slate-50 dark:hover:bg-dark-card transition-colors group/sub"
+                                >
+                                  <div className="p-2 rounded-lg bg-navy-50 dark:bg-navy-900/60 text-navy-800 dark:text-sky-400 group-hover/sub:bg-navy-900 group-hover/sub:text-white dark:group-hover/sub:bg-navy-800 transition-colors">
+                                    <sub.icon className="w-4 h-4" />
                                   </div>
-                                  <div className="text-xs text-slate-500 dark:text-slate-400 line-clamp-1 mt-0.5">
-                                    {sub.desc}
+                                  <div>
+                                    <div className="text-sm font-semibold text-navy-950 dark:text-white group-hover/sub:text-navy-700 dark:group-hover/sub:text-sky-300">
+                                      {sub.name}
+                                    </div>
+                                    <div className="text-xs text-slate-500 dark:text-slate-400 line-clamp-1 mt-0.5">
+                                      {sub.desc}
+                                    </div>
                                   </div>
-                                </div>
-                              </Link>
-                            ))}
-                            <div className="mt-2 pt-2 border-t border-slate-100 dark:border-dark-border px-2 pb-1">
-                              <Link
-                                href="/services"
-                                className="text-xs font-semibold text-navy-700 dark:text-sky-400 hover:text-navy-900 dark:hover:text-sky-300 flex items-center justify-between"
-                              >
-                                <span>View All Capabilities</span>
-                                <ArrowRight className="w-3.5 h-3.5" />
-                              </Link>
+                                </Link>
+                              ))}
+                              <div className="mt-2 pt-2 border-t border-slate-100 dark:border-dark-border px-2 pb-1">
+                                <Link
+                                  href="/services"
+                                  className="text-xs font-semibold text-navy-700 dark:text-sky-400 hover:text-navy-900 dark:hover:text-sky-300 flex items-center justify-between"
+                                >
+                                  <span>View All Capabilities</span>
+                                  <ArrowRight className="w-3.5 h-3.5" />
+                                </Link>
+                              </div>
                             </div>
-                          </div>
-                        </div>
-                      )}
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
                     </div>
                   );
                 }
@@ -295,98 +305,110 @@ export function Navbar() {
       </header>
 
       {/* Mobile Drawer */}
-      {mobileMenuOpen && (
-        <div className="fixed inset-0 z-50 lg:hidden">
-          <div
-            className="fixed inset-0 bg-navy-950/70 dark:bg-black/80 backdrop-blur-sm"
-            onClick={() => setMobileMenuOpen(false)}
-          />
-          <div className="fixed top-0 right-0 bottom-0 w-5/6 max-w-sm bg-white dark:bg-dark-bg shadow-2xl z-10 flex flex-col overflow-y-auto border-l border-slate-200 dark:border-dark-border">
-            <div className="p-4 border-b border-slate-100 dark:border-dark-border flex items-center justify-between bg-slate-50 dark:bg-dark-surface">
-              <div className="flex items-center gap-2.5">
-                <div className="relative w-8 h-8 rounded-lg overflow-hidden border border-slate-200 dark:border-dark-border bg-white p-0.5">
-                  <Image
-                    src="/logo.jpeg"
-                    alt="Logo"
-                    fill
-                    className="object-contain"
-                  />
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <div className="fixed inset-0 z-50 lg:hidden">
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              className="fixed inset-0 bg-navy-950/70 dark:bg-black/80 backdrop-blur-sm"
+              onClick={() => setMobileMenuOpen(false)}
+            />
+            <motion.div
+              initial={shouldReduceMotion ? { opacity: 0 } : { x: '100%' }}
+              animate={shouldReduceMotion ? { opacity: 1 } : { x: 0 }}
+              exit={shouldReduceMotion ? { opacity: 0 } : { x: '100%' }}
+              transition={{ duration: 0.28, ease: [0.21, 0.47, 0.32, 0.98] }}
+              className="fixed top-0 right-0 bottom-0 w-5/6 max-w-sm bg-white dark:bg-dark-bg shadow-2xl z-10 flex flex-col overflow-y-auto border-l border-slate-200 dark:border-dark-border"
+            >
+              <div className="p-4 border-b border-slate-100 dark:border-dark-border flex items-center justify-between bg-slate-50 dark:bg-dark-surface">
+                <div className="flex items-center gap-2.5">
+                  <div className="relative w-8 h-8 rounded-lg overflow-hidden border border-slate-200 dark:border-dark-border bg-white p-0.5">
+                    <Image
+                      src="/logo.jpeg"
+                      alt="Logo"
+                      fill
+                      className="object-contain"
+                    />
+                  </div>
+                  <span className="font-extrabold text-base text-navy-950 dark:text-white">
+                    KALTADE
+                  </span>
                 </div>
-                <span className="font-extrabold text-base text-navy-950 dark:text-white">
-                  KALTADE
-                </span>
-              </div>
-              <button
-                onClick={() => setMobileMenuOpen(false)}
-                className="p-1.5 rounded-lg text-slate-500 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-dark-elevated"
-              >
-                <X className="w-5 h-5" />
-              </button>
-            </div>
-
-            <div className="p-4 flex-1 space-y-1">
-              {/* Theme toggle row in mobile drawer */}
-              <div className="pb-3 mb-2 border-b border-slate-100 dark:border-dark-border">
-                <ThemeToggle variant="labeled" />
+                <button
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="p-1.5 rounded-lg text-slate-500 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-dark-elevated transition-colors cursor-pointer"
+                  aria-label="Close menu"
+                >
+                  <X className="w-5 h-5" />
+                </button>
               </div>
 
-              {navLinks.map((link) => (
-                <div key={link.name}>
-                  <Link
-                    href={link.href}
-                    className={cn(
-                      'block px-3 py-2.5 rounded-lg font-semibold text-sm transition-colors',
-                      pathname === link.href
-                        ? 'bg-navy-50 dark:bg-dark-card text-navy-900 dark:text-sky-300 font-bold'
-                        : 'text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-dark-card'
+              <div className="p-4 flex-1 space-y-1">
+                {/* Theme toggle row in mobile drawer */}
+                <div className="pb-3 mb-2 border-b border-slate-100 dark:border-dark-border">
+                  <ThemeToggle variant="labeled" />
+                </div>
+
+                {navLinks.map((link) => (
+                  <div key={link.name}>
+                    <Link
+                      href={link.href}
+                      className={cn(
+                        'block px-3 py-2.5 rounded-lg font-semibold text-sm transition-colors',
+                        pathname === link.href
+                          ? 'bg-navy-50 dark:bg-dark-card text-navy-900 dark:text-sky-300 font-bold'
+                          : 'text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-dark-card'
+                      )}
+                    >
+                      {link.name}
+                    </Link>
+                    {link.hasDropdown && (
+                      <div className="pl-4 py-1 space-y-1">
+                        {link.subItems?.map((sub) => (
+                          <Link
+                            key={sub.name}
+                            href={sub.href}
+                            className="block px-3 py-2 rounded-md text-xs font-medium text-slate-600 dark:text-slate-400 hover:text-navy-900 dark:hover:text-sky-300 hover:bg-slate-50 dark:hover:bg-dark-card"
+                          >
+                            {sub.name}
+                          </Link>
+                        ))}
+                      </div>
                     )}
+                  </div>
+                ))}
+
+                <div className="pt-4 border-t border-slate-200 dark:border-dark-border space-y-2 mt-4">
+                  <Link
+                    href="/properties/find"
+                    className="block px-3 py-2 rounded-lg text-xs font-medium text-slate-600 dark:text-slate-400 hover:text-navy-900 dark:hover:text-white transition-colors"
                   >
-                    {link.name}
+                    🔍 Tell Us What Property You Need
                   </Link>
-                  {link.hasDropdown && (
-                    <div className="pl-4 py-1 space-y-1">
-                      {link.subItems?.map((sub) => (
-                        <Link
-                          key={sub.name}
-                          href={sub.href}
-                          className="block px-3 py-2 rounded-md text-xs font-medium text-slate-600 dark:text-slate-400 hover:text-navy-900 dark:hover:text-sky-300 hover:bg-slate-50 dark:hover:bg-dark-card"
-                        >
-                          {sub.name}
-                        </Link>
-                      ))}
-                    </div>
-                  )}
+                  <Link
+                    href="/properties/list"
+                    className="block px-3 py-2 rounded-lg text-xs font-medium text-slate-600 dark:text-slate-400 hover:text-navy-900 dark:hover:text-white transition-colors"
+                  >
+                    📝 List Your Property
+                  </Link>
                 </div>
-              ))}
-
-              <div className="pt-4 border-t border-slate-200 dark:border-dark-border space-y-2 mt-4">
-                <Link
-                  href="/properties/find"
-                  className="block px-3 py-2 rounded-lg text-xs font-medium text-slate-600 dark:text-slate-400 hover:text-navy-900 dark:hover:text-white"
-                >
-                  🔍 Tell Us What Property You Need
-                </Link>
-                <Link
-                  href="/properties/list"
-                  className="block px-3 py-2 rounded-lg text-xs font-medium text-slate-600 dark:text-slate-400 hover:text-navy-900 dark:hover:text-white"
-                >
-                  📝 List Your Property
-                </Link>
-
               </div>
-            </div>
 
-            <div className="p-4 border-t border-slate-100 dark:border-dark-border bg-slate-50 dark:bg-dark-surface space-y-2">
-              <Button href="/valuation" variant="secondary" className="w-full">
-                Request Property Valuation
-              </Button>
-              <Button href="/contact" variant="primary" className="w-full">
-                Get Consultation
-              </Button>
-            </div>
+              <div className="p-4 border-t border-slate-100 dark:border-dark-border bg-slate-50 dark:bg-dark-surface space-y-2">
+                <Button href="/valuation" variant="secondary" className="w-full">
+                  Request Property Valuation
+                </Button>
+                <Button href="/contact" variant="primary" className="w-full">
+                  Get Consultation
+                </Button>
+              </div>
+            </motion.div>
           </div>
-        </div>
-      )}
+        )}
+      </AnimatePresence>
     </>
   );
 }
