@@ -347,12 +347,12 @@ export default function ContactPage() {
                       Send Another Message
                     </Button>
                     <Button
-                      href="/properties"
+                      href="/valuation"
                       variant="primary"
                       size="md"
                       rightIcon={<ArrowRight className="w-4 h-4" />}
                     >
-                      Browse Properties
+                      Request Valuation
                     </Button>
                   </div>
                 </div>

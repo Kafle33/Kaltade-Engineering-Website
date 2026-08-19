@@ -268,13 +268,13 @@ export default function LandDevelopmentPage() {
                 Request Land Development Consultation
               </Button>
               <Button
-                href="/projects"
+                href="/contact"
                 variant="outline"
                 size="lg"
                 className="bg-white/10 dark:bg-dark-card text-white border-white/20 dark:border-dark-border hover:bg-white/20"
                 rightIcon={<ArrowRight className="w-4 h-4" />}
               >
-                View Subdivision Projects
+                Contact Technical Team
               </Button>
             </div>
 

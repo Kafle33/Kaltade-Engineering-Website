@@ -403,53 +403,26 @@ export default function CommercialRealEstatePage() {
         </div>
       </section>
 
-      {/* 4. Live Commercial Listings Showcase */}
-      <section className="py-20 sm:py-28 bg-slate-50 dark:bg-dark-bg border-b border-slate-200/80 dark:border-dark-border">
+      {/* 4. Commercial Real Estate Assistance Callout */}
+      <section className="py-12 bg-slate-50 dark:bg-dark-bg border-b border-slate-200/80 dark:border-dark-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-12 gap-4">
-            <div>
-              <span className="text-xs font-bold uppercase tracking-wider text-navy-800 dark:text-sky-300 bg-navy-50 dark:bg-dark-elevated px-3 py-1 rounded-md border border-navy-100 dark:border-dark-border mb-3 inline-block">
-                MARKETPLACE
-              </span>
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-navy-950 dark:text-white tracking-tight">
-                Verified Commercial Properties
-              </h2>
-              <p className="mt-2 text-sm text-slate-600 dark:text-slate-300 max-w-2xl">
-                Commercial plots, corporate buildings, logistics land, and showroom spaces in Dhangadhi and Kailali, verified by Kaltade engineers.
+          <div className="p-8 rounded-2xl bg-white dark:bg-dark-card border border-slate-200 dark:border-dark-border shadow-xs dark:shadow-card-dark flex flex-col md:flex-row items-center justify-between gap-6">
+            <div className="space-y-2 text-center md:text-left">
+              <h3 className="text-xl font-bold text-navy-950 dark:text-white">
+                Looking to Buy or List Commercial Property in Sudurpashchim?
+              </h3>
+              <p className="text-sm text-slate-600 dark:text-slate-300 max-w-2xl">
+                Whether you are searching for highway-facing commercial land or listing corporate space, our team verifies title, boundaries, and municipal bylaws.
               </p>
             </div>
-
-            <Button href="/properties" variant="outline" size="md" rightIcon={<ArrowRight className="w-4 h-4" />}>
-              View All Properties
-            </Button>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {commercialProperties.map((prop) => (
-              <PropertyCard
-                key={prop.id}
-                property={prop}
-                onInquire={handleInquireProperty}
-              />
-            ))}
-          </div>
-
-          {/* Quick Listing Callout */}
-          <div className="mt-12 p-6 rounded-2xl bg-white dark:bg-dark-card border border-slate-200 dark:border-dark-border shadow-xs dark:shadow-card-dark flex flex-col sm:flex-row items-center justify-between gap-4">
-            <div className="flex items-center gap-3">
-              <Building className="w-6 h-6 text-amber-600 dark:text-amber-400 shrink-0" />
-              <div>
-                <h4 className="text-sm font-bold text-navy-950 dark:text-white">
-                  Own a Commercial Land Parcel or Building?
-                </h4>
-                <p className="text-xs text-slate-500 dark:text-slate-400">
-                  List your property with engineering verification to attract serious institutional buyers and corporate tenants.
-                </p>
-              </div>
+            <div className="flex flex-wrap gap-3 shrink-0">
+              <Button href="/properties/find" variant="outline" size="md">
+                Submit Requirement
+              </Button>
+              <Button href="/properties/list" variant="primary" size="md">
+                List Your Property
+              </Button>
             </div>
-            <Button href="/properties/list" variant="primary" size="sm">
-              List Your Commercial Property
-            </Button>
           </div>
         </div>
       </section>

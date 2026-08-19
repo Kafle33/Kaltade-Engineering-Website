@@ -30,11 +30,11 @@ export function MobileActionBar() {
         </a>
 
         <Link
-          href="/properties"
+          href="/properties/find"
           className="flex flex-col items-center justify-center p-1 rounded-lg text-slate-700 dark:text-slate-300 hover:text-navy-950 dark:hover:text-white active:bg-slate-100 dark:active:bg-dark-card transition-colors"
         >
           <Building2 className="w-4 h-4 text-blue-700 dark:text-blue-400" />
-          <span className="text-[10px] font-semibold mt-1">Properties</span>
+          <span className="text-[10px] font-semibold mt-1">Find Property</span>
         </Link>
 
         <Link

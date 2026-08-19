@@ -38,8 +38,8 @@ export default function HomePage() {
       {/* 6. Engineering & DPR Section */}
       <EngineeringDprSection />
 
-      {/* 7. Featured Properties Marketplace */}
-      <FeaturedProperties />
+      {/* 7. Featured Properties Marketplace (Hidden while finalizing listings) */}
+      {/* <FeaturedProperties /> */}
 
       {/* 8. Land Area Converter Widget */}
       <LandConverterWidget />
@@ -72,7 +72,7 @@ export default function HomePage() {
               Request Valuation
             </Button>
             <Button
-              href="/properties"
+              href="/properties/find"
               variant="white"
               size="lg"
               leftIcon={<Building2 className="w-4 h-4" />}

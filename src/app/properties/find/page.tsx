@@ -169,11 +169,11 @@ Additional Notes: ${additionalRequirements || 'None provided.'}`;
       {/* Top Banner */}
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mb-8">
         <Link
-          href="/properties"
+          href="/real-estate"
           className="inline-flex items-center gap-2 text-xs font-bold text-navy-900 dark:text-sky-300 hover:text-amber-600 dark:hover:text-amber-400 mb-6 transition-colors"
         >
           <ArrowLeft className="w-4 h-4" />
-          <span>Back to Properties Marketplace</span>
+          <span>Back to Real Estate Consultancy</span>
         </Link>
 
         <div className="bg-navy-950 dark:bg-dark-surface text-white rounded-3xl p-6 sm:p-10 relative overflow-hidden shadow-xl dark:shadow-card-dark border border-navy-900 dark:border-dark-border">
@@ -274,12 +274,12 @@ Additional Notes: ${additionalRequirements || 'None provided.'}`;
                 <span>Continue to WhatsApp</span>
               </a>
               <Button
-                href="/properties"
+                href="/real-estate"
                 variant="primary"
                 size="md"
                 rightIcon={<ArrowRight className="w-4 h-4" />}
               >
-                Browse Current Listings
+                Explore Real Estate Services
               </Button>
               <Button
                 onClick={handleReset}

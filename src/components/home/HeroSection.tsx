@@ -70,7 +70,7 @@ export function HeroSection() {
                 Request Valuation
               </Button>
               <Button
-                href="/properties"
+                href="/properties/find"
                 variant="outline"
                 size="lg"
                 className="bg-white/10 text-white border-white/20 hover:bg-white/20 hover:border-white/30 dark:bg-dark-card/60 dark:border-dark-border"

@@ -162,9 +162,6 @@ export default function RealEstatePage() {
               <Button href="/properties/list" variant="white" size="lg">
                 List Your Property
               </Button>
-              <Button href="/properties" variant="outline" size="lg" className="bg-white/10 dark:bg-dark-card text-white border-white/20 dark:border-dark-border hover:bg-white/20">
-                Browse Marketplace
-              </Button>
             </div>
           </div>
         </div>

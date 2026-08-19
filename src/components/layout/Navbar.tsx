@@ -79,8 +79,6 @@ export function Navbar() {
     },
     { name: 'Valuation', href: '/valuation' },
     { name: 'Real Estate', href: '/real-estate' },
-    { name: 'Properties', href: '/properties' },
-    { name: 'Projects', href: '/projects' },
     { name: 'Insights', href: '/insights' },
     { name: 'Contact', href: '/contact' },
   ];

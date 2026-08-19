@@ -155,10 +155,10 @@ export function Footer() {
               </li>
               <li>
                 <Link
-                  href="/projects"
+                  href="/services/dpr"
                   className="hover:text-white transition-colors"
                 >
-                  Projects &amp; Case Studies
+                  Detailed Project Reports (DPR)
                 </Link>
               </li>
             </ul>
@@ -170,14 +170,6 @@ export function Footer() {
               Real Estate Advisory
             </h4>
             <ul className="space-y-2.5 text-sm text-slate-300 dark:text-slate-400">
-              <li>
-                <Link
-                  href="/properties"
-                  className="hover:text-white transition-colors"
-                >
-                  Verified Property Marketplace
-                </Link>
-              </li>
               <li>
                 <Link
                   href="/real-estate/investment"
