@@ -25,12 +25,6 @@ import { insightsData } from '@/data/insightsData';
 import { Badge } from '@/components/ui/Badge';
 import { Button } from '@/components/ui/Button';
 
-interface PageProps {
-  params?: {
-    slug?: string;
-  };
-}
-
 interface InsightArticleDetailPageClientProps {
   slug: string;
 }
