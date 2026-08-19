@@ -214,7 +214,7 @@ ${description || 'No additional remarks provided.'}`;
             </div>
 
             <div className="bg-emerald-50 dark:bg-emerald-950/50 border border-emerald-200 dark:border-emerald-800/60 rounded-xl p-3.5 max-w-xl mx-auto text-xs text-emerald-800 dark:text-emerald-300 text-center">
-              ✉️ Notification dispatched to <strong>kaltadeengineeringservices@gmail.com</strong> &amp; <strong>ai.antigravity11@gmail.com</strong>
+              📲 Redirecting to WhatsApp to send your inquiry directly to our team.
             </div>
 
             <div className="flex flex-wrap items-center justify-center gap-4 pt-2">
@@ -235,7 +235,7 @@ ${description || 'No additional remarks provided.'}`;
                 className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs shadow-md transition-all"
               >
                 <MessageSquare className="w-4 h-4" />
-                <span>Send Instant Copy via WhatsApp</span>
+                <span>Continue to WhatsApp</span>
               </a>
               <Button
                 href="/properties"

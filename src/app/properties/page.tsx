@@ -351,9 +351,7 @@ export default function PropertiesPage() {
                 variant="white"
                 size="sm"
                 leftIcon={<Search className="w-4 h-4" />}
-              >
-                Submit Buyer Requirement
-              </Button>
+              >Submit via WhatsApp</Button>
             </div>
           </div>
         </div>
@@ -758,7 +756,7 @@ export default function PropertiesPage() {
                 Your inquiry for <strong className="text-navy-950 dark:text-white">{inquiryProperty?.title}</strong> has been received by our engineering and property consultancy desk.
               </p>
               <div className="bg-emerald-50 dark:bg-emerald-950/50 border border-emerald-200 dark:border-emerald-800/60 rounded-xl p-3 text-xs text-emerald-800 dark:text-emerald-300 text-center max-w-sm mx-auto">
-                ✉️ Notification dispatched to official desk &amp; WhatsApp channel.
+                📲 Redirecting to WhatsApp to send your inquiry directly to our team.
               </div>
             </div>
             <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-2">
@@ -781,7 +779,7 @@ export default function PropertiesPage() {
                   className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs shadow-xs transition-all cursor-pointer"
                 >
                   <MessageSquare className="w-3.5 h-3.5" />
-                  <span>Send Instant Copy via WhatsApp</span>
+                  <span>Continue to WhatsApp</span>
                 </a>
               )}
               <Button
@@ -887,9 +885,7 @@ export default function PropertiesPage() {
                 variant="primary"
                 size="sm"
                 isLoading={inquiryLoading}
-              >
-                Submit Inquiry
-              </Button>
+              >Submit via WhatsApp</Button>
             </div>
           </form>
         )}

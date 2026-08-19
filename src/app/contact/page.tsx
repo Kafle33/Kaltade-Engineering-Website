@@ -322,7 +322,7 @@ export default function ContactPage() {
                   </div>
 
                   <div className="bg-emerald-50/80 dark:bg-emerald-950/50 border border-emerald-200 dark:border-emerald-800/60 rounded-xl p-3.5 max-w-lg mx-auto text-xs text-emerald-800 dark:text-emerald-300 text-center">
-                    ✉️ Notification dispatched to <strong>kaltadeengineeringservices@gmail.com</strong> &amp; <strong>ai.antigravity11@gmail.com</strong>
+                    📲 Redirecting to WhatsApp to send your inquiry directly to our team.
                   </div>
 
                   <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3">
@@ -341,7 +341,7 @@ export default function ContactPage() {
                       className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs shadow-md transition-all"
                     >
                       <MessageSquare className="w-4 h-4" />
-                      <span>Send Instant Copy via WhatsApp</span>
+                      <span>Continue to WhatsApp</span>
                     </a>
                     <Button onClick={handleReset} variant="outline" size="md">
                       Send Another Message
@@ -490,9 +490,7 @@ export default function ContactPage() {
                         isLoading={isSubmitting}
                         className="w-full shadow-lg"
                         leftIcon={<Send className="w-4 h-4" />}
-                      >
-                        Submit Consultation Request
-                      </Button>
+                      >Submit via WhatsApp</Button>
                       <p className="text-center text-[11px] text-slate-400 dark:text-slate-500 mt-3">
                         By submitting, you agree to receive professional contact regarding your engineering or property inquiry. No spam.
                       </p>

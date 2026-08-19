@@ -223,9 +223,7 @@ export default function ValuationPage() {
               <a
                 href="#request-valuation"
                 className="inline-flex items-center justify-center font-medium rounded-lg transition-all duration-200 bg-amber-600 dark:bg-amber-500 text-white hover:bg-amber-700 dark:hover:bg-amber-600 text-base px-6 py-3.5 gap-2.5 shadow-xs hover:shadow-md"
-              >
-                Submit Valuation Request
-              </a>
+              >Submit via WhatsApp</a>
               <Button href="/contact" variant="white" size="lg">
                 Contact Our Evaluators
               </Button>
@@ -433,7 +431,7 @@ export default function ValuationPage() {
                       Valuation Request Logged Successfully!
                     </h3>
                     <div className="bg-emerald-50 dark:bg-emerald-950/50 border border-emerald-200 dark:border-emerald-800/60 rounded-xl p-3.5 max-w-md mx-auto text-xs text-emerald-800 dark:text-emerald-300 text-center">
-                      ✉️ Notification sent to <strong>kaltadeengineeringservices@gmail.com</strong> &amp; <strong>ai.antigravity11@gmail.com</strong>
+                      📲 Redirecting to WhatsApp to send your inquiry directly to our team.
                     </div>
                   </div>
 
@@ -456,7 +454,7 @@ export default function ValuationPage() {
                       className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs shadow-md transition-all"
                     >
                       <MessageSquare className="w-4 h-4" />
-                      <span>Send Instant Copy via WhatsApp</span>
+                      <span>Continue to WhatsApp</span>
                     </a>
                     <Button onClick={handleReset} variant="outline" size="sm">
                       Submit Another Property
@@ -616,9 +614,7 @@ export default function ValuationPage() {
                   </div>
 
                   <div className="pt-2">
-                    <Button type="submit" variant="primary" className="w-full" size="lg">
-                      Submit Valuation Request
-                    </Button>
+                    <Button type="submit" variant="primary" className="w-full" size="lg">Submit via WhatsApp</Button>
                     <p className="text-[11px] text-slate-500 dark:text-slate-400 text-center mt-2">
                       All submitted property details are handled strictly under client confidentiality.
                     </p>

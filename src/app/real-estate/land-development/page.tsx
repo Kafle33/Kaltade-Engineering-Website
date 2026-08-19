@@ -680,7 +680,7 @@ export default function LandDevelopmentPage() {
               </p>
             </div>
             <div className="bg-emerald-50 dark:bg-emerald-950/50 border border-emerald-200 dark:border-emerald-800/60 rounded-xl p-3 max-w-md mx-auto text-xs text-emerald-800 dark:text-emerald-300 text-center">
-              ✉️ Notification sent to <strong>kaltadeengineeringservices@gmail.com</strong> &amp; <strong>ai.antigravity11@gmail.com</strong>
+              📲 Redirecting to WhatsApp to send your inquiry directly to our team.
             </div>
             <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3">
               <a
